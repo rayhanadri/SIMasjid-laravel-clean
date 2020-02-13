@@ -67,4 +67,4 @@ ke
 1. delete folder storage di
 `SIMASJID-CLEAN-LARAVEL/public/storage`
 2. buat symbolic link dengan command di cmd/git bash/terminal
-`cd storage:link`
+`php artisan storage:link`
