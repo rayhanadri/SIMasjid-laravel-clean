@@ -1,4 +1,4 @@
-** ---master-laravel-- **
+**Master-laravel**
 **Live demo:** `http://clean.simasjid.my.id`
 
 
