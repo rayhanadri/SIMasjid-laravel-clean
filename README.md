@@ -71,7 +71,7 @@ MAIL_ENCRYPTION=ssl</p>
 <li>buat symbolic link dengan command di cmd/git bash/terminal<br>
 <code>php artisan storage:link</code></li>
 </ol>
-<h2 id="page-expired">419 Page Expired</h2>
+<h2 id="page-expired">419 Page Expired, file tidak terupdate, route tidak terupdate</h2>
 <ol>
 <li>Refresh page <code>Ctrl+F5</code></li>
 <li>Jika masih terjadi refresh cache laravel</li>
