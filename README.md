@@ -88,3 +88,4 @@ php artisan view:clear</p>
 <p>git reset --hard HEAD</p>
 </blockquote>
 
+///////
