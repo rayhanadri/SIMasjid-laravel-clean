@@ -10,6 +10,8 @@
 <blockquote>
 <p><a href="http://clean.simasjid.my.id">http://clean.simasjid.my.id</a></p>
 </blockquote>
+<p>| username: ketua<br>
+| password: password</p>
 <h1 id="modul---fitur-tersedia">Modul &amp;  Fitur Tersedia</h1>
 <ul>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> Full Autentikasi (Login, Logout, Register, dan Reset Password)</li>
