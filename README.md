@@ -24,11 +24,15 @@ password : password
 4.	Generate application key
 `php artisan key:generate`
 
+
+
 **Tidak bisa login hasil clone github, tidak ada failed response login**
 1.	Copy file `AuthenticateUsers.php` dari direktori
 `SIMASJID-CLEAN-LARAVEL/`
 ke
 `SIMASJID-CLEAN-LARAVEL/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticateUsers.php`
+
+
 
 
 **Error DB SQLSTATE[HY000] [1045] Access denied for user**
@@ -58,3 +62,9 @@ ke
     MAIL_PASSWORD=emzbwvjgjstdyuqx
     MAIL_ENCRYPTION=ssl
 
+
+**Gambar tidak bisa ter-load, error filemtime, saat login langsung error**
+1. delete folder storage di
+`SIMASJID-CLEAN-LARAVEL/public/storage`
+2. buat symbolic link dengan command di cmd/git bash/terminal
+`cd storage:link`
