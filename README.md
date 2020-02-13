@@ -1,5 +1,7 @@
 master-laravel
 
+import database simasjid-clean-min.sql ke database MySQL
+
 pass user ketua
 username : ketua
 password : password
@@ -8,7 +10,7 @@ password : password
 
 **Error autoload setelah clone github**
 1.	Masuk direktori project laravel 
-`cd /e/xampp/htdocs/simasjid/sistemlaravel/simasjid`
+`cd SIMASJID-CLEAN-LARAVEL`
 2.	Install composer di folder laravel 
 `composer install`
 3.	Copy .env.example dan rename ke .env
@@ -17,19 +19,18 @@ password : password
 `php artisan key:generate`
 
 **Tidak bisa login hasil clone github, tidak ada failed response login**
-1.	Buka file `AuthenticateUsers.php` di direktori
-`simasjid/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticateUsers.php`
-2.	Ubah line 147 
-`return 'email';`
-jadi 
-`return 'username';`
+1.	Copy file `AuthenticateUsers.php` dari direktori
+`SIMASJID-CLEAN-LARAVEL/`
+ke
+`SIMASJID-CLEAN-LARAVEL/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticateUsers.php`
+
 
 **Error DB SQLSTATE[HY000] [1045] Access denied for user**
 
 **Import DB**
 1.	Import DB, db simasjid.sql. Buka di browser localhost/phpmyadmin
 2.	New Database name: simasjid
-3.	Import choose file db simasjid.sql
+3.	Import choose file db simasjid-clean-min.sql
 
 **Setting File env**
 1.	Buka file `.env` di direktori project laravel
