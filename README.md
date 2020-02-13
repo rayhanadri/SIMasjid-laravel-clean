@@ -1,5 +1,6 @@
-`Live demo: http://clean.simasjid.my.id`
 master-laravel
+`Live demo: http://clean.simasjid.my.id`
+
 
 import database simasjid-clean-min.sql ke database MySQL
 
