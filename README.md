@@ -7,7 +7,9 @@
 import database simasjid-clean-min.sql ke database MySQL
 
 pass user ketua
+
 username : ketua
+
 password : password
 
 **Panduan Error**
