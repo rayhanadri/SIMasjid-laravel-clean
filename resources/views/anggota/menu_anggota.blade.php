@@ -24,7 +24,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
 <div id="menu_keanggotaan_mini" class="row" style="margin: 1em auto; display: none;">
     <div class="dropdown d-inline mr-2">
         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Menu
+            <i class="fa fa-bars"></i> Menu
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ route('anggotaIndex') }}"><i class="fa fa-table"></i> Data Anggota</a>

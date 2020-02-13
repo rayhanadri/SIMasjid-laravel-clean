@@ -121,7 +121,7 @@
             <li id='aset-link'><a class="nav-link not-ready" href="#"><i class="fas fa-warehouse"></i><span>Aset</span></a></li>
             <li id='keuangan-link'><a class="nav-link not-ready" href="#"><i class="fas fa-money-bill-wave"></i><span>Keuangan</span></a></li>
             <li id='musyawarah-link'><a class="nav-link not-ready" href="#"><i class="fas fa-comments"></i><span>Musyawarah</span></a></li>
-            <li id='kurban-link'><a class="nav-link not-ready" href="#"><i class="fas fa-money-bill-wave"></i><span>Kurban</span></a></li>
+            <li id='kurban-link'><a class="nav-link not-ready" href="#"><i class="icofont-cow"></i><span>Kurban</span></a></li>
         </aside>
       </div>
       <script>

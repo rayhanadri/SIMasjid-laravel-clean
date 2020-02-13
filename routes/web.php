@@ -13,18 +13,7 @@
 
 // basic route login,register,reset-password
 Auth::routes();
-
-// Route::get('test', function () {
-//     $id = Auth::user()->id;
-//     $jenis = "Kerusakan";
-//     $isi = "Kerusakan barang xxx";
-//     $tgl_dibuat = now();
-
-//     event(new App\Events\StatusLiked($id, $jenis, $isi, $tgl_dibuat));
-//     return "Event has been sent!";
-// });
-
-Route::view('/after_register', 'auth\after_register')->name('afterRegister');
+Route::view('/after_register', 'auth.after_register')->name('afterRegister');
 
 //pakai middleware auth
 Route::middleware('auth')->group(function () {
