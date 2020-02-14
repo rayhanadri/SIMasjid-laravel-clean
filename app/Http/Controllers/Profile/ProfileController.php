@@ -29,6 +29,7 @@ class ProfileController extends AnggotaController
         }
 
         //file confirmed image, make image then orientate
+        ini_set('memory_limit', '2048M');
         $image = Image::make($file);
 
         // perbaiki orientasi gambar dengan intervention

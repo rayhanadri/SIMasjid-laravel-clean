@@ -1,4 +1,5 @@
 @include('layouts.header')
+
 <body>
   <div id="app">
     <section class="section">

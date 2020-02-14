@@ -20,6 +20,11 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         </a>
     </div>
     @endif
+    <div class="col-xs-2" style="padding: 0px;">
+        <a id="menu_pengelola_aset" href="{{ route('anggotaPengelolaAset') }}" class="btn btn-info icon-left" style="height: 55px; width: 120px; font-size: 11px; border-radius: 0; line-height: 1.5;">
+            <i class="fa fa-users-cog" style="font-size: 24px;"></i><br>Pengelola Aset
+        </a>
+    </div>
 </div>
 <div id="menu_keanggotaan_mini" class="row" style="margin: 1em auto; display: none;">
     <div class="dropdown d-inline mr-2">
@@ -31,6 +36,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
             @if($inside_sekretaris)
             <a class="dropdown-item" href="{{ route('anggotaIndexVerifikasi') }}"><i class="fa fa-user-check"></i> Verifikasi</a>
             @endif
+            <a class="dropdown-item" href="{{ route('anggotaPengelolaAset') }}"><i class="fa fa-users-cog"></i> Pengelola Aset</a>
         </div>
     </div>
 </div>

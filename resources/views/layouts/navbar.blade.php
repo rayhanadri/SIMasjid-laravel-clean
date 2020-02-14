@@ -81,7 +81,7 @@
               <img alt="image" src="
               <?php
               if ($authUser->link_foto != null) {
-                echo route('home').'/'.$authUser->link_foto.'?='.filemtime($authUser->link_foto);
+                echo route('home').'/'.$authUser->link_foto.'?='.strtotime("now");
               } else {
                 echo route('home').'/'.'public\dist\assets\img\avatar\avatar-1.png';
               }
@@ -103,6 +103,10 @@
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
               </form>
+              <!-- <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger"> -->
+              <!-- @csrf
+              <i class="fas fa-sign-out-alt"></i> Logout
+              </a> -->
             </div>
           </li>
         </ul>
@@ -116,12 +120,13 @@
             <a href="{{ route('home') }}">SIM</a>
           </div>
           <ul class="sidebar-menu">
+            <!-- <li class="menu-header">Dashboard</li> -->
             <li id='home-link'><a class="nav-link" href="{{ route('home') }}"><i class="fas fa-mosque"></i><span>Home</span></a></li>
             <li id='keanggotaan-link'><a class="nav-link" href="{{ route('anggotaIndex') }}"><i class="fas fa-users"></i><span>Keanggotaan</span></a></li>
-            <li id='aset-link'><a class="nav-link not-ready" href="#"><i class="fas fa-warehouse"></i><span>Aset</span></a></li>
+            <li id='aset-link'><a class="nav-link" href="{{ route('asetIndex') }}"><i class="fas fa-warehouse"></i><span>Aset</span></a></li>
             <li id='keuangan-link'><a class="nav-link not-ready" href="#"><i class="fas fa-money-bill-wave"></i><span>Keuangan</span></a></li>
             <li id='musyawarah-link'><a class="nav-link not-ready" href="#"><i class="fas fa-comments"></i><span>Musyawarah</span></a></li>
-            <li id='kurban-link'><a class="nav-link not-ready" href="#"><i class="icofont-cow"></i><span>Kurban</span></a></li>
+            <li id='kurban-link'><a class="nav-link not-ready" href="#"><i class="icofont-cow" style="font-size: 30px;"></i><span>Kurban</span></a></li>
         </aside>
       </div>
       <script>

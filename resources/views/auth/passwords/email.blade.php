@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="simple-footer">
-                            Copyright &copy; SIMASJID {{ date('Y') }}
+                            Copyright &copy; Stisla 2018
                         </div>
                     </div>
                 </div>
