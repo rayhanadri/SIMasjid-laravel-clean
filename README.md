@@ -4,6 +4,9 @@
 <h1 id="live-demo">Live Demo</h1>
 <p>Kunjungi link berikut untuk live demo.</p>
 <blockquote>
+<p><a href="http://clean.simasjid.my.id">http://clean.simasjid.my.id</a></p>
+</blockquote>
+<blockquote>
 <p>karena alasan keamanan silakan minta login demo ke pemilik repository</p>
 </blockquote>
 <h1 id="modul---fitur-tersedia">Modul &amp;  Fitur Tersedia</h1>
