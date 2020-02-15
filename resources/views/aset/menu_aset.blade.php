@@ -1,3 +1,10 @@
+<style>
+  @media only screen and (max-width: 595px){
+    #menu_aset{
+      display: none;
+    }
+  }
+</style>
 <div id="menu_aset" class="row" style="margin: 1em auto;">
     <div class="col-xs-2" style="padding: 0px;">
         <a id="menu_index" href="{{ route('asetIndex') }}" class="btn btn-info icon-left" style="height: 55px; width: 120px; font-size: 11px; border-radius: 0; line-height: 1.5;">
@@ -50,7 +57,7 @@
         </a>
     </div>
 </div>
-<div id="menu_aset_mini" class="row" style="margin: 1em auto; display: none;">
+<div id="menu_aset_mini" class="row" style="margin: 1em auto; display:none;">
     <div class="dropdown d-inline mr-2">
         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-bars"></i> Menu
@@ -60,7 +67,7 @@
             <a class="dropdown-item" href="{{ route('asetCreate') }}"><i class="fa fa-edit"></i> Pencatatan</a>
             <a class="dropdown-item" href="{{ route('asetTracking') }}"><i class="fa fa-search"></i> Tracking</a>
             <a class="dropdown-item" href="{{ route('asetPeminjamanIndexBerjalan') }}"><i class="fa fa-hand-holding"></i> Peminjaman</a>
-            <a class="dropdown-item not-ready" href="#"><i class="fa fa-table"></i> Perbaikan</a>
+            <a class="dropdown-item not-ready" href="#"><i class="fa fa-tools"></i> Perbaikan</a>
             <a class="dropdown-item not-ready" href="#"><i class="fa fa-clock"></i> Jadwal Check</a>
             <a class="dropdown-item not-ready" href="#"><i class="fa fa-lightbulb"></i> Usulan</a>
             <a class="dropdown-item not-ready" href="#"><i class="fa fa-truck-loading"></i> Pengadaan</a>

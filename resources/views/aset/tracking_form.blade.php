@@ -1,7 +1,8 @@
 @include('layouts.header')
 @include('layouts.navbar')
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Instascan &ndash; Demo</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
@@ -40,7 +41,7 @@
                     <i class="fa fa-search"></i>
                   </div>
                 </div>
-                <input type="text" id="kode_aset_input" name="kode" class="form-control" placeholder="Kode Aset">
+                <input type="text" id="kode_aset_input" name="kode" class="form-control" placeholder="Kode Aset" required>
               </div>
             </div>
             <button type="submit" class="btn btn-lg btn-info btn-primary">Check</button>
@@ -52,7 +53,7 @@
         </div>
       </div>
       <div class="row">
-        <button id="button-camera" style="margin: 1em auto;" class="btn btn-dark" data-toggle="collapse" data-target="#camera-box" aria-expanded="false">
+        <button id="button-camera" style="margin: 1em auto;" class="btn btn-dark" data-toggle="collapse" data-target="#camera-box" aria-expanded="false" onclick="clickCamera()">
           <i class="fa fa-camera"></i> Camera QR Scanner
         </button>
         <div class="col-lg-12 col-md-12 col-sm-12">
@@ -75,6 +76,7 @@
 @include('layouts.footer')
 <script type="text/javascript">
   //JS halaman aktif
+  var openCamera = 'close';
   $("#menu_tracking").addClass("active");
   // $(document).ready(function() {
   //   var isExpanded = $('#button-camera').attr("aria-expanded");
@@ -85,54 +87,53 @@
   //   }
   // });
 
-  $(document).on("click", "#button-camera", function() {
+  function clickCamera() {
+    var isExpanded = $('#button-camera').attr("aria-expanded");
+    // android code
+    if (typeof Android !== "undefined" && Android !== null) {
+      // Android.showToast();
+      Android.openScanner();
+      $('#camera-box').remove();
+    } else {
+      openScanner();
+    }
+  }
+
+  function openScanner() {
     let scanner = new Instascan.Scanner({
       video: document.getElementById('preview'),
       mirror: false
     });
-
-    console.log('buka');
     scanner.addListener('scan', function(content) {
-      var link = "{{ route('home') }}" + '/aset/tracking_hasil?kode=' + content
-      window.location.href = link;
-    });
-    Instascan.Camera.getCameras().then(function(cameras) {
-      if (cameras.length > 0) {
-        if(cameras.length == 1){
-          scanner.start(cameras[0]);
-        }else {
-          scanner.start(cameras[1]);
+        var link = "{{ route('home') }}" + '/aset/tracking_hasil?kode=' + content;
+        window.location.href = link;
+      });
+      Instascan.Camera.getCameras().then(function(cameras) {
+        if (cameras.length > 0) {
+          if (cameras.length == 1) {
+            scanner.start(cameras[0]);
+          } else {
+            scanner.start(cameras[1]);
+          }
+        } else {
+          console.error('No cameras found.');
         }
-      } else {
-        console.error('No cameras found.');
-      }
-    }).catch(function(e) {
-      console.error(e);
-    });
+      }).catch(function(e) {
+        console.error(e);
+      });
+  }
 
-  });
 
-  // let scanner = new Instascan.Scanner({
-  //   video: document.getElementById('preview'),
-  //   mirror: false
-  // });
-  // scanner.addListener('scan', function(content) {
-  //   // $("#kode_aset_input").value(content);
-  //   // $("#kode_aset_input").remove();
-  //   var link = "{{ route('home') }}" + '/aset/tracking_hasil?kode=' + content
-  //   window.location.href = link;
-  //   // document.getElementById("input-kode").value = content; // Pass the scanned content value to an input field
-  // });
-  // Instascan.Camera.getCameras().then(function(cameras) {
-  //   if (cameras.length > 0) {
-  //     scanner.start(cameras[0]);
+
+  // $(document).on("click", "#button-camera", function() {
+  //   var isExpanded = $('#button-camera').attr("aria-expanded");
+  //   // android code
+  //   if (typeof Android !== "undefined" && Android !== null) {
+  //     android.showToast();
+  //     // android.openScanner();
   //   } else {
-  //     console.error('No cameras found.');
+  //     alert("Not android");
+  //     // openScanner();
   //   }
-  // }).catch(function(e) {
-  //   console.error(e);
   // });
-  // });
-
-  // 
 </script>

@@ -6,7 +6,13 @@ $authUser = Auth::user();
 $sekretaris = array(1, 2);
 $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
 ?>
-
+<style>
+  @media only screen and (max-width: 595px){
+    #menu_keanggotaan{
+      display: none;
+    }
+  }
+</style>
 <div id="menu_keanggotaan" class="row" style="margin: 1em auto;">
     <div class="col-xs-2" style="padding: 0px;">
         <a id="menu_index" href="{{ route('anggotaIndex') }}" class="btn btn-info icon-left" style="height: 55px; width: 120px; font-size: 11px; border-radius: 0; line-height: 1.5;">
@@ -26,7 +32,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         </a>
     </div>
 </div>
-<div id="menu_keanggotaan_mini" class="row" style="margin: 1em auto; display: none;">
+<div id="menu_keanggotaan_mini" class="row" style="margin: 1em auto; display:none;">
     <div class="dropdown d-inline mr-2">
         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-bars"></i> Menu

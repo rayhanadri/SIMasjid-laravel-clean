@@ -69,8 +69,8 @@
                             @foreach ($peminjamanGroup as $peminjaman)
                             <tr>
                                 <td id="td_no_peminjaman">{{ $peminjaman->id }}</td>
-                                <td id="td_kode_barang_peminjaman">{{ $peminjaman->barang->nama }}</td>
                                 <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
+                                <td id="td_kode_barang_peminjaman">{{ $peminjaman->barang->nama }}</td>
                                 <td id="td_jumlah_barang_peminjaman">{{ $peminjaman->jumlah }}</td>
                                 <td id="td_pembuat_peminjaman">{{ $peminjaman->pembuat->nama }}</td>
                                 <td id="td_nama_peminjam">{{ $peminjaman->nama_peminjam}}</td>
@@ -78,9 +78,9 @@
                                 <td id="td_keterangan_peminjaman">{{ $peminjaman->keterangan}}</td>
                                 <td id="td_tgl_peminjaman">{{ $peminjaman->tgl_dibuat}}</td>
                                 <td id="td_btn_peminjaman">
-                                    <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
-                                        <a href="#" class="open-tolak btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $peminjaman->id }}" data-target="#tolakModal"><i class="fas fa-times"></i></i> Tolak</a>
+                                    <div class="btn-group-vertical mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
                                         <a href="#" class="open-terima btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $peminjaman->id }}" data-target="#terimaModal"><i class="fas fa-check"></i> Terima</a>
+                                        <a href="#" class="open-tolak btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $peminjaman->id }}" data-target="#tolakModal"><i class="fas fa-times"></i></i> Tolak</a>
                                     </div>
                                 </td>
                             </tr>

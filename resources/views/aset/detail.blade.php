@@ -59,11 +59,11 @@
               </tr>
               <tr>
                 <td>Harga Satuan:</td>
-                <td>{{ $aset->harga_satuan }}</td>
+                <td id="td_harga_satuan" class="harga">{{ $aset->harga_satuan }}</td>
               </tr>
               <tr>
                 <td>Total Nilai:</td>
-                <td>{{ $aset->jumlah * $aset->harga_satuan }}</td>
+                <td id="td_total_nilai" class="harga">{{ $aset->jumlah * $aset->harga_satuan }}</td>
               </tr>
               <tr>
                 <td>Sumber:</td>
@@ -173,6 +173,11 @@
 
   $(document).ready(function() {
     $('#menu_index').addClass('active');
+    $(".harga").autoNumeric('init', {
+        aSep: '.',
+        aDec: ',',
+        aSign: 'Rp. '
+    });
     //init scroll boolean
     var scroll_table = false;
 

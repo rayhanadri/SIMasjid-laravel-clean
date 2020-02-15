@@ -25,7 +25,7 @@ class PasswordReset extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->from('simasjid.ibnusina@gmail.com', 'SI Masjid Ibnu Sina')
+            ->from('no-reply@simasjid.my.id', 'SI Masjid Ibnu Sina')
             ->line('Anda mendapatkan pesan ini karena kami menerima permintaan reset password untuk akun Anda.') // Here are the lines you can safely override
             ->action('Reset Password', url('password/reset', $this->token))
             ->line('Jika Anda tidak melakukan permintaan reset password, silakan abaikan pesan ini.');

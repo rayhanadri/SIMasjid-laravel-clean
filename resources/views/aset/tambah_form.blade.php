@@ -61,18 +61,11 @@
             </div>
             <div class="form-group">
               <label>Harga Satuan*</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    Rp.
-                  </div>
-                </div>
-                <input name="harga_satuan" type="text" class="form-control currency" required>
-              </div>
+              <input id="harga_satuan" name="harga_satuan" type="text" class="form-control currency" required>
             </div>
             <div class="form-group">
-              <span id="img_uploaded" style="text-align: center;" class="img-thumbnail rounded mx-auto d-block" ">
-                <img src=" {{ route('home') }}/public/storage/foto_aset/not-available.jpg" id="blah" alt="foto profil" style="max-width:250px; overflow: hidden;" required><br>
+              <span id="img_uploaded" style="text-align: center;" class="img-thumbnail rounded mx-auto d-block">
+                <img src="{{ route('home') }}/public/storage/foto_aset/not-available.jpg" id="blah" alt="foto profil" style="max-width:250px; overflow: hidden;" required><br>
               </span>
               <label>Upload Foto Aset*</label>
               <input type="file" required name="file" id="fileChooser" accept="image" class="form-control" onchange="return ValidateFileUpload()">
@@ -97,6 +90,31 @@
   $("body").addClass("sidebar-mini");
   $("#menu_pencatatan").addClass("active");
   $("#aset-link").addClass("active");
+
+  $(document).ready(function() {
+    $('#harga_satuan').autoNumeric('init', {
+      aSep: '.',
+      aDec: ',',
+      aSign: 'Rp. ',
+      mDec: '0'
+    });
+
+    $('form').submit(function() {
+      var form = $(this);
+      $('input').each(function(i) {
+        var self = $(this);
+        try {
+          var v = self.autoNumeric('get');
+          self.autoNumeric('destroy');
+          self.val(v);
+        } catch (err) {
+          console.log("Not an autonumeric field: " + self.attr("name"));
+        }
+      });
+      return true;
+    });
+  });
+
 
   function ValidateFileUpload() {
     var fuData = document.getElementById('fileChooser');
@@ -126,7 +144,7 @@
                 // $('#blah').remove();
                 $('#img_uploaded').html(img);
               }, {
-                maxWidth: 300,
+                maxWidth: $('#img_uploaded').width(),
                 orientation: true
               }
             );

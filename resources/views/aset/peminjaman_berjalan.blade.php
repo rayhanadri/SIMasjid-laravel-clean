@@ -69,8 +69,8 @@
                         <tbody>
                             <tr>
                                 <td id="td_no_peminjaman">{{ $peminjaman->id }}</td>
-                                <td id="td_kode_barang_peminjaman">{{ $peminjaman->barang->nama }}</td>
                                 <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
+                                <td id="td_kode_barang_peminjaman">{{ $peminjaman->barang->nama }}</td>
                                 <td id="td_jumlah_peminjaman">{{ $peminjaman->jumlah }}</td>
                                 <td id="td_pembuat_peminjaman">{{ $peminjaman->pembuat->nama }}</td>
                                 <td id="td_nama_peminjam">{{ $peminjaman->nama_peminjam }}</td>

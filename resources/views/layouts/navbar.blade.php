@@ -14,14 +14,13 @@
 
   $notifs = Notifikasi::where('id_penerima', '=', Auth::user()->id)->skip(0)->take(5)->orderBy('id', 'desc')->get();
   ?>
-
   <div id="app">
     <div class="main-wrapper">
       <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar">
         <div class="form-inline mr-auto">
           <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li id="toggle-bar"><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
           </ul>
         </div>
         <ul class="navbar-nav navbar-right">
@@ -50,7 +49,7 @@
               <div class="dropdown-list-content dropdown-list-icons">
                 @foreach ( $notifs as $notif )
                 @if ( $notif->sudah_baca == 0 )
-                <a href="#" class="notif dropdown-item dropdown-item-unread" data-id="{{ $notif->id }}">
+                <a href="{{ $notif->link }}" class="notif dropdown-item dropdown-item-unread" data-id="{{ $notif->id }}" data-link="{{ $notif->link }}">
                   @else
                   <a href="{{ $notif->link }}" class="dropdown-item">
                     @endif
@@ -81,9 +80,9 @@
               <img alt="image" src="
               <?php
               if ($authUser->link_foto != null) {
-                echo route('home').'/'.$authUser->link_foto.'?='.strtotime("now");
+                echo route('home') . '/' . $authUser->link_foto . '?=' . strtotime("now");
               } else {
-                echo route('home').'/'.'public\dist\assets\img\avatar\avatar-1.png';
+                echo route('home') . '/' . 'public\dist\assets\img\avatar\avatar-1.png';
               }
               ?>" class="rounded-circle mr-1">
               <div class="d-sm-none d-lg-inline-block"> {{$authUser->nama}}</div>
@@ -111,7 +110,7 @@
           </li>
         </ul>
       </nav>
-      <div class="main-sidebar">
+      <div class="main-sidebar" id="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
             <a href="{{ route('home') }}">SI MASJID IBNU SINA</a>
@@ -135,10 +134,27 @@
           $('.not-ready').click(function() {
             alert('Fitur ini belum tersedia');
           });
+          if (typeof Android !== "undefined" && Android !== null) {
+            $('.main-sidebar').css({
+              'z-index': 1002
+            });
+            $('.navbar').css({
+              position: "fixed",
+              top: 0,
+              'z-index': 1000
+            });
+            $('.navbar-bg').css({
+              position: "fixed",
+              top: 0,
+              'z-index': 999
+            });
+          }
         });
 
-        $('.notif').click(function() {
+        $('.notif').click(function(e) {
+          e.preventDefault();
           var id = $(this).data('id');
+          var link = $(this).data('link');
           $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -151,6 +167,7 @@
             },
             type: 'POST',
             success: function(data) {
+              window.location.href = link;
               console.log(data.success);
             }
           });
