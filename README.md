@@ -1,14 +1,10 @@
----
-
-
----
 
 <h1 id="sistem-informasi-masjid-ibnu-sina-clean-laravel-source-code">Sistem Informasi Masjid Ibnu Sina (Clean Laravel Source Code)</h1>
 <p><img src="http://simasjid.my.id/public/dist/assets/img/ibnusina.jpg" alt=""></p>
 <h1 id="live-demo">Live Demo</h1>
 <p>Kunjungi link berikut untuk live demo.</p>
 <blockquote>
-<p><a href="http://clean.simasjid.my.id">http://clean.simasjid.my.id</a></p>
+<p>karena alasan keamanan silakan minta login demo ke pemilik repository</p>
 </blockquote>
 <p>| username: ketua<br>
 | password: password</p>
@@ -56,12 +52,7 @@ DB_PASSWORD=</p>
 <li>Ubah line 26-31 jadi seperti berikut</li>
 </ol>
 <blockquote>
-<p>MAIL_DRIVER=smtp<br>
-MAIL_HOST=<a href="http://smtp.gmail.com">smtp.gmail.com</a><br>
-MAIL_PORT=465<br>
-<a href="mailto:MAIL_USERNAME=simasjid.ibnusina@gmail.com">MAIL_USERNAME=simasjid.ibnusina@gmail.com</a><br>
-MAIL_PASSWORD=emzbwvjgjstdyuqx<br>
-MAIL_ENCRYPTION=ssl</p>
+<p>karena password email aplikasi pernah diretas, silakan minta pengaturan password langsung ke pemilik repository</p>
 </blockquote>
 <h1 id="errors">Errors</h1>
 <h2 id="gambar-tidak-ter-load-error-filemtime-error-navbar-profile-picture">Gambar tidak ter-load, error filemtime, error navbar profile picture</h2>
