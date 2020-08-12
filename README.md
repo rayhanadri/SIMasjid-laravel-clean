@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ---
 
 
 ---
+=======
+>>>>>>> 5e20bd78141f704a898e5cc90f57c9b78222549f
 
 <h1 id="sistem-informasi-masjid-ibnu-sina-clean-laravel-source-code">Sistem Informasi Masjid Ibnu Sina (Clean Laravel Source Code)</h1>
 <p><img src="http://simasjid.my.id/public/dist/assets/img/ibnusina.jpg" alt=""></p>
@@ -11,8 +14,9 @@
 <blockquote>
 <p><a href="http://clean.simasjid.my.id">http://clean.simasjid.my.id</a></p>
 </blockquote>
-<p>| username: ketua<br>
-| password: password</p>
+<blockquote>
+<p>karena alasan keamanan silakan minta login demo ke pemilik repository</p>
+</blockquote>
 <h1 id="modul---fitur-tersedia">Modul &amp;  Fitur Tersedia</h1>
 <ul>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> Full Autentikasi (Login, Logout, Register, dan Reset Password)</li>
@@ -57,12 +61,7 @@ DB_PASSWORD=</p>
 <li>Ubah line 26-31 jadi seperti berikut</li>
 </ol>
 <blockquote>
-<p>MAIL_DRIVER=smtp<br>
-MAIL_HOST=<a href="http://smtp.gmail.com">smtp.gmail.com</a><br>
-MAIL_PORT=465<br>
-<a href="mailto:MAIL_USERNAME=simasjid.ibnusina@gmail.com">MAIL_USERNAME=simasjid.ibnusina@gmail.com</a><br>
-MAIL_PASSWORD=emzbwvjgjstdyuqx<br>
-MAIL_ENCRYPTION=ssl</p>
+<p>karena password email aplikasi pernah diretas, silakan minta pengaturan password langsung ke pemilik repository</p>
 </blockquote>
 <h1 id="errors">Errors</h1>
 <h2 id="gambar-tidak-ter-load-error-filemtime-error-navbar-profile-picture">Gambar tidak ter-load, error filemtime, error navbar profile picture</h2>
