@@ -29,7 +29,6 @@ class MasterController extends Controller
     //kategori
     public function createKategori(Request $request)
     {
-        $request->kode = strtoupper($request->kode);
         //validasi
         Validator::make($request->all(), [
             'nama' => 'required',
@@ -38,35 +37,7 @@ class MasterController extends Controller
 
         $kategori = new Kategori;
         $kategori->nama = $request->nama;
-        $kategori->kode = $request->kode;
-        $kategori->id_pj = $request->id_pj;
-        $kategori->save();
-
-        return Redirect::back();
-    }
-
-    //kategori update
-    public function updateKategori(Request $request)
-    {
-        //parse to
-        $request->kode = strtoupper($request->kode);
-        //cari kategori
-        $kategori = Kategori::get()->where('id', '=', $request->id)->first();
-        //validasi
-        if ($request->kode != $kategori->kode) {
-            Validator::make($request->all(), [
-                'nama' => 'required',
-                'kode' => 'required|unique:kategori|size:4',
-            ])->validate();
-        } else {
-            Validator::make($request->all(), [
-                'nama' => 'required',
-            ])->validate();
-        }
-
-        $kategori = Kategori::get()->where('id', '=', $request->id)->first();
-        $kategori->nama = $request->nama;
-        $kategori->kode = $request->kode;
+        $kategori->kode = strtoupper($request->kode);
         $kategori->id_pj = $request->id_pj;
         $kategori->save();
 
@@ -103,31 +74,6 @@ class MasterController extends Controller
         $lokasi = new Lokasi;
         $lokasi->nama = $request->nama;
         $lokasi->save();
-
-        return Redirect::back();
-    }
-
-    //lokasi update
-    public function updateLokasi(Request $request)
-    {
-        //parse to
-        $request->kode = strtoupper($request->kode);
-        //cari kategori
-        $kategori = Kategori::get()->where('id', '=', $request->id)->first();
-        //validasi
-        if ($request->kode != $kategori->kode) {
-            Validator::make($request->all(), [
-                'nama' => 'required',
-            ])->validate();
-        } else {
-            Validator::make($request->all(), [
-                'nama' => 'required',
-            ])->validate();
-        }
-        $kategori->nama = $request->nama;
-        $kategori->kode = $request->kode;
-        $kategori->id_pj = $request->id_pj;
-        $kategori->save();
 
         return Redirect::back();
     }

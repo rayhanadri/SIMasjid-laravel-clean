@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+<<<<<<< HEAD
+use Illuminate\Support\Facades\Validator;
+=======
+>>>>>>> first commit
 use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfileController extends AnggotaController
@@ -18,6 +22,25 @@ class ProfileController extends AnggotaController
         // menyimpan data file yang diupload ke variabel $file
         $file = $request->file('file');
 
+<<<<<<< HEAD
+        //validasi file dengan mime
+        Validator::make($request->all(), [
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2048',
+        ])->validate();
+
+        // validasi jenis file in case mime not allowed
+        // $allowed_extension = ['jpg', 'jpeg', 'gif', 'png', 'bmp'];
+        // $extension = $file->getClientOriginalExtension();
+        // $inside_allowed = in_array($extension, $allowed_extension);
+        // if( !$inside_allowed ){
+        //     throw ValidationException::withMessages([
+        //         'file' => 'Format file gambar yang diperbolehkan adalah jpg, jpeg, gif, png, dan bmp.',
+        //     ]);
+        // }
+
+        //file confirmed image, make image then orientate
+        ini_set('memory_limit', '2048M');
+=======
         // validasi jenis file
         $allowed_extension = ['jpg', 'jpeg', 'gif', 'png', 'bmp'];
         $extension = $file->getClientOriginalExtension();
@@ -29,7 +52,7 @@ class ProfileController extends AnggotaController
         }
 
         //file confirmed image, make image then orientate
-        ini_set('memory_limit', '2048M');
+>>>>>>> first commit
         $image = Image::make($file);
 
         // perbaiki orientasi gambar dengan intervention

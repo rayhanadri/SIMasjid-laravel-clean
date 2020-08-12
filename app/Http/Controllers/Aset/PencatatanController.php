@@ -73,7 +73,6 @@ class PencatatanController extends Controller
         }
 
         //file confirmed image, make image then orientate
-        ini_set('memory_limit', '5242880');
         $image = Image::make($file);
 
         // perbaiki orientasi gambar dengan intervention

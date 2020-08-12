@@ -53,13 +53,11 @@
                     <table id="table_peminjaman" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th id="th_no_peminjaman">No. Peminjaman</th>
+                                <th id="th_no_peminjaman">No</th>
                                 <th id="th_kode_peminjaman">Kode Barang</th>
                                 <th id="th_nama_barang_peminjaman">Nama Barang</th>
                                 <th id="th_jumlah_barang_peminjaman">Jumlah</th>
                                 <th id="th_pembuat_peminjaman">Pembuat</th>
-                                <th id="th_nama_peminjam">Nama Peminjam</th>
-                                <th id="th_telp_peminjam">Telp/HP Peminjam</th>
                                 <th id="th_keterangan_peminjaman">Keterangan</th>
                                 <th id="th_tgl_dibuat_peminjaman">Tanggal Dibuat</th>
                                 <th id="th_action_peminjaman">Alasan</th>
@@ -69,13 +67,11 @@
                             @foreach ($peminjamanGroup as $peminjaman)
                             <tr>
                                 <td id="td_no_peminjaman">{{ $peminjaman->id }}</td>
-                                <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
                                 <td id="td_kode_barang_peminjaman">{{ $peminjaman->barang->nama }}</td>
-                                <td id="td_jumlah_barang_peminjaman">{{ $peminjaman->jumlah }}</td>
-                                <td id="td_pembuat_peminjaman">{{ $peminjaman->pembuat->nama }}</td>
-                                <td id="td_nama_peminjam">{{ $peminjaman->nama_peminjam}}</td>
-                                <td id="td_telp_peminjam">{{ $peminjaman->telp_peminjam}}</td>
-                                <td id="td_keterangan_peminjaman">{{ $peminjaman->keterangan}}</td>
+                                <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->jumlah }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->pembuat->nama }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->keterangan}}</td>
                                 <td id="td_nama_kategori">{{ $peminjaman->tgl_dibuat}}</td>
                                 <td id="td_nama_kategori">{{ $peminjaman->alasan_tolak}}</td>
                             </tr>
@@ -116,6 +112,7 @@
 
 <!-- SCRIPT -->
 <script type="text/javascript">
+
     //document function
     $(document).ready(function() {
         $('#menu_peminjaman').addClass('active');

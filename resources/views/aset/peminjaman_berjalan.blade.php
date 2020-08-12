@@ -53,33 +53,28 @@
                     <table id="table_peminjaman" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th id="th_no_peminjaman">No. Peminjaman</th>
+                                <th id="th_no_peminjaman">No</th>
                                 <th id="th_kode_peminjaman">Kode Barang</th>
                                 <th id="th_nama_barang_peminjaman">Nama Barang</th>
                                 <th id="th_jumlah_barang_peminjaman">Jumlah</th>
                                 <th id="th_pembuat_peminjaman">Pembuat</th>
-                                <th id="th_nama_peminjam">Nama Peminjam</th>
-                                <th id="th_telp_peminjam">Telp/HP Peminjam</th>
                                 <th id="th_keterangan_peminjaman">Keterangan</th>
                                 <th id="th_tgl_dibuat_peminjaman">Tanggal Dibuat</th>
-                                <th id="th_action_peminjaman" style="width: 12em;">Action</th>
+                                <th id="th_action_peminjaman">Action</th>
                             </tr>
                         </thead>
-                        @foreach ($peminjamanGroup as $peminjaman)
                         <tbody>
+                            @foreach ($peminjamanGroup as $peminjaman)
                             <tr>
                                 <td id="td_no_peminjaman">{{ $peminjaman->id }}</td>
-                                <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
                                 <td id="td_kode_barang_peminjaman">{{ $peminjaman->barang->nama }}</td>
-                                <td id="td_jumlah_peminjaman">{{ $peminjaman->jumlah }}</td>
-                                <td id="td_pembuat_peminjaman">{{ $peminjaman->pembuat->nama }}</td>
-                                <td id="td_nama_peminjam">{{ $peminjaman->nama_peminjam }}</td>
-                                <td id="td_telp_peminjam">{{ $peminjaman->telp_peminjam }}</td>
-                                <td id="td_keterangan_peminjaman">{{ $peminjaman->keterangan }}</td>
-                                <td id="td_tgl_peminjaman">{{ $peminjaman->tgl_dibuat }}</td>
-                                <td id="td_btn">
-                                    <div class="btn-group-vertical mb-3" role="group">
-                                        <a href="#" class="btn btn-icon btn-sm btn-secondary" onclick="printBukti(['{{ $peminjaman->id }}', '{{ $peminjaman->barang->kode }}', '{{ $peminjaman->barang->nama }}', '{{ $peminjaman->jumlah }}', '{{ $peminjaman->tgl_dibuat }}', '{{ $peminjaman->pembuat->nama }}', '{{ $peminjaman->nama_peminjam }}', '{{ $peminjaman->telp_peminjam }}', '{{ $peminjaman->keterangan }}'])"><i class="fas fa-print"></i> Print Bukti</a>
+                                <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->jumlah }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->pembuat->nama }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->keterangan}}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->tgl_dibuat}}</td>
+                                <td id="td_nama_kategori">
+                                    <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
                                         <a href="#" class="open-selesai btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $peminjaman->id }}" data-target="#selesaiModal"><i class="fas fa-flag-checkered"></i> Selesaikan</a>
                                     </div>
                                 </td>
@@ -128,70 +123,10 @@
         $("#id_selesai").val(thisDataPeminjaman);
     });
 
-    function printBukti(arrayBukti) {
-        var bukti =
-            '<table align="center" border="0">' +
-            '<tr>' +
-            '<td>' +
-            '<img src="{{route("home")}}/public/dist/assets/img/ibnusina.jpg" alt="logo" width="75">' +
-            '</td>' +
-            '<td>' +
-            '<h2 align="center" > Masjid Ibnu Sina </h2>' +
-            '<h3 align="center" style="text-align:center;"> Bukti Peminjaman Barang </h3>' +
-            '</td>' +
-            '</tr>' +
-            '</table>' +
-            '<hr>' +
-            '<table align="center" border="1" style="text-align:center;">' +
-            '<tr>' +
-            '<th>Nomor Peminjaman</th>' +
-            '<th>Kode Barang</th>' +
-            '<th>Nama Barang</th>' +
-            '<th>Jumlah Barang</th>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>' + arrayBukti[0] + '</td>' +
-            '<td>' + arrayBukti[1] + '</td>' +
-            '<td>' + arrayBukti[2] + '</td>' +
-            '<td>' + arrayBukti[3] + '</td>' +
-            '</tr>' +
-            '</table>' +
-            '<table align="center" border="1" style="text-align:center;">' +
-            '<tr>' +
-            '<th>Tanggal</th>' +
-            '<th>Takmir/Remas</th>' +
-            '<th>Nama Peminjam</th>' +
-            '<th>Telp/HP Peminjam</th>' +
-            '<th>Keterangan</th>' +
-            '</tr>' +
-            '<br>' +
-            '<tr>' +
-            '<td>' + arrayBukti[4] + '</td>' +
-            '<td>' + arrayBukti[5] + '</td>' +
-            '<td>' + arrayBukti[6] + '</td>' +
-            '<td>' + arrayBukti[7] + '</td>' +
-            '<td>' + arrayBukti[8] + '</td>' +
-            '</tr>' +
-            '</table>' +
-            '</tr>' +
-            '<br><hr style="border-top: 2px dashed;">' +
-            '</div>';
-        var newWin = window.open('', 'Print-window');
-        newWin.document.open();
-        newWin.document.write('<html><body onload="window.print()">');
-        newWin.document.write(bukti);
-        newWin.document.write('</body></html>');
-        newWin.document.close();
-        setTimeout(function() {
-            newWin.document.close();
-        }, 10);
-    }
-
     //document function
     $(document).ready(function() {
         $('#menu_peminjaman').addClass('active');
         $('#berjalan-tab').addClass('active');
-        $('.bukti-peminjaman').remove();
         //dynamic scrollx
         var scroll_table = false;
         if ($(window).width() <= 740) {

@@ -52,7 +52,11 @@
           <img src="
           <?php
           if ($anggota->link_foto != null) {
+<<<<<<< HEAD
             echo route('home') . '/' . $anggota->link_foto . '?=' .  strtotime("now");
+=======
+            echo route('home') . '/' . $anggota->link_foto . '?=' . filemtime($anggota->link_foto);
+>>>>>>> first commit
           } else {
             echo route('home') . '/' . 'public\dist\assets\img\avatar\avatar-1.png';
           }
@@ -75,7 +79,11 @@
               @if (Session::has('message'))
               <div class="alert alert-info">{{ Session::get('message') }}</div>
               @endif
-              <input type="file" required name="file" id="fileChooser" accept="image" class="form-control" onchange="return ValidateFileUpload()">
+<<<<<<< HEAD
+              <input type="file" required name="file" id="fileChooser" accept="image/*" class="form-control" onchange="return ValidateFileUpload()">
+=======
+              <input type="file" required name="file" id="fileChooser" accept="image/.gif, .png, .jpg, .jpeg, .bmp" class="form-control" onchange="return ValidateFileUpload()">
+>>>>>>> first commit
               <div class="wrapper" style="text-align: center; margin-top:7px">
                 <button type="submit" class="btn btn-primary">Upload Foto</button>
               </div>
@@ -123,7 +131,11 @@
       //The file uploaded is an image
 
       if (Extension == "gif" || Extension == "png" || Extension == "bmp" ||
+<<<<<<< HEAD
+        Extension == "jpeg" || Extension == "jpg" || Extension == "svg") {
+=======
         Extension == "jpeg" || Extension == "jpg") {
+>>>>>>> first commit
 
         // To Display
         if (fuData.files && fuData.files[0]) {

@@ -13,8 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+<<<<<<< HEAD
+=======
         //
-        'App\Console\Commands\everyMinute',
+>>>>>>> first commit
     ];
 
     /**
@@ -25,10 +27,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-        // the call method
-        $schedule->command('minute:update')->everyMinute();
+<<<<<<< HEAD
+=======
+        //
+>>>>>>> first commit
     }
 
     /**

@@ -64,7 +64,11 @@
               </div>
             </div>
             <div class="simple-footer">
-              Copyright &copy; Stisla 2018
+<<<<<<< HEAD
+              Copyright &copy; Stisla <?php echo date('Y'); ?>
+=======
+              Copyright &copy; SIMASJID {{ date('Y') }}
+>>>>>>> first commit
             </div>
           </div>
         </div>

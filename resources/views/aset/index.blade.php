@@ -1,5 +1,7 @@
 @include('layouts.header')
 @include('layouts.navbar')
+<<<<<<< HEAD
+=======
 <!-- Main Content -->
 <!-- <script type="text/javascript" src="{{asset('public/dist/assets/js/page/bootstrap-modal.js')}}"></script> -->
 <?php
@@ -7,6 +9,7 @@
 //hide untuk selain sekretaris dan ketua
 // $inside_pengelola = in_array(Auth::user()->id, $list_pengelola);
 ?>
+>>>>>>> first commit
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -21,6 +24,10 @@
             <div></div>
         </div>
         <div class="section-body" style="min-height: 800px;">
+<<<<<<< HEAD
+            @include('aset.data_tab')
+=======
+>>>>>>> first commit
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -38,6 +45,11 @@
                     <div id="filter-box" class="collapse">
                         <div class="card-body">
                             <h6 style="text-align:center"><i class="fa fa-filter"></i> Filter Data</h6>
+<<<<<<< HEAD
+                            <div id="filter-nama" style="margin:10px"></div>
+                            <div id="filter-kategori" style="margin:10px"></div>
+                            <div id="filter-jumlah" style="margin:10px"></div>
+=======
                             <div id="filter-kode" style="margin:10px"></div>
                             <div id="filter-nama" style="margin:10px"></div>
                             <div id="filter-kategori" style="margin:10px"></div>
@@ -45,6 +57,7 @@
                             <div id="filter-jumlah" style="margin:10px"></div>
                             <div id="filter-status" style="margin:10px"></div>
                             <div id="filter-lokasi" style="margin:10px"></div>
+>>>>>>> first commit
                         </div>
                     </div>
                 </div>
@@ -54,6 +67,27 @@
                     <table id="table_aset" class="table table-striped table-bordered">
                         <thead>
                             <tr>
+<<<<<<< HEAD
+                                <th id="th_no_aset">No</th>
+                                <th id="th_nama_aset">Nama Barang</th>
+                                <th id="th_kategori_aset">Kategori</th>
+                                <th id="th_nilai_aset">Jumlah</th>
+                                <th id="th_action_btn">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($katalogGroup as $katalog)
+                            <tr data-child-value="{{ $katalog->id }}">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $katalog->nama_barang }}</td>
+                                @if ($katalog->kategori != null)
+                                <td>{{ $katalog->kategori->nama }}</td>
+                                @else
+                                <td>-</td>
+                                @endif
+                                <td>{{ $katalog->jumlah }}</td>
+                                <td><a href="{{ route('asetIndex') }}/katalog/{{ $katalog->id }}" class="btn btn-sm btn-primary"><i class="fa fa-boxes"></i> Daftar Barang</a></td>
+=======
                                 <th>-</th>
                                 <th id="th_no_aset">No</th>
                                 <th id="th_kode_aset">Kode Aset</th>
@@ -88,10 +122,12 @@
                                 @endif
                                 <td>
                                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                        <a href="{{ route('home').'/aset/detail/'.$aset->id }}" class="btn btn-icon btn-sm btn-info" style="width: 7em;"><i class="fas fa-info-circle"></i> Detail</a>
-                                        <a href="#" class="btn btn-icon btn-sm btn-primary open-update" style="width: 7em;" data-toggle="modal" data-id="{{ $aset->id }}" data-nama="{{ $aset->nama }}" data-kategori="{{ $aset->id_kategori }}" data-status="{{ $aset->status }}" data-lokasi="{{ $aset->id_lokasi }}" data-jumlah="{{ $aset->jumlah }}" data-harga_satuan="{{ $aset->harga_satuan }}" data-target="#updateModal"><i class="fas fa-sync"></i> Perbarui</a>
+                                        <a href="{{ route('home').'/aset/detail/'.$aset->id }}" class="btn btn-icon btn-sm btn-info" style="width: 7em; margin: 2px;"><i class="fas fa-info-circle"></i> Detail</a>
+                                        <a href="#" class="btn btn-icon btn-sm btn-primary open-update" style="width: 7em; margin: 2px;" data-toggle="modal" data-id="{{ $aset->id }}" data-nama="{{ $aset->nama }}" data-kategori="{{ $aset->id_kategori }}" data-status="{{ $aset->status }}" data-lokasi="{{ $aset->id_lokasi }}" data-jumlah="{{ $aset->jumlah }}" data-harga_satuan="{{ $aset->harga_satuan }}" data-target="#updateModal"><i class="fas fa-sync"></i> Perbarui</a>
+                                        <!-- <a href="#" class="btn btn-icon btn-sm btn-danger" style="width: 7em; margin: 2px;" data-toggle="modal" data-id="{{ $aset->id }}" data-target="#lepasModal"><i class="fas fa-recycle"></i> Lepas</a> -->
                                     </div>
                                 </td>
+>>>>>>> first commit
                             </tr>
                             @endforeach
                         </tbody>
@@ -101,6 +137,8 @@
         </div>
     </section>
 </div>
+<<<<<<< HEAD
+=======
 
 <!-- Modal Perbarui -->
 <div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
@@ -165,6 +203,7 @@
 </div>
 </div>
 
+>>>>>>> first commit
 <!-- SCRIPT -->
 <script type="text/javascript">
     //JS halaman aktif
@@ -194,6 +233,29 @@
         }, 10);
     }
 
+<<<<<<< HEAD
+    //document function
+    $(document).ready(function() {
+        $("#menu_index").addClass("active");
+        $("#katalog-tab").addClass("active");
+        $(".custom-select").css('width', '82px');
+
+        $('form').submit(function() {
+            var form = $(this);
+            $('input').each(function(i) {
+                var self = $(this);
+                try {
+                    var v = self.autoNumeric('get');
+                    self.autoNumeric('destroy');
+                    self.val(v);
+                } catch (err) {
+                    console.log("Not an autonumeric field: " + self.attr("name"));
+                }
+            });
+            return true;
+        });
+
+=======
     function status_colorized() {
         //status aktif bold
         $(".font-status").css('font-weight', 'bold');
@@ -314,6 +376,7 @@
         $("#menu_index").addClass("active");
         $(".custom-select").css('width', '82px');
 
+>>>>>>> first commit
         //JQuery Pencarian Berdasarkan Kriteria
 
 
@@ -324,19 +387,28 @@
             scroll_table = true;
         }
         var table = $('#table_aset').DataTable({
+<<<<<<< HEAD
+            pageLength: 50,
+=======
             columnDefs: [{
                 "orderable": false,
                 "targets": 0
             }],
             pageLength: 25,
+>>>>>>> first commit
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'pdfHtml5',
                     text: '<i class="fa fa-file-pdf"></i> PDF',
                     messageTop: 'Data Aset',
+<<<<<<< HEAD
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+=======
                     orientation: 'landscape',
                     exportOptions: {
                         columns: [1, 2, 3, 4, 5, 6, 7]
+>>>>>>> first commit
                     }
                 },
                 {
@@ -344,7 +416,11 @@
                     text: '<i class="fa fa-print"></i> Print',
                     messageTop: 'Data Aset',
                     exportOptions: {
+<<<<<<< HEAD
+                        columns:  [0, 1, 2, 3]
+=======
                         columns: [1, 2, 3, 4, 5, 6, 7]
+>>>>>>> first commit
                     },
                     customize: function(win) {
 
@@ -352,7 +428,11 @@
                         var current = null;
                         var bod = [];
 
+<<<<<<< HEAD
+                        var css = '@page { size: potrait; }',
+=======
                         var css = '@page { size: landscape; }',
+>>>>>>> first commit
                             head = win.document.head || win.document.getElementsByTagName('head')[0],
                             style = win.document.createElement('style');
 
@@ -371,9 +451,12 @@
             ],
             "scrollX": scroll_table,
             "lengthChange": false,
+<<<<<<< HEAD
+=======
             "order": [
                 [1, 'asc']
             ],
+>>>>>>> first commit
             language: {
                 search: "_INPUT_",
                 searchPlaceholder: "Kata Kunci Pencarian...",
@@ -383,6 +466,11 @@
             //kriteria column 0 nama tipe input
             initComplete: function() {
                 //kriteria column 0 nama tipe select
+<<<<<<< HEAD
+                this.api().columns([1]).every(function() {
+                    var column = this;
+                    var input = $('<input class="form-control" placeholder="Nama Barang" style="margin-bottom:10px;"></input>')
+=======
                 this.api().columns([2]).every(function() {
                     var column = this;
                     var input = $('<input class="form-control" placeholder="Kode Aset" style="margin-bottom:10px;"></input>')
@@ -398,6 +486,7 @@
                 this.api().columns([3]).every(function() {
                     var column = this;
                     var input = $('<input class="form-control" placeholder="Nama Aset" style="margin-bottom:10px;"></input>')
+>>>>>>> first commit
                         .appendTo($("#filter-nama"))
                         .on('keyup change clear', function() {
                             if (column.search() !== this.value) {
@@ -407,7 +496,11 @@
                             }
                         });
                 });
+<<<<<<< HEAD
+                this.api().columns([2]).every(function() {
+=======
                 this.api().columns([4]).every(function() {
+>>>>>>> first commit
                     var column = this;
                     var select = $('<select class="form-control select2" id="select2-kategori" style="margin: 5px; width:100%;"><option value="">Kategori Aset</option></select>')
                         // .appendTo($(column.header()).empty())
@@ -424,6 +517,9 @@
                         select.append('<option value="' + d + '">' + d + '</option>')
                     });
                 });
+<<<<<<< HEAD
+                this.api().columns([3]).every(function() {
+=======
                 this.api().columns([5]).every(function() {
                     var column = this;
                     var input = $('<input class="form-control" placeholder="Pencatatan" style="margin-bottom:10px;"></input>')
@@ -437,6 +533,7 @@
                         });
                 });
                 this.api().columns([6]).every(function() {
+>>>>>>> first commit
                     var column = this;
                     var input = $('<input class="form-control" placeholder="Jumlah" style="margin-bottom:10px;"></input>')
                         .appendTo($("#filter-jumlah"))
@@ -448,6 +545,15 @@
                             }
                         });
                 });
+<<<<<<< HEAD
+            }
+        });
+
+        //Android Remove Download PDF and Print Button Datatables
+        if (typeof Android !== "undefined" && Android !== null) {
+            $('.dt-buttons').remove();
+        }
+=======
                 this.api().columns([7]).every(function() {
                     var column = this;
                     var select = $('<select class="form-control select2" id="select2-status" style="margin-bottom:10px; width:100%;"><option value = "">Status</option></select>')
@@ -506,6 +612,7 @@
 
             }
         });
+>>>>>>> first commit
 
         //mobile
         if ($(window).width() <= 595) {
@@ -523,9 +630,26 @@
             table.columns([6, 7]).visible(false);
         }
     });
+<<<<<<< HEAD
+    /* open action button listener */
+    // action listener button
+    $(document).on("click", ".open-pinjam", function() {
+        /* passing data dari view button detail ke modal */
+        var id_aset = $(this).data('id');
+        var nama_barang = $(this).data('nama');
+        var kode_aset = $(this).data('kode');
+        var jumlah = $(this).data('jumlah');
+        $("#id-aset-pinjam").val(id_aset);
+        $("#nama-barang-pinjam").val(nama_barang);
+        $("#kode-aset-pinjam").val(kode_aset);
+        $("#jumlah-pinjam").val(jumlah);
+        $("#max-jumlah-pinjam").html(jumlah);
+    });
+=======
 
     // action listener click detail
 
+>>>>>>> first commit
     $(document).on("click", ".open-update", function() {
         /* passing data dari view button detail ke modal */
         var this_id = $(this).data('id');
@@ -546,7 +670,44 @@
         $("#jumlah-update").val(this_jumlah);
         var this_harga_satuan = $(this).data('harga_satuan');
         $("#harga_satuan-update").val(this_harga_satuan);
+<<<<<<< HEAD
+        //autoNumeric
+        $(".harga").autoNumeric('update', {
+            aSep: '.',
+            aDec: ',',
+            aSign: 'Rp. ',
+            mDec: '0'
+        });
     });
+    $(document).on("click", ".open-perbaikan", function() {
+        /* passing data dari view button detail ke modal */
+        var id_aset = $(this).data('id');
+        var nama_barang = $(this).data('nama');
+        var kode_aset = $(this).data('kode');
+        var jumlah = $(this).data('jumlah');
+        $("#id-aset-perbaikan").val(id_aset);
+        $("#nama-barang-perbaikan").val(nama_barang);
+        $("#kode-aset-perbaikan").val(kode_aset);
+        $("#jumlah-perbaikan").val(jumlah);
+        $("#max-jumlah-perbaikan").html(jumlah);
+    });
+    $(document).on("click", ".open-lepas", function() {
+        /* passing data dari view button detail ke modal */
+        var id_aset = $(this).data('id');
+        var nama_barang = $(this).data('nama');
+        var kode_aset = $(this).data('kode');
+        var jumlah = $(this).data('jumlah');
+        $("#id-aset-lepas").val(id_aset);
+        $("#nama-barang-lepas").val(nama_barang);
+        $("#kode-aset-lepas").val(kode_aset);
+        $("#jumlah-lepas").val(jumlah);
+        $("#max-jumlah-lepas").html(jumlah);
+    });
+
+    /* close action button listener */
+=======
+    });
+>>>>>>> first commit
 
     $(document).on("click", "#filter-btn", function() {
         $('#filter-box').show();

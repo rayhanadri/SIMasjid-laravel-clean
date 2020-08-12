@@ -74,14 +74,9 @@
                         <tbody>
                             @foreach ($lokasiGroup as $lokasi)
                             <tr>
-                                <td id="td_no_kategori">{{ $loop->iteration }}</th>
+                                <td id="td_no_kategori">{{ $lokasi->id }}</th>
                                 <td id="td_nama_kategori">{{ $lokasi->nama }}</th>
-                                <td id="td_btn">
-                                    <div class="btn-group-vertical mb-3" role="group">
-                                    <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $lokasi->id }}" data-nama="{{ $lokasi->nama }}" data-target="#updateModal"><i class="fas fa-sync"></i> Perbarui</a>
-                                        <a href="#" class="open-delete  btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $lokasi->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
-                                    </div>
-                                </td>
+                                <td id="td_action_kategori">XX</th>
                             </tr>
                             @endforeach
                         </tbody>
@@ -101,7 +96,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('masterLokasiCreate') }}">
+            <form method="POST" action="{{ route('lokasiCreate') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
@@ -112,65 +107,10 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Tambah Lokasi</button>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-<!-- Modal Update -->
-<div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
-    <div class="modal-dialog" role="document">
-        <form action="{{ route('masterKategoriUpdate') }}" method="post">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Perbarui Data Lokasi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="update_nama" class="col-md-4 col-form-label text-md-right">Nama Lokasi</label>
-                        <div class="col-md-6">
-                            <input id="update_nama" type="text" class="form-control" name="nama" placeholder="Nama Lokasi" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <input type="text" id="id_update" name="id" value=""/>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <input type="submit" value="Simpan" class="btn btn-primary" />
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- Modal Delete -->
-<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Hapus Kategori</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="{{ route('home') }}/public/dist/assets/img/svg/trash.svg" id="detailFoto" class="mx-auto d-block" alt="tolak image" style="width:150px; height:150px;overflow: hidden;">
-
-                <h5 align="center">Apakah Anda yakin ingin menghapus lokasi ini?</h5>
-            </div>
-            <div class="modal-footer bg-whitesmoke br">
-                <form action="{{ route('masterLokasiDelete') }}" method="post">
-                    @csrf
-                    <input type="text" id="id_delete" name="id" value="" />
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak, Batalkan</button>
-                    <input type="submit" value="Ya, Tolak" class="btn btn-danger" />
-                </form>
-            </div>
         </div>
     </div>
 </div>
@@ -222,21 +162,6 @@
                 });
             },
         });
-    });
-    // action listener update
-    $(document).on("click", ".open-update", function() {
-        /* passing data dari view button detail ke modal */
-        var this_id = $(this).data('id');
-        var this_nama = $(this).data('nama');
-        $("#id_update").val(this_id);
-        $("#update_nama").val(this_nama);
-    });
-
-    // action listener delete
-    $(document).on("click", ".open-delete", function() {
-        /* passing data dari view button detail ke modal */
-        var this_id = $(this).data('id');
-        $("#id_delete").val(this_id);
     });
 </script>
 @include('layouts.footer')

@@ -39,7 +39,7 @@
                     <table id="table_aset" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th id="th_No_aset">No. Aset</th>
+                                <th id="th_NO_aset">No</th>
                                 <th id="th_kode_aset">Kode Aset</th>
                                 <th id="th_nama_aset">Nama Barang</th>
                                 <th id="th_kategori_aset">Kategori</th>
@@ -98,25 +98,13 @@
                     <div class="form-group row">
                         <label for="jumlah" class="col-md-4 col-form-label text-md-right">Jumlah (Max: <span id="max-jumlah"></span>)</label>
                         <div class="col-md-6">
-                            <input id="jumlah" type="number" class="form-control" name="jumlah" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="nama_peminjam" class="col-md-4 col-form-label text-md-right">Nama Peminjam</label>
-                        <div class="col-md-6">
-                            <input id="nama_peminjam" type="text" class="form-control" name="nama_peminjam" placeholder="Nama Peminjam" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="telp_peminjam" class="col-md-4 col-form-label text-md-right">No. HP/Telp Peminjam</label>
-                        <div class="col-md-6">
-                            <input id="telp_peminjam" type="text" class="form-control" name="telp_peminjam" placeholder="Nomor Telepon/HP Peminjam" required>
+                            <input id="jumlah" type="number" class="form-control" name="jumlah">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="keterangan" class="col-md-4 col-form-label text-md-right">Keterangan</label>
                         <div class="col-md-6">
-                            <textarea id="keterangan" class="form-control" name="keterangan" style="height:82px;" placeholder="Keterangan lainnya"></textarea>
+                            <textarea id="keterangan" class="form-control" name="keterangan" style="height:82px;" placeholder="Keterangan Nama Peminjam, Tanggal Pengembalian, dan Lain-lain" required></textarea>
                         </div>
                     </div>
                 </div>

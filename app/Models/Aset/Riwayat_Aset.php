@@ -4,7 +4,7 @@ namespace App\Models\Aset;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Riwayat_Aset extends Model
+class Riwayat_aset extends Model
 {
     //
     protected $table = 'riwayat_aset';

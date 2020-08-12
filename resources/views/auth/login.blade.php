@@ -11,12 +11,21 @@
             </div>
             <div class="card card-primary">
               <div class="card-header">
+<<<<<<< HEAD
+                <h4 style="margin: auto; padding: auto;">Masuk SI Masjid Ibnu Sina</h4>
+=======
                 <h4 style="margin: auto; padding: auto;">Login SI Masjid Ibnu Sina</h4>
+>>>>>>> first commit
               </div>
               <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
                   @csrf
                   <div class="form-group row">
+<<<<<<< HEAD
+=======
+                    <!-- <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label> -->
+
+>>>>>>> first commit
                     <div class="col-md-12">
                       <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="Username">
                       @error('username')
@@ -56,7 +65,11 @@
                   <div class="form-group row mb-0">
                     <div class="col-lg-12">
                       <button type="submit" class="btn btn-primary" style="width:100%; margin-bottom:15px;">
+<<<<<<< HEAD
+                        {{ __('Masuk (Log in)') }}
+=======
                         {{ __('Login') }}
+>>>>>>> first commit
                       </button>
                     </div>
 

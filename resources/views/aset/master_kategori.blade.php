@@ -72,23 +72,18 @@
                                 <th id="th_no_kategori">No</th>
                                 <th id="th_kode_kategori">Kode Kategori</th>
                                 <th id="th_nama_kategori">Nama Kategori</th>
-                                <th id="th_pj_kategori">Penanggung Jawab</th>
-                                <th id="th_btn">Action</th>
+                                <th id="th_nama_kategori">Penanggung Jawab</th>
+                                <th id="th_action_kategori">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($kategoriGroup as $kategori)
                             <tr>
-                                <td id="td_no_kategori">{{ $loop->iteration }}</th>
+                                <td id="td_no_kategori">{{ $kategori->id }}</th>
                                 <td id="td_kode_kategori">{{ $kategori->kode }}</th>
                                 <td id="td_nama_kategori">{{ $kategori->nama }}</th>
-                                <td id="td_pj_kategori">{{ $kategori->penanggung_jawab->nama }}</th>
-                                <td id="td_btn">
-                                    <div class="btn-group-vertical mb-3" role="group">
-                                        <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $kategori->id }}" data-nama="{{ $kategori->nama }}" data-kode="{{ $kategori->kode }}" data-pj="{{ $kategori->id_pj }}" data-target="#updateModal"><i class="fas fa-sync"></i> Perbarui</a>
-                                        <a href="#" class="open-delete  btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $kategori->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
-                                    </div>
-                                </td>
+                                <td id="td_nama_kategori">{{ $kategori->penanggung_jawab->nama }}</th>
+                                <td id="td_nama_kategori">XX</th>
                             </tr>
                             @endforeach
                         </tbody>
@@ -96,6 +91,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 </div>
 <!-- Modal Tambah Kategori -->
@@ -108,7 +104,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('masterKategoriCreate') }}">
+            <form method="POST" action="{{ route('kategoriCreate') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
@@ -126,7 +122,7 @@
                     <div class="form-group row">
                         <label for="kode" class="col-md-4 col-form-label text-md-right">Penanggung Jawab</label>
                         <div class="col-md-6">
-                            <select id="pj" type="text" class="form-control" name="id_pj" style="width:100%;">
+                            <select id="pj-tambah" type="text" class="form-control" name="id_pj" style="width:100%;">
                                 @foreach ($anggotaGroup as $anggota)
                                 <option value="{{ $anggota->id }}"> {{ $anggota->nama }}</option>
                                 @endforeach
@@ -135,85 +131,13 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Tambah Kategori</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- Modal Update -->
-<div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
-    <div class="modal-dialog" role="document">
-        <form action="{{ route('masterKategoriUpdate') }}" method="post">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Perbarui Data Kategori</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="update_nama" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
-                        <div class="col-md-6">
-                            <input id="update_nama" type="text" class="form-control" name="nama" placeholder="Nama Kategori" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="update_kode" class="col-md-4 col-form-label text-md-right">Kode Kategori (Harus unik, 4 karakter)</label>
-                        <div class="col-md-6">
-                            <input id="update_kode" type="text" class="form-control" name="kode" placeholder="Kode Kategori" required="" minlength="4" maxlength="4" size="4">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="kode" class="col-md-4 col-form-label text-md-right">Penanggung Jawab</label>
-                        <div class="col-md-6">
-                            <select id="update_pj" type="text" class="form-control" name="id_pj" style="width:100%;">
-                                @foreach ($anggotaGroup as $anggota)
-                                <option value="{{ $anggota->id }}"> {{ $anggota->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <input type="text" id="id_update" name="id" value=""/>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <input type="submit" value="Simpan" class="btn btn-primary" />
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- Modal Delete -->
-<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Hapus Kategori</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="{{ route('home') }}/public/dist/assets/img/svg/trash.svg" id="detailFoto" class="mx-auto d-block" alt="tolak image" style="width:150px; height:150px;overflow: hidden;">
-
-                <h5 align="center">Apakah Anda yakin ingin menghapus kategori ini?</h5>
-            </div>
-            <div class="modal-footer bg-whitesmoke br">
-                <form action="{{ route('masterKategoriDelete') }}" method="post">
-                    @csrf
-                    <input type="text" id="id_delete" name="id" value="" />
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak, Batalkan</button>
-                    <input type="submit" value="Ya, Tolak" class="btn btn-danger" />
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- SCRIPT -->
 
 <script type="text/javascript">
@@ -277,33 +201,18 @@
             }
         });
 
-
-    });
-
-    $(document).on("click", ".open-tambah", function() {
-        $('#pj').select2({
-            dropdownParent: $('#tambahKategoriModal')
+        $(document).on("click", ".open-tambah", function() {
+            $('#pj-tambah').select2({
+                dropdownParent: $('#tambahKategoriModal')
+            });
         });
     });
 
-    // action listener update
-    $(document).on("click", ".open-update", function() {
-        /* passing data dari view button detail ke modal */
-        var this_id = $(this).data('id');
-        var this_nama = $(this).data('nama');
-        var this_kode = $(this).data('kode');
-        var this_pj = $(this).data('pj');
-        $("#id_update").val(this_id);
-        $("#update_nama").val(this_nama);
-        $("#update_kode").val(this_kode);
-        $("#update_pj").val(this_pj);
-    });
-
     // action listener delete
-    $(document).on("click", ".open-delete", function() {
+    $(document).on("click", ".open-delete-kategori", function() {
         /* passing data dari view button detail ke modal */
         var this_id = $(this).data('id');
-        $("#id_delete").val(this_id);
+        $(".modal-footer #id_kategori_del").val(this_id);
     });
 </script>
 @include('layouts.footer')

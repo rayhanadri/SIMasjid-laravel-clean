@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Peminjaman;
 use App\Models\Aset\Aset;
-use App\Models\Aset\Riwayat_Aset;
+use App\Models\Aset\Riwayat_aset;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +23,7 @@ class PeminjamanController extends Controller
     {
         $asetGroup = Aset::get()->where('status', '=', 'Tersedia');
         $peminjamanGroup = Peminjaman::get()->where('status', '=', 'Belum Verifikasi');
-        return view('aset.peminjaman_create', ['asetGroup' => $asetGroup]);
+        return view('aset.peminjaman_create', ['peminjamanGroup' => $peminjamanGroup, 'asetGroup' => $asetGroup]);
     }
 
     public function create(Request $request)
@@ -42,12 +42,8 @@ class PeminjamanController extends Controller
             ]);
         } else {
             //jumlah barang dipinjam valid, lanjutkan peminjaman
-            $peminjaman->jumlah = $request->jumlah;                             // input -- jumlah
-            $peminjaman->nama_peminjam = $request->nama_peminjam;             // input -- nama peminjam
-            $peminjaman->telp_peminjam = $request->telp_peminjam;             // input -- kontak peminjam
-            if ($request->keterangan != null) {
-                $peminjaman->keterangan = $request->keterangan;                   // input -- ket
-            }
+            $peminjaman->jumlah = $request->jumlah;             // input -- jumlah
+            $peminjaman->keterangan = $request->keterangan;     // input -- ket
             $peminjaman->status = 'Belum Verifikasi';
             $peminjaman->tgl_dibuat = now();
             $peminjaman->save();

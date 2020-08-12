@@ -73,8 +73,13 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                     <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
                                         <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
                                         @if($inside_sekretaris)
+<<<<<<< HEAD
+                                        <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#updateModal"><i class="fas fa-edit"></i></i> Edit</a>
+                                        <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
+=======
                                         <a href="#" class="open-edit btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#editModal"><i class="fas fa-sync"></i></i> Perbarui</a>
                                         <!-- <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a> -->
+>>>>>>> first commit
                                         @endif
                                     </div>
                                 </td>
@@ -93,7 +98,11 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+<<<<<<< HEAD
+                <h5 class="modal-title">Detail Akun Anggota</h5>
+=======
                 <h5 class="modal-title">Detail Anggota</h5>
+>>>>>>> first commit
                 <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -163,6 +172,16 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+<!-- Modal Update -->
+<div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('anggotaUpdate') }}" method="post">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ubah Data Anggota</h5>
+=======
 <!-- Modal Edit -->
 <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
     <div class="modal-dialog" role="document">
@@ -171,6 +190,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Perbarui Data Anggota</h5>
+>>>>>>> first commit
                     <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -180,11 +200,19 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                         <tbody>
                             <tr>
                                 <th scope="row">Nama</th>
+<<<<<<< HEAD
+                                <td><input name="nama" id="updateNama" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Jabatan</th>
+                                <td><select id="updateJabatan" name="id_jabatan" class="form-control select" required>
+=======
                                 <td><input name="nama" id="editNama" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <th scope="row">Jabatan</th>
                                 <td><select id="editJabatan" name="id_jabatan" class="form-control select">
+>>>>>>> first commit
                                         <option value=5>Remaja Masjid</option>
                                         <option value=4>Takmir Masjid</option>
                                         <option value=3>Bendahara Takmir</option>
@@ -194,13 +222,32 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                             </tr>
                             <tr>
                                 <th scope="row">Status</th>
+<<<<<<< HEAD
+                                <td><select id="updateStatus" name="id_status" class="form-control select" required>
+=======
                                 <td><select id="editStatus" name="id_status" class="form-control select">
+>>>>>>> first commit
                                         <option value=1>Aktif</option>
                                         <option value=2>Non-Aktif</option>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">Username</th>
+<<<<<<< HEAD
+                                <td><input name="username" id="updateUsername" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td><input type="email" name="email" id="updateEmail" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Alamat</th>
+                                <td><input name="alamat" id="updateAlamat" class="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Telp/HP</th>
+                                <td><input name="telp" id="updateTelp" class="form-control" required /></td>
+=======
                                 <td><input name="username" id="editUsername" class="form-control" /></td>
                             </tr>
                             <tr>
@@ -214,14 +261,21 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                             <tr>
                                 <th scope="row">Telp/HP</th>
                                 <td><input name="telp" id="editTelp" class="form-control" /></td>
+>>>>>>> first commit
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
+<<<<<<< HEAD
+                    <input type="text" id="id_update" name="id" value="" hidden required />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <input type="submit" value="Simpan" class="btn btn-primary" />
+=======
                     <input type="text" id="id_edit" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
                     <input type="submit" value="Perbarui Data" class="btn btn-primary" />
+>>>>>>> first commit
                 </div>
             </div>
         </form>
@@ -322,16 +376,33 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         var thisDataAnggota = $(this).data('id');
         $(".modal-footer #id_delete").val(thisDataAnggota);
     });
+<<<<<<< HEAD
+    // onclick btn update, show modal
+    $(document).on("click", ".open-update", function() {
+        /* passing data dari view button detail ke modal */
+        var thisDataAnggota = $(this).data('id');
+        $(".modal-footer #id_update").val(thisDataAnggota);
+=======
     // onclick btn edit, show modal
     $(document).on("click", ".open-edit", function() {
         /* passing data dari view button detail ke modal */
         var thisDataAnggota = $(this).data('id');
         $(".modal-footer #id_edit").val(thisDataAnggota);
+>>>>>>> first commit
         var linkDetail = "{{ route('home') }}/anggota/detail/" + thisDataAnggota;
         $.get(linkDetail, function(data) {
             //deklarasi var obj JSON data detail anggota
             var obj = data;
             // ganti elemen pada dokumen html dengan hasil data json dari jquery
+<<<<<<< HEAD
+            $(".modal-body #updateNama").val(obj.nama);
+            $(".modal-body #updateJabatan").val(obj.id_jabatan);
+            $(".modal-body #updateStatus").val(obj.id_status);
+            $(".modal-body #updateUsername").val(obj.username);
+            $(".modal-body #updateEmail").val(obj.email);
+            $(".modal-body #updateAlamat").val(obj.alamat);
+            $(".modal-body #updateTelp").val(obj.telp);
+=======
             $(".modal-body #editNama").val(obj.nama);
             $(".modal-body #editJabatan").val(obj.id_jabatan);
             $(".modal-body #editStatus").val(obj.id_status);
@@ -339,6 +410,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
             $(".modal-body #editEmail").val(obj.email);
             $(".modal-body #editAlamat").val(obj.alamat);
             $(".modal-body #editTelp").val(obj.telp);
+>>>>>>> first commit
             //base root project url + url dari db
             // var link_foto = "{{ route('home') }}/" + obj.link_foto;
             // document.getElementById("detailFoto").src = link_foto;

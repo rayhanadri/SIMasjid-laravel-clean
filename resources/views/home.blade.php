@@ -18,7 +18,11 @@
     <div class="section-body">
       <div class="row">
         <div class="col-12">
+<<<<<<< HEAD
+          <h3 style="text-align:center;">Selamat datang di Sistem Informasi Masjid Ibnu Sina!!</h3>
+=======
           <h3 style="text-align:center;">Selamat datang di Sistem Informasi Masjid Ibnu Sina!</h3>
+>>>>>>> first commit
         </div>
       </div>
       <div class="row">
@@ -40,7 +44,11 @@
             </div>
           </a>
         </div>
+<<<<<<< HEAD
+        <!-- <div class="col-lg-2 col-md-4 col-6" style="padding: 10px;">
+=======
         <div class="col-lg-2 col-md-4 col-6" style="padding: 10px;">
+>>>>>>> first commit
           <a href="#" class="btn btn-info not-ready" style="width: 100%; height: 150px;">
             <div style="font-size: 14px; padding: 30px 0px;">
               <i class="fa fa-money-bill-wave" style="font-size: 32px;"></i>
@@ -66,7 +74,11 @@
               Kurban
             </div>
           </a>
+<<<<<<< HEAD
+        </div> -->
+=======
         </div>
+>>>>>>> first commit
       </div>
     </div>
   </section>

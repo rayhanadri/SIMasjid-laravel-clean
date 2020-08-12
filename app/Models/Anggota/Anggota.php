@@ -2,7 +2,10 @@
 
 namespace App\Models\Anggota;
 
+<<<<<<< HEAD
+=======
 // use Illuminate\Database\Eloquent\Model;
+>>>>>>> first commit
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\PasswordReset;
@@ -24,7 +27,10 @@ class Anggota extends Authenticatable
     {
         $this->notify(new PasswordReset($token));
     }
+<<<<<<< HEAD
+=======
 
 
 
+>>>>>>> first commit
 }

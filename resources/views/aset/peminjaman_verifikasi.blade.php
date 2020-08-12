@@ -53,13 +53,11 @@
                     <table id="table_peminjaman" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th id="th_no_peminjaman">No. Peminjaman</th>
+                                <th id="th_no_peminjaman">No</th>
                                 <th id="th_kode_peminjaman">Kode Barang</th>
                                 <th id="th_nama_barang_peminjaman">Nama Barang</th>
                                 <th id="th_jumlah_barang_peminjaman">Jumlah</th>
                                 <th id="th_pembuat_peminjaman">Pembuat</th>
-                                <th id="th_nama_peminjam">Nama Peminjam</th>
-                                <th id="th_telp_peminjam">Telp/HP Peminjam</th>
                                 <th id="th_keterangan_peminjaman">Keterangan</th>
                                 <th id="th_tgl_dibuat_peminjaman">Tanggal Dibuat</th>
                                 <th id="th_action_peminjaman">Action</th>
@@ -69,18 +67,16 @@
                             @foreach ($peminjamanGroup as $peminjaman)
                             <tr>
                                 <td id="td_no_peminjaman">{{ $peminjaman->id }}</td>
-                                <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
                                 <td id="td_kode_barang_peminjaman">{{ $peminjaman->barang->nama }}</td>
-                                <td id="td_jumlah_barang_peminjaman">{{ $peminjaman->jumlah }}</td>
-                                <td id="td_pembuat_peminjaman">{{ $peminjaman->pembuat->nama }}</td>
-                                <td id="td_nama_peminjam">{{ $peminjaman->nama_peminjam}}</td>
-                                <td id="td_telp_peminjam">{{ $peminjaman->telp_peminjam}}</td>
-                                <td id="td_keterangan_peminjaman">{{ $peminjaman->keterangan}}</td>
-                                <td id="td_tgl_peminjaman">{{ $peminjaman->tgl_dibuat}}</td>
-                                <td id="td_btn_peminjaman">
-                                    <div class="btn-group-vertical mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
-                                        <a href="#" class="open-terima btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $peminjaman->id }}" data-target="#terimaModal"><i class="fas fa-check"></i> Terima</a>
+                                <td id="td_nama_barang_peminjaman">{{ $peminjaman->barang->kode }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->jumlah }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->pembuat->nama }}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->keterangan}}</td>
+                                <td id="td_nama_kategori">{{ $peminjaman->tgl_dibuat}}</td>
+                                <td id="td_nama_kategori">
+                                    <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
                                         <a href="#" class="open-tolak btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $peminjaman->id }}" data-target="#tolakModal"><i class="fas fa-times"></i></i> Tolak</a>
+                                        <a href="#" class="open-terima btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $peminjaman->id }}" data-target="#terimaModal"><i class="fas fa-check"></i> Terima</a>
                                     </div>
                                 </td>
                             </tr>

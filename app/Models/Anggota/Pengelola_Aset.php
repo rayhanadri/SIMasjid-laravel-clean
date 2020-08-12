@@ -11,9 +11,12 @@ class Pengelola_Aset extends Model
 
     public $timestamps = false; 
 
+<<<<<<< HEAD
+=======
     protected $fillable = [
         'id_pengelola',
     ];
+>>>>>>> first commit
 
     //pengelola anggota adalah anggota
     public function anggota_pengelola()
