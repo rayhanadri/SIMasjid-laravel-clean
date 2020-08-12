@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
----
-
-
----
-=======
->>>>>>> 5e20bd78141f704a898e5cc90f57c9b78222549f
-
 <h1 id="sistem-informasi-masjid-ibnu-sina-clean-laravel-source-code">Sistem Informasi Masjid Ibnu Sina (Clean Laravel Source Code)</h1>
 <p><img src="http://simasjid.my.id/public/dist/assets/img/ibnusina.jpg" alt=""></p>
 <h1 id="live-demo">Live Demo</h1>
@@ -132,15 +123,3 @@ jadi
     DB_USERNAME=root
     DB_PASSWORD=
     
-**Reset Password Via Email Error**
-1.	Buka file .env di direktori project laravel
-2.	Ubah line 26-31 jadi seperti berikut
-    ```
-    MAIL_DRIVER=smtp
-    MAIL_HOST=smtp.gmail.com
-    MAIL_PORT=465
-    MAIL_USERNAME=simasjid.ibnusina@gmail.com
-    MAIL_PASSWORD=emzbwvjgjstdyuqx
-    MAIL_ENCRYPTION=ssl
-
->>>>>>> first commit
