@@ -123,11 +123,7 @@
       //The file uploaded is an image
 
       if (Extension == "gif" || Extension == "png" || Extension == "bmp" ||
-<<<<<<< HEAD
         Extension == "jpeg" || Extension == "jpg" || Extension == "svg") {
-=======
-        Extension == "jpeg" || Extension == "jpg") {
->>>>>>> first commit
 
         // To Display
         if (fuData.files && fuData.files[0]) {

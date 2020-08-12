@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::post('aset/updateStatus', 'Aset\AsetController@updateStatus')->name('asetUpdateStatus');
         Route::post('aset/delete', 'Aset\AsetController@delete')->name('asetDelete');
         Route::post('aset/updateFoto', 'Aset\AsetController@updateFoto')->name('asetUpdateFoto');
+        Route::get('aset/testing', 'Aset\AsetController@testing')->name('asetTesting');
 
         //route aset tracking
         Route::get('aset/tracking', 'Aset\TrackingController@trackingForm')->name('asetTracking');
@@ -84,7 +85,6 @@ Route::middleware('auth')->group(function () {
         Route::get('aset/usulan/ditolak', 'Aset\UsulanController@indexDitolak')->name('asetUsulanIndexDitolak');
         Route::get('aset/usulan/dibatalkan', 'Aset\UsulanController@indexDibatalkan')->name('asetUsulanIndexDibatalkan');
         // Route::get('aset/usulan/create', 'Aset\UsulanController@createForm')->name('asetUsulanCreate');
-        
         //post route usulan
         Route::post('aset/usulan/create', 'Aset\UsulanController@create')->name('asetUsulanCreate');
         Route::post('aset/usulan/proses', 'Aset\UsulanController@proses')->name('asetUsulanProses');

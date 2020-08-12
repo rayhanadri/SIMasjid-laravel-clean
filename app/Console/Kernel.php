@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        'App\Console\Commands\everyMinute',
     ];
 
     /**
@@ -24,7 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        // $schedule->command('inspire')
+        //          ->hourly();
+        // the call method
+        $schedule->command('minute:update')->everyMinute();
     }
 
     /**

@@ -102,7 +102,6 @@
     background: #fff !important;
     box-shadow: inset 0 0 0px #fff !important;
   }
-<<<<<<< HEAD
 
   .dataTables_wrapper .dataTables_filter label .form-control{
     margin-left: 20px;
@@ -112,6 +111,4 @@
     background: no-repeat url("https://beta2.simasjid.my.id/public/search.png");
   }
 
-=======
->>>>>>> first commit
 </style>

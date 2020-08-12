@@ -1,11 +1,7 @@
 <footer class="main-footer">
   <div class="footer-left">
-<<<<<<< HEAD
     <!-- <button id="dark-mode-btn" class="btn btn-dark">Dark Mode</button><br> -->
     Copyright &copy; <?php echo date('Y'); ?> <div class="bullet"></div> SIMASJID Ibnu Sina Malang
-=======
-    Copyright &copy; SIMASJID {{ date('Y') }}
->>>>>>> first commit
   </div>
   <div class="footer-right">
     2.0.0
@@ -44,7 +40,6 @@
 <!-- <script src="{{ asset('public/dist/assets/js/custom.js') }}"></script> -->
 
 <!-- Page Specific JS File -->
-<<<<<<< HEAD
 <script type="text/javascript">
   //dark-mode
   $(document).ready(function() {
@@ -90,8 +85,6 @@
     //
   });
 </script>
-=======
->>>>>>> first commit
 </body>
 
 </html>

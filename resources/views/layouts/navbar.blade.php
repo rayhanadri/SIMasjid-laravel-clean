@@ -41,25 +41,15 @@
           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg"><i class="far fa-bell"></i></a>
             @endif
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
-<<<<<<< HEAD
               <div class="dropdown-header">Notifikasi
                 <div class="float-right">
                   <!-- <a href="#">Mark All As Read</a> -->
-=======
-              <div class="dropdown-header">Notifications
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
->>>>>>> first commit
                 </div>
               </div>
               <div class="dropdown-list-content dropdown-list-icons">
                 @foreach ( $notifs as $notif )
                 @if ( $notif->sudah_baca == 0 )
-<<<<<<< HEAD
                 <a href="{{ $notif->link }}" class="notif dropdown-item dropdown-item-unread" data-id="{{ $notif->id }}" data-link="{{ $notif->link }}">
-=======
-                <a href="#" class="notif dropdown-item dropdown-item-unread" data-id="{{ $notif->id }}">
->>>>>>> first commit
                   @else
                   <a href="{{ $notif->link }}" class="dropdown-item">
                     @endif
@@ -82,11 +72,7 @@
                   @endforeach
               </div>
               <div class="dropdown-footer text-center">
-<<<<<<< HEAD
                 <!-- <a href="#">View All <i class="fas fa-chevron-right"></i></a> -->
-=======
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
->>>>>>> first commit
               </div>
             </div>
           </li>
@@ -108,7 +94,6 @@
               <a href="{{ route('pengaturanAkun') }}" class="dropdown-item has-icon">
                 <i class="fas fa-cog"></i> Pengaturan Akun
               </a>
-<<<<<<< HEAD
               <!-- <div class="form-group">
                 <label class="custom-switch mt-2">
                   <input type="checkbox" id="dark-mode-switch" name="custom-switch-checkbox" class="custom-switch-input">
@@ -120,12 +105,6 @@
               <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt"></i> Keluar (Log out)
-=======
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt"></i> Logout
->>>>>>> first commit
               </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -138,36 +117,22 @@
           </li>
         </ul>
       </nav>
-<<<<<<< HEAD
       <div class="main-sidebar" id="main-sidebar">
-=======
-      <div class="main-sidebar">
->>>>>>> first commit
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
             <a href="{{ route('home') }}">SI MASJID IBNU SINA</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-<<<<<<< HEAD
             <a href="{{ route('home') }}"><img src="{{ route('home')}}/public/dist/assets/img/ibnusina.jpg" style="width: 3em;"></a>
-=======
-            <a href="{{ route('home') }}">SIM</a>
->>>>>>> first commit
           </div>
           <ul class="sidebar-menu">
             <!-- <li class="menu-header">Dashboard</li> -->
             <li id='home-link'><a class="nav-link" href="{{ route('home') }}"><i class="fas fa-mosque"></i><span>Home</span></a></li>
             <li id='keanggotaan-link'><a class="nav-link" href="{{ route('anggotaIndex') }}"><i class="fas fa-users"></i><span>Keanggotaan</span></a></li>
             <li id='aset-link'><a class="nav-link" href="{{ route('asetIndex') }}"><i class="fas fa-warehouse"></i><span>Aset</span></a></li>
-<<<<<<< HEAD
             <!-- <li id='keuangan-link'><a class="nav-link not-ready" href="#"><i class="fas fa-money-bill-wave"></i><span>Keuangan</span></a></li>
             <li id='musyawarah-link'><a class="nav-link not-ready" href="#"><i class="fas fa-comments"></i><span>Musyawarah</span></a></li>
             <li id='kurban-link'><a class="nav-link not-ready" href="#"><i class="icofont-cow" style="font-size: 30px;"></i><span>Kurban</span></a></li> -->
-=======
-            <li id='keuangan-link'><a class="nav-link not-ready" href="#"><i class="fas fa-money-bill-wave"></i><span>Keuangan</span></a></li>
-            <li id='musyawarah-link'><a class="nav-link not-ready" href="#"><i class="fas fa-comments"></i><span>Musyawarah</span></a></li>
-            <li id='kurban-link'><a class="nav-link not-ready" href="#"><i class="fas fa-money-bill-wave"></i><span>Kurban</span></a></li>
->>>>>>> first commit
         </aside>
       </div>
       <script>
@@ -176,7 +141,6 @@
           $('.not-ready').click(function() {
             alert('Fitur ini belum tersedia');
           });
-<<<<<<< HEAD
           if (typeof Android !== "undefined" && Android !== null) {
             $('.main-sidebar').css({
               'z-index': 1002
@@ -197,12 +161,6 @@
           e.preventDefault();
           var id = $(this).data('id');
           var link = $(this).data('link');
-=======
-        });
-
-        $('.notif').click(function() {
-          var id = $(this).data('id');
->>>>>>> first commit
           $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -215,10 +173,7 @@
             },
             type: 'POST',
             success: function(data) {
-<<<<<<< HEAD
               window.location.href = link;
-=======
->>>>>>> first commit
               console.log(data.success);
             }
           });

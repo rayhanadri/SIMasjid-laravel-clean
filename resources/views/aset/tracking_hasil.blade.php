@@ -9,10 +9,7 @@
           <li class="breadcrumb-item"><a href="{{ route('asetIndex') }}">Manajemen Aset</a></li>
           <li class="breadcrumb-item"><a href="{{ route('asetTracking') }}">Tracking</a></li>
           <li class="breadcrumb-item active">Hasil Tracking</li>
-<<<<<<< HEAD
           <!-- <li class="breadcrumb-item active">Usulan</li> -->
-=======
->>>>>>> first commit
         </ol>
       </div>
     </div>
@@ -20,17 +17,12 @@
     <div class="row">
       <div class="col-12">
         <div class="section-header">
-<<<<<<< HEAD
           <h1 style="margin: auto;"><i class="fa fa-info-circle"></i> Detail</h1>
-=======
-          <h1 style="margin: auto;"><i class="fa fa-search"></i> Hasil Tracking</h1>
->>>>>>> first commit
         </div>
       </div>
     </div>
     <div class="section-body">
       <div class="row">
-<<<<<<< HEAD
         @if ($errors->any())
         <div class="alert alert-danger">
           <ul>
@@ -62,15 +54,12 @@
       </div>
       <div class="row">
         <br>
-=======
->>>>>>> first commit
         <h4 style="margin:auto;" id="judul_detail">Detail Aset</h4>
         <br>
       </div>
       <div class="row">
         <br>
         <div class="col-lg-4 col-md-4 col-sm-12 ">
-<<<<<<< HEAD
           <!-- <img id="foto-barang" src="{{ route('home') }}/{{ $aset->link_foto_barang }}" alt="foto" style="max-width:100%; max-height:500px; margin: 15px;"></img> -->
           <span id="img_uploaded" style="text-align: center;" class="img-thumbnail rounded mx-auto d-block">
             <img src="{{ route('home') }}/{{ $aset->link_foto_barang. '?=' .  strtotime('now') }}" id="blah" alt="foto aset" style="max-width:100%; overflow: hidden;" required><br>
@@ -100,9 +89,6 @@
             </div>
           </form>
           @endif
-=======
-          <img id="foto-barang" src="{{ route('home') }}/{{ $aset->link_foto_barang }}" alt="foto" style="max-width:100%; max-height:500px; margin: 15px;"></img>
->>>>>>> first commit
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 ">
           <table id="table-barang" border="1" style="width: 100%;">
@@ -117,7 +103,6 @@
               </tr>
               <tr>
                 <td>Kategori:</td>
-<<<<<<< HEAD
                 @if ($aset->kategori != null)
                 <td>{{ $aset->kategori->nama }}</td>
                 @else
@@ -131,9 +116,6 @@
                 @else
                 <td>-</td>
                 @endif
-=======
-                <td>{{ $aset->kategori->nama }}</td>
->>>>>>> first commit
               </tr>
               <tr>
                 <td>Pencatatan:</td>
@@ -145,19 +127,11 @@
               </tr>
               <tr>
                 <td>Harga Satuan:</td>
-<<<<<<< HEAD
                 <td id="td_harga_satuan" class="harga">{{ $aset->harga_satuan }}</td>
               </tr>
               <tr>
                 <td>Total Nilai:</td>
                 <td id="td_total_nilai" class="harga">{{ $aset->jumlah * $aset->harga_satuan }}</td>
-=======
-                <td>{{ $aset->harga_satuan }}</td>
-              </tr>
-              <tr>
-                <td>Total Nilai:</td>
-                <td>{{ $aset->jumlah * $aset->harga_satuan }}</td>
->>>>>>> first commit
               </tr>
               <tr>
                 <td>Sumber:</td>
@@ -165,15 +139,11 @@
               </tr>
               <tr>
                 <td>Lokasi:</td>
-<<<<<<< HEAD
                 @if ($aset->lokasi != null)
                 <td>{{ $aset->lokasi->nama }}</td>
                 @else
                 <td>-</td>
                 @endif
-=======
-                <td>{{ $aset->lokasi->nama }}</td>
->>>>>>> first commit
               </tr>
               <tr>
                 <td>Status:</td>
@@ -216,11 +186,7 @@
             <thead>
               <tr>
                 <th>Aksi</th>
-<<<<<<< HEAD
                 <th>Petugas</th>
-=======
-                <th>Oleh</th>
->>>>>>> first commit
                 <th>Waktu</th>
                 <th>Jumlah</th>
                 <th>Status Aset</th>
@@ -242,17 +208,12 @@
       </div>
       <div class="row">
         <div class="col-12">
-<<<<<<< HEAD
           <a href="{{ route('asetIndex') }}" class="btn btn-lg btn-info btn-primary" style="margin: 2em;">Kembali</a>
-=======
-          <a href="{{ route('asetTracking') }}" class="btn btn-lg btn-info btn-primary" style="margin: 2em;">Kembali</a>
->>>>>>> first commit
         </div>
       </div>
     </div>
   </section>
 </div>
-<<<<<<< HEAD
 <!-- Modal Tambah Peminjaman -->
 <div class="modal fade" tabindex="-1" role="dialog" id="tambahPeminjamanModal">
   <div class="modal-dialog" role="document">
@@ -530,10 +491,6 @@
       }
     }
   }
-=======
-@include('layouts.footer')
-<script type="text/javascript">
->>>>>>> first commit
   //print qr
   function printDiv(id) {
     var div_qr_label = "qr-label";
@@ -559,7 +516,6 @@
 
   $(document).ready(function() {
     $('#menu_tracking').addClass('active');
-<<<<<<< HEAD
     $(".harga").autoNumeric('init', {
       aSep: '.',
       aDec: ',',
@@ -584,19 +540,12 @@
 
 
 
-=======
->>>>>>> first commit
     //init scroll boolean
     var scroll_table = false;
 
     if ($(window).width() <= 480) {
-<<<<<<< HEAD
       $('#foto-barang').css("max-height", 240);
       $('#qr-code-img').css("max-width", 125);
-=======
-      $('#foto-barang').css("max-width", 240);
-      $('#foto-barang').css("max-height", 240);
->>>>>>> first commit
       $('#foto-barang').css("float", "none");
       $('#table-barang').css("width", "100%");
       scroll_table = true;
@@ -613,7 +562,6 @@
       }
     });
   });
-<<<<<<< HEAD
 
   /* open action button listener */
   // action listener button
@@ -683,6 +631,4 @@
   });
 
   /* close action button listener */
-=======
->>>>>>> first commit
 </script>

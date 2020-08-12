@@ -16,17 +16,12 @@
     <div class="row">
       <div class="col-12">
         <div class="section-header">
-<<<<<<< HEAD
           <h1 style="margin: auto;"><i class="fa fa-info-circle"></i> Detail Aset</h1>
-=======
-          <h1 style="margin: auto;"><i class="fa fa-info-circle"></i> Detail</h1>
->>>>>>> first commit
         </div>
       </div>
     </div>
     <div class="section-body">
       <div class="row">
-<<<<<<< HEAD
         @if ($errors->any())
         <div class="alert alert-danger">
           <ul>
@@ -108,17 +103,6 @@
           @endif
         </div>
         <div class="col-lg-8 col-md-6 col-sm-12 ">
-=======
-        <h4 style="margin:auto;" id="judul_detail">Detail Aset</h4>
-        <br>
-      </div>
-      <div class="row">
-        <br>
-        <div class="col-lg-4 col-md-4 col-sm-12 ">
-          <img id="foto-barang" src="{{ route('home') }}/{{ $aset->link_foto_barang }}" alt="foto" style="max-width:100%; max-height:500px; margin: 15px;"></img>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 ">
->>>>>>> first commit
           <table id="table-barang" border="1" style="width: 100%;">
             <tbody>
               <tr>
@@ -126,7 +110,6 @@
                 <td>{{ $aset->kode }}</td>
               </tr>
               <tr>
-<<<<<<< HEAD
                 <td>Nama Barang:</td>
                 <td>{{ $aset->katalog->nama_barang }}</td>
               </tr>
@@ -142,21 +125,11 @@
                 <td>Kategori:</td>
                 @if ($aset->katalog->kategori != null)
                 <td>{{ $aset->katalog->kategori->nama }}</td>
-=======
-                <td>Nama Aset:</td>
-                <td>{{ $aset->nama }}</td>
-              </tr>
-              <tr>
-                <td>Kategori:</td>
-                @if ($aset->kategori != null)
-                <td>{{ $aset->kategori->nama }}</td>
->>>>>>> first commit
                 @else
                 <td>-</td>
                 @endif
               </tr>
               <tr>
-<<<<<<< HEAD
                 <td>Penanggung Jawab:</td>
                 @if ($aset->katalog->kategori != null)
                 <td>{{ $aset->katalog->kategori->penanggung_jawab->nama }}</td>
@@ -175,22 +148,6 @@
               <tr>
                 <td>Nilai:</td>
                 <td id="td_harga_satuan" class="harga">{{ $aset->harga_satuan }}</td>
-=======
-                <td>Pencatatan:</td>
-                <td>{{ $aset->tgl_pencatatan->isoFormat('LLLL')}}</td>
-              </tr>
-              <tr>
-                <td>Jumlah:</td>
-                <td>{{ $aset->jumlah }}</td>
-              </tr>
-              <tr>
-                <td>Harga Satuan:</td>
-                <td>{{ $aset->harga_satuan }}</td>
-              </tr>
-              <tr>
-                <td>Total Nilai:</td>
-                <td>{{ $aset->jumlah * $aset->harga_satuan }}</td>
->>>>>>> first commit
               </tr>
               <tr>
                 <td>Sumber:</td>
@@ -198,11 +155,7 @@
               </tr>
               <tr>
                 <td>Lokasi:</td>
-<<<<<<< HEAD
                 @if ($aset->lokasi != null)
-=======
-                @if ($aset->lokas != null)
->>>>>>> first commit
                 <td>{{ $aset->lokasi->nama }}</td>
                 @else
                 <td>-</td>
@@ -210,11 +163,7 @@
               </tr>
               <tr>
                 <td>Status:</td>
-<<<<<<< HEAD
                 <td><b>{{ $aset->status }}</b></td>
-=======
-                <td>{{ $aset->status }}</td>
->>>>>>> first commit
               </tr>
               <tr>
                 <td>Keterangan:</td>
@@ -252,35 +201,19 @@
           <table id="table-riwayat" class="display" style="width:100%">
             <thead>
               <tr>
-<<<<<<< HEAD
               <th>Waktu</th>
                 <th>Status Awal</th>
                 <th>Status Akhir</th>
                 <th>Keterangan</th>
-=======
-                <th>Aksi</th>
-                <th>Oleh</th>
-                <th>Waktu</th>
-                <th>Jumlah</th>
-                <th>Status Aset</th>
->>>>>>> first commit
               </tr>
               @foreach( $aset->riwayat_aset as $riwayat_aset)
             </thead>
             <tbody>
               <tr>
-<<<<<<< HEAD
                 <td>{{ $riwayat_aset->waktu->isoFormat('LLLL') }}</td>
                 <td>{{ $riwayat_aset->status_awal }}</td>
                 <td>{{ $riwayat_aset->status_akhir }}</td>
                 <td>{{ $riwayat_aset->keterangan }}</td>
-=======
-                <td>{{ $riwayat_aset->aksi }}</td>
-                <td>{{ $riwayat_aset->oleh_anggota->nama }}</td>
-                <td>{{ $riwayat_aset->waktu->isoFormat('LLLL') }}</td>
-                <td>{{ $riwayat_aset->jumlah }}</td>
-                <td>{{ $riwayat_aset->status }}</td>
->>>>>>> first commit
               </tr>
             </tbody>
             @endforeach
@@ -295,7 +228,6 @@
     </div>
   </section>
 </div>
-<<<<<<< HEAD
 @include('layouts.footer')\
 @if ($permission == true)
 <!-- Modal Baik -->
@@ -592,10 +524,6 @@
       }
     }
   }
-=======
-@include('layouts.footer')
-<script type="text/javascript">
->>>>>>> first commit
   //print qr
   function printDiv(id) {
     var div_qr_label = "qr-label";
@@ -621,7 +549,6 @@
 
   $(document).ready(function() {
     $('#menu_index').addClass('active');
-<<<<<<< HEAD
     $(".harga").autoNumeric('init', {
       aSep: '.',
       aDec: ',',
@@ -644,8 +571,6 @@
       return true;
     });
 
-=======
->>>>>>> first commit
     //init scroll boolean
     var scroll_table = false;
 
@@ -668,7 +593,6 @@
       }
     });
   });
-<<<<<<< HEAD
 
   /* open action button listener */
   // action listener button
@@ -719,6 +643,4 @@
   });
 
   /* close action button listener */
-=======
->>>>>>> first commit
 </script>

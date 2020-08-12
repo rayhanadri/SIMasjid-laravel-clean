@@ -1,8 +1,5 @@
 @include('layouts.header')
-<<<<<<< HEAD
 
-=======
->>>>>>> first commit
 <body>
   <div id="app">
     <section class="section">
@@ -108,11 +105,7 @@
                   <div class="form-group">
                     <div class="col-lg-6 offset-lg-4" style="text-align:center;">
                       <button type="submit" class="btn btn-primary" style="width: 100%">
-<<<<<<< HEAD
                         {{ __('Simpan') }}
-=======
-                        {{ __('Register') }}
->>>>>>> first commit
                       </button>
                     </div>
                   </div>
@@ -121,11 +114,7 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <a class="btn btn-sm btn-outline-info" href="{{ route('login') }}" style="width:100%; margin-top: 5px;">
-<<<<<<< HEAD
                       {{ __('Sudah punya akun? Masuk di sini.') }}
-=======
-                      {{ __('Sudah punya akun? Login di sini.') }}
->>>>>>> first commit
                     </a>
                   </div>
                   <div class="col-lg-6">

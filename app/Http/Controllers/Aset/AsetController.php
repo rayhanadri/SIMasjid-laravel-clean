@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Aset;
 
-use App\Http\Controllers\Controller;
-use App\Models\Aset\Aset;
-use App\Models\Aset\Katalog;
-use App\Models\Aset\Kategori;
-use App\Models\Aset\Lokasi;
-use App\Models\Aset\Riwayat_Aset;
 use Illuminate\Http\Request;
+use App\Models\Aset\Aset;
+use App\Models\Aset\Riwayat_Aset;
+use App\Models\Aset\Lokasi;
+use App\Models\Aset\Kategori;
+use App\Models\Aset\Katalog;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Validator;
+
 
 class AsetController extends Controller
 {
+    //
     public function index()
     {
         $katalogGroup = Katalog::join('aset', 'aset.id_katalog', '=', 'katalog.id')
@@ -29,6 +32,7 @@ class AsetController extends Controller
 
         $kategoriGroup = Kategori::get();
         $lokasiGroup = Lokasi::get();
+        // return $asetGroup];
         return view('aset.index', ["katalogGroup" => $katalogGroup, "kategoriGroup" => $kategoriGroup, "lokasiGroup" => $lokasiGroup]);
     }
 
@@ -78,6 +82,7 @@ class AsetController extends Controller
         if ($permission == false) {
             return redirect(route('home'));
         }
+        // return $request;
         $aset = Aset::get()->where('id', '=', $request->id)->first();
         $aset->merek = $request->merek;
         $aset->tipe = $request->tipe;

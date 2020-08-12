@@ -4,7 +4,7 @@ namespace App\Models\Aset;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Riwayat_aset extends Model
+class Riwayat_Aset extends Model
 {
     //
     protected $table = 'riwayat_aset';
@@ -14,5 +14,10 @@ class Riwayat_aset extends Model
     public function oleh_anggota()
     {
         return $this->hasOne('App\Models\Anggota\Anggota', 'id', 'id_oleh_anggota');
+    }
+
+    public function last_update()
+    {
+        return $this->order_by('waktu', 'desc')->first();
     }
 }
