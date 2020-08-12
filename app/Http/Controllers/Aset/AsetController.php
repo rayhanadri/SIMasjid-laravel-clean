@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Aset;
 
-<<<<<<< HEAD
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Aset;
 use App\Models\Aset\Katalog;
@@ -26,56 +25,10 @@ class AsetController extends Controller
 
         foreach ($katalogGroup as $katalog) {
             $katalog->kategori;
-=======
-use Illuminate\Http\Request;
-use App\Models\Aset\Aset;
-use App\Models\Aset\Riwayat_Aset;
-use App\Models\Aset\Lokasi;
-use App\Models\Aset\Kategori;
-use App\Http\Controllers\Controller;
-use QrCode;
-use Storage;
-use Auth;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
-// use App\Events\StatusLiked;
-use App\Models\Notifikasi;
-use App\Models\Anggota\Pengelola_Aset;
-
-
-class AsetController extends Controller
-{
-    //
-    public function index()
-    {
-        // echo "index";
-        $asetGroup = Aset::get();
-        foreach ($asetGroup as $aset) {
-            // jika keterangan kosong ganti -
-            if ($aset->keterangan == NULL) {
-                $aset->keterangan = "-";
-                $aset->save();
-            }
-            // jika jumlah <= 0 status tidak tersedia
-            if ($aset->jumlah <= 0) {
-                $aset->status = "Tidak Tersedia";
-                $aset->save();
-            }
-            // jika jumlah > 0 status tersedia
-            if ($aset->jumlah > 0) {
-                $aset->status = "Tersedia";
-                $aset->save();
-            }
-            $aset->kategori;
-            $aset->lokasi;
-            $aset->tgl_pencatatan;
->>>>>>> first commit
         }
 
         $kategoriGroup = Kategori::get();
         $lokasiGroup = Lokasi::get();
-<<<<<<< HEAD
         return view('aset.index', ["katalogGroup" => $katalogGroup, "kategoriGroup" => $kategoriGroup, "lokasiGroup" => $lokasiGroup]);
     }
 
@@ -116,15 +69,10 @@ class AsetController extends Controller
         $kategoriGroup = Kategori::get();
         $lokasiGroup = Lokasi::get();
         return view('aset.index_by_katalog', ["asetGroup" => $asetGroup, "kategoriGroup" => $kategoriGroup, "lokasiGroup" => $lokasiGroup]);
-=======
-        // return $asetGroup;
-        return view('aset.index', ["asetGroup" => $asetGroup, "kategoriGroup" => $kategoriGroup, "lokasiGroup" => $lokasiGroup]);
->>>>>>> first commit
     }
 
     public function update(Request $request)
     {
-<<<<<<< HEAD
         //check permission
         $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
         if ($permission == false) {
@@ -163,71 +111,20 @@ class AsetController extends Controller
         $riwayat_aset->waktu = now();
         $riwayat_aset->id_aset = $aset->id;
         $riwayat_aset->save();
-=======
-        //validasi input
-        Validator::make($request->all(), [
-            'jumlah' => 'required|numeric|min:0',
-        ])->validate();
-
-        $aset = Aset::get()->where('id', '=', $request->id)->first();
-        // ganti kode aset
-        $kategori = Kategori::get()->where('id', '=', $request->id_kategori)->first();
-        $kode_kategori = $kategori->kode;
-        $aset->kode = $kode_kategori . $aset->id;
-
-        // generate qr baru
-        $qrCode = QrCode::format('png')->size(1000)->generate($aset->kode);
-        $output_file = '/qr-code/img-' . $aset->kode . '.png';
-        Storage::disk('public')->put($output_file, $qrCode); //storage/app/public/img/qr-code/img-1557309130.png
-        $aset->link_qr = "public/storage/qr-code/img-" . $aset->kode . ".png";
-
-        // ganti detail
-        $aset->nama = $request->nama;
-        $aset->id_kategori = $request->id_kategori;
-        $aset->id_lokasi = $request->id_lokasi;
-        if ($request->jumlah < 1) {
-            $aset->status = "Tidak Tersedia";
-        } else {
-            $aset->status = "Tersedia";
-        }
-        $aset->jumlah = $request->jumlah;
-        $aset->harga_satuan = $request->harga_satuan;
-        $aset->save();
-
-        //Riwayat
-        $riwayat_aset = new Riwayat_Aset;
-        $riwayat_aset->aksi = "Diperbarui";
-        $riwayat_aset->status = $aset->status;
-        $riwayat_aset->jumlah = $aset->jumlah;
-
-        $riwayat_aset->waktu = now();
-        $riwayat_aset->id_aset = $aset->id;
-        $riwayat_aset->id_oleh_anggota = Auth::user()->id;
-        $riwayat_aset->save();
-
-        return redirect()->back();
->>>>>>> first commit
     }
 
     public function detail($id)
     {
         $aset = Aset::get()->where('id', '=', $id)->first();
-<<<<<<< HEAD
         if ($aset == null) {
             return redirect()->route('asetIndex');
         }
-=======
-        // if ($aset == NULL) {
-        //     return redirect()->back()->withErrors('Kode aset tidak ditemukan.');
-        // }
->>>>>>> first commit
         $aset->riwayat_aset();
         $aset->lokasi();
         // return $aset;
         return view('aset.detail', ['aset' => $aset]);
     }
 
-<<<<<<< HEAD
     public function updateFoto(Request $request)
     {
         //check permission
@@ -314,21 +211,3 @@ class AsetController extends Controller
         return redirect()->back();
     }
 }
-=======
-    public function getAsetWhere($id)
-    {
-        $aset = Aset::get()->where('id', '=', $id)->first();
-        $aset->parse_tgl_pencatatan = $aset->tgl_pencatatan->isoFormat('LLLL');
-        $aset->kategori;
-        $aset->lokasi;
-
-        return $aset;
-    }
-
-
-    public function testing()
-    {
-        return view('aset.testing');
-    }
-}
->>>>>>> first commit

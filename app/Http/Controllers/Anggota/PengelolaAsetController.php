@@ -5,18 +5,11 @@ namespace App\Http\Controllers\Anggota;
 use App\Models\Anggota\Pengelola_Aset;
 use Illuminate\Http\Request;
 use App\Models\Anggota\Anggota;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
-=======
->>>>>>> first commit
 
 class PengelolaAsetController extends AnggotaController
 {
     //mendapatkan list anggota pengelola aset, return list anggota pengelola aset
-<<<<<<< HEAD
-=======
-    //mendapatkan list anggota pengelola aset, return list anggota pengelola aset
->>>>>>> first commit
     public function index()
     {
         //get all id pengelola
@@ -34,13 +27,8 @@ class PengelolaAsetController extends AnggotaController
         foreach ($pengelolaGroup as $pengelola) {
             $pengelola->anggota_pengelola;
             $pengelola->nama = $pengelola->anggota_pengelola->nama;
-<<<<<<< HEAD
             $pengelola->status = $this->getStatus($pengelola->anggota_pengelola);
             $pengelola->jabatan = $this->getJabatan($pengelola->anggota_pengelola);
-=======
-            $pengelola->status= $this->getStatus($pengelola->anggota_pengelola);
-            $pengelola->jabatan= $this->getJabatan($pengelola->anggota_pengelola);
->>>>>>> first commit
         }
 
         // return $pengelolaGroup;
@@ -63,7 +51,6 @@ class PengelolaAsetController extends AnggotaController
         Pengelola_Aset::get()->where('id', '=', $request->id)->first()->delete();
         return redirect(route('anggotaPengelolaAset'));
     }
-<<<<<<< HEAD
 
     public function checkPermission()
     {
@@ -80,6 +67,4 @@ class PengelolaAsetController extends AnggotaController
             return false;
         }
     }
-=======
->>>>>>> first commit
 }

@@ -14,21 +14,13 @@
 
   $notifs = Notifikasi::where('id_penerima', '=', Auth::user()->id)->skip(0)->take(5)->orderBy('id', 'desc')->get();
   ?>
-<<<<<<< HEAD
-=======
-
->>>>>>> first commit
   <div id="app">
     <div class="main-wrapper">
       <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar">
         <div class="form-inline mr-auto">
           <ul class="navbar-nav mr-3">
-<<<<<<< HEAD
             <li id="toggle-bar"><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-=======
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
->>>>>>> first commit
           </ul>
         </div>
         <ul class="navbar-nav navbar-right">
@@ -102,15 +94,9 @@
               <img alt="image" src="
               <?php
               if ($authUser->link_foto != null) {
-<<<<<<< HEAD
                 echo route('home') . '/' . $authUser->link_foto . '?=' . strtotime("now");
               } else {
                 echo route('home') . '/' . 'public\dist\assets\img\avatar\avatar-1.png';
-=======
-                echo route('home').'/'.$authUser->link_foto.'?='.filemtime($authUser->link_foto);
-              } else {
-                echo route('home').'/'.'public\dist\assets\img\avatar\avatar-1.png';
->>>>>>> first commit
               }
               ?>" class="rounded-circle mr-1">
               <div class="d-sm-none d-lg-inline-block"> {{$authUser->nama}}</div>

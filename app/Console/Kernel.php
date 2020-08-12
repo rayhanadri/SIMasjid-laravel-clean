@@ -13,10 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-<<<<<<< HEAD
-=======
         //
->>>>>>> first commit
     ];
 
     /**
@@ -27,10 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-<<<<<<< HEAD
-=======
         //
->>>>>>> first commit
     }
 
     /**

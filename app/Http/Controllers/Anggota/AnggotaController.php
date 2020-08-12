@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 class AnggotaController extends Controller
-<<<<<<< HEAD
 {
-=======
-{ 
->>>>>>> first commit
     //CONSTANT VALUES FOR MEMBER STATUS
     public const ACTIVE_MEMBER = 1;
     public const NON_ACTIVE_MEMBER = 2;
@@ -89,28 +85,10 @@ class AnggotaController extends Controller
         $anggota = Anggota::get()->where('id', $id)->first();
         $anggota->jabatan = $this->getJabatan($anggota);
         $anggota->status = $this->getStatus($anggota);
-<<<<<<< HEAD
         $anggota->link_foto = $anggota->link_foto . '?=' . filemtime($anggota->link_foto);
         return $anggota;
     }
 
-=======
-        $anggota->link_foto = $anggota->link_foto.'?='.filemtime($anggota->link_foto);
-        return $anggota;
-    }
-
-    public function dasbor()
-    {
-        //jml anggota
-        $jumlahAktif = Anggota::get()->where('id_status', '=', self::ACTIVE_MEMBER)->count();
-        $jumlahNonAktif = Anggota::get()->where('id_status', '=', self::NON_ACTIVE_MEMBER)->count();
-        $jumlahUnverified = Anggota::get()->where('id_status', '=', self::UNVERIFIED_MEMBER)->count();
-        
-        //retval
-        return view('anggota.anggotaDasbor', ['jumlahAktif' => $jumlahAktif, 'jumlahUnverified' => $jumlahUnverified, 'jumlahNonAktif' => $jumlahNonAktif]);
-    }
-
->>>>>>> first commit
     //mendapatkan semua anggota terdaftar aktif dan non-aktif
     public function index()
     {
@@ -140,11 +118,7 @@ class AnggotaController extends Controller
     }
 
     //mengedit data akun anggota, return list anggota terdaftar
-<<<<<<< HEAD
     public function update(Request $request)
-=======
-    public function edit(Request $request)
->>>>>>> first commit
     {
         //check akses sekretaris
         if ($this->checkAksesSekretaris() == false) {
@@ -156,11 +130,7 @@ class AnggotaController extends Controller
         if ($request->username != $anggota->username) {
             $anggota->username = $request->username;
             $request->validate([
-<<<<<<< HEAD
                 'username' => 'unique:anggota',
-=======
-                'username' => 'unique:anggota'
->>>>>>> first commit
             ]);
         }
         if ($request->email != $anggota->email) {
@@ -169,14 +139,11 @@ class AnggotaController extends Controller
                 'email' => 'unique:anggota|email'
             ]);
         }
-<<<<<<< HEAD
         $request->validate([
             'nama' => 'required',
             'id_jabatan' => 'required',
             'id_status' => 'required',
         ]);
-=======
->>>>>>> first commit
         $anggota->nama = $request->nama;
         $anggota->id_jabatan = $request->id_jabatan;
         $anggota->id_status = $request->id_status;
