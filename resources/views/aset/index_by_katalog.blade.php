@@ -19,7 +19,6 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
         @include('aset.menu_aset')
         <div class="section-header">
             <h1 style="margin:auto;"><i class="fa fa-table"></i> Data Aset</h1>
-            <div></div>
         </div>
         <div class="section-body" style="min-height: 800px;">
             @include('aset.data_tab')
@@ -345,7 +344,6 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
 
         //mobile
         if ($(window).width() <= 595) {
-            $('#th_no_aset').hide();
             $('#th_kategori_aset').hide();
             $('#th_status_aset').hide();
             table.columns([1, 4, 5, 6, 7]).visible(false);

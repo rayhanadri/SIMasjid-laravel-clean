@@ -234,10 +234,9 @@
 
         //mobile
         if ($(window).width() <= 595) {
-            $('#th_no_aset').hide();
             $('#th_kategori_aset').hide();
             $('#th_status_aset').hide();
-            table.columns([1, 4, 5, 6, 7]).visible(false);
+            // table.columns([1, 4, 5, 6, 7]).visible(false);
             $('.section-body').css({
                 "padding": "0px"
             });
@@ -245,7 +244,7 @@
 
         //tab or mobile landscape
         if ($(window).width() < 1280 && $(window).width() > 480) {
-            table.columns([6, 7]).visible(false);
+            // table.columns([6, 7]).visible(false);
         }
     });
     /* open action button listener */

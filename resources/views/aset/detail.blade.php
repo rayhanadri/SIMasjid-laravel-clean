@@ -33,42 +33,26 @@
         @endif
       </div>
       <div class="row">
-        <?php $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission(); ?>
+        <?php $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();?>
         <!-- <a href="#" class="btn btn-icon btn-sm btn-primary open-update" style="width: 7em; margin-left: 20px; margin-bottom: 20px;" data-toggle="modal" data-id="{{ $aset->id }}" data-nama="{{ $aset->nama }}" data-kategori="{{ $aset->id_kategori }}" data-status="{{ $aset->status }}" data-lokasi="{{ $aset->id_lokasi }}" data-jumlah="{{ $aset->jumlah }}" data-harga_satuan="{{ $aset->harga_satuan }}" data-target="#updateModal"><i class="fas fa-sync"></i> Perbarui</a> -->
         <div class="dropdown d-inline">
           @if ($permission == true)
-          @if ($aset->status != "Dilepas")
-          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="min-width: 12em; margin-left: 20px; margin-bottom: 20px;">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 20px; margin-bottom: 20px; width: 240px;">
             Kelola Aset
           </button>
           @endif
-          @endif
-          <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
+          <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px); width: 240px;">
             @if ($permission == true)
-            @if ($aset->status != "Dilepas")
-            @if ($aset->status != "Baik")
-            <a href="#" class="dropdown-item has-icon" data-toggle="modal" data-target="#baikModal"><i class="fas fa-check"></i> Baik</a>
-            @endif
-            @if ($aset->status != "Rusak")
-            <a href="#" class="dropdown-item has-icon" data-toggle="modal" data-id="{{ $aset->id }}" data-target="#rusakModal"><i class="fas fa-unlink"></i> Rusak</a>
-            @endif
-            @if ($aset->status != "Diperbaiki")
-            <a href="#" class="dropdown-item has-icon" data-toggle="modal" data-target="#perbaikiModal"><i class="fas fa-tools"></i> Perbaiki</a>
-            @endif
-            @if ($aset->status != "Dipinjam")
-            <a href="#" class="dropdown-item has-icon" data-toggle="modal" data-target="#pinjamModal"><i class="fas fa-hand-holding"></i> Pinjamkan</a>
-            @endif
-            <a href="#" class="dropdown-item has-icon" data-toggle="modal" data-target="#lepasModal"><i class="fas fa-recycle"></i> Lepaskan</a>
+            <a href="#" class="dropdown-item has-icon open-ubah-status" data-toggle="modal" data-target="#ubahStatusModal"><i class="fas fa-exclamation-circle"></i> Ubah Status & Keterangan</a>
             <a href="#" class="dropdown-item has-icon open-update" data-toggle="modal" data-target="#updateModal"><i class="fas fa-pen-square"></i> Edit Data</a>
             <a href="#" class="dropdown-item has-icon open-delete" data-toggle="modal" data-id="{{ $aset->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus Data</a>
-            @endif
             @endif
           </div>
         </div>
       </div>
       <div class="row">
         <br>
-        <div class="col-lg-4 col-md-6 col-sm-12 ">
+        <div class="col-lg-6 col-md-6 col-sm-12 ">
           <!-- <img id="foto-barang" src="{{ route('home') }}/{{ $aset->link_foto_barang }}" alt="foto" style="max-width:100%; max-height:500px; margin: 15px;"></img> -->
           <span id="img_uploaded" style="text-align: center;" class="img-thumbnail rounded mx-auto d-block">
             <img src="{{ route('home') }}/{{ $aset->link_foto_barang. '?=' .  strtotime('now') }}" id="blah" alt="foto aset" style="max-width:100%; overflow: hidden;" required><br>
@@ -102,7 +86,7 @@
           @endif
           @endif
         </div>
-        <div class="col-lg-8 col-md-6 col-sm-12 ">
+        <div class="col-lg-6 col-md-6 col-sm-12 ">
           <table id="table-barang" border="1" style="width: 100%;">
             <tbody>
               <tr>
@@ -163,7 +147,7 @@
               </tr>
               <tr>
                 <td>Status:</td>
-                <td><b>{{ $aset->status }}</b></td>
+                <td><span id="colorized_status"><b>{{ $aset->status }}</b></span></td>
               </tr>
               <tr>
                 <td>Keterangan:</td>
@@ -196,27 +180,30 @@
       </div>
       <hr>
       <div class="row">
-        <h4 id="judul_riwayat" style="margin:auto;">Riwayat Aset</h4>
+        <h4 id="judul_riwayat" style="margin:auto;">Riwayat Status dan Keterangan Aset</h4>
         <div class="col-12">
           <table id="table-riwayat" class="display" style="width:100%">
             <thead>
               <tr>
-              <th>Waktu</th>
+                <th>No</th>
+                <th>Waktu</th>
                 <th>Status Awal</th>
                 <th>Status Akhir</th>
                 <th>Keterangan</th>
               </tr>
-              @foreach( $aset->riwayat_aset as $riwayat_aset)
+
             </thead>
             <tbody>
+              @foreach( $aset->riwayat_aset as $riwayat_aset)
               <tr>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $riwayat_aset->waktu->isoFormat('LLLL') }}</td>
                 <td>{{ $riwayat_aset->status_awal }}</td>
                 <td>{{ $riwayat_aset->status_akhir }}</td>
                 <td>{{ $riwayat_aset->keterangan }}</td>
               </tr>
+              @endforeach
             </tbody>
-            @endforeach
           </table>
         </div>
       </div>
@@ -230,6 +217,48 @@
 </div>
 @include('layouts.footer')\
 @if ($permission == true)
+<!-- Modal Ubah Status -->
+<div class="modal fade" tabindex="-1" role="dialog" id="ubahStatusModal">
+  <div class="modal-dialog" role="document">
+    <form action="{{ route('asetUpdateStatus') }}" method="post">
+      @csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ubah Status dan Keterangan Aset</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div class="form-group row">
+            <label for="status-update" class="col-md-4 col-form-label text-md-right">Status</label>
+            <div class="col-md-6">
+              <select id="status-update" name="status" class="form-control select" style="width:100%;">
+                <option value="Baik">Baik</option>
+                <option value="Rusak">Rusak</option>
+                <option value="Diperbaiki">Diperbaiki</option>
+                <option value="Dipinjam">Dipinjam</option>
+                <option value="Dilepas">Dilepas</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="keterangan-update" class="col-md-4 col-form-label text-md-right">Keterangan</label>
+            <div class="col-md-6">
+              <textarea id="keterangan" type="text" class="form-control " name="keterangan" style="height: 82px;" required> {{ $aset->keterangan }}
+              </textarea>
+            </div>
+          </div>
+          <div class="modal-footer bg-whitesmoke br">
+            <input type="text" id="id-update" name="id" value="{{ $aset->id }}" hidden />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+            <input type="submit" value="Simpan" class="btn btn-primary" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <!-- Modal Baik -->
 <div class="modal fade" tabindex="-1" role="dialog" id="baikModal">
   <div class="modal-dialog" role="document">
@@ -287,10 +316,20 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="sumber-update" class="col-md-4 col-form-label text-md-right">Sumber</label>
+            <div class="col-md-6">
+              <select id="sumber-update" name="sumber" class="form-control select" style="width:100%;">
+                <option value="Pengadaan">Pengadaan</option>
+                <option value="Hibah">Hibah</option>
+                <option value="Produksi">Produksi</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="lokasi-update" class="col-md-4 col-form-label text-md-right">Lokasi</label>
             <div class="col-md-6">
               <select id="lokasi-update" name="id_lokasi" class="form-control select" style="width:100%;">
-                <?php $lokasiGroup = App\Models\Aset\Lokasi::get(); ?>
+                <?php $lokasiGroup = App\Models\Aset\Lokasi::get();?>
                 @foreach ($lokasiGroup as $lokasi)
                 @if ( $lokasi->id == $aset->id_lokasi)
                 <option value="{{ $lokasi->id }}" selected>{{ $lokasi->nama }}</option>
@@ -306,13 +345,6 @@
             <div class="col-md-6">
               <input name="harga" id="harga_satuan-update" class="form-control harga" value="{{ $aset->harga_satuan }}" />
             </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="keterangan-update" class="col-md-4 col-form-label text-md-right">Keterangan</label>
-          <div class="col-md-6">
-            <textarea id="keterangan" type="text" class="form-control " name="keterangan" style="height: 82px;"> {{ $aset->keterangan }}
-            </textarea>
           </div>
         </div>
         <div class="modal-footer bg-whitesmoke br">
@@ -547,6 +579,16 @@
     }, 10);
   }
 
+  //colorized status
+  function colorized(){
+    var status = "{{ $aset->status }}";
+    if (status == "Baik"){
+      $("#colorized_status").css("color", "green");
+    } else {
+      $("#colorized_status").css("color", "red");
+    }
+  }
+
   $(document).ready(function() {
     $('#menu_index').addClass('active');
     $(".harga").autoNumeric('init', {
@@ -555,6 +597,8 @@
       aSign: 'Rp. ',
       mDec: '0'
     });
+
+    colorized();
 
     $('form').submit(function() {
       var form = $(this);
@@ -590,8 +634,10 @@
         "infoEmpty": "Tidak ada data",
         "search": "_INPUT_",
         "searchPlaceholder": "Cari data...",
+        "order": [[ 0, "desc" ]]
       }
     });
+
   });
 
   /* open action button listener */
@@ -608,7 +654,13 @@
     $("#jumlah-pinjam").val(jumlah);
     $("#max-jumlah-pinjam").html(jumlah);
   });
+  $(document).on("click", ".open-ubah-status", function() {
+    var status = "{{ $aset->status }}";
+    $("#status-update").val(status);
+  });
   $(document).on("click", ".open-update", function() {
+    var sumber = "{{ $aset->sumber }}";
+    $("#sumber-update").val(sumber);
     //autoNumeric
     $(".harga").autoNumeric('update', {
       aSep: '.',
@@ -616,6 +668,7 @@
       aSign: 'Rp. ',
       mDec: '0'
     });
+
   });
   $(document).on("click", ".open-perbaikan", function() {
     /* passing data dari view button detail ke modal */

@@ -114,22 +114,23 @@
       var link = "{{ route('home') }}" + '/aset/tracking_hasil?kode=' + content;
       window.location.href = link;
     });
-    Instascan.Camera.getCameras().then(function(cameras) {
+      Instascan.Camera.getCameras().then(function(cameras) {
       if (cameras.length > 0) {
-        if (cameras.length == 1) {
-          scanner.start(cameras[0]);
-        } else {
-          scanner.start(cameras[1]);
-        }
+        var selectedCam = cameras[0];
+        $.each(cameras, (i, c) => {
+            if (c.name.indexOf('back') != -1) {
+                selectedCam = c;
+                return false;
+            }
+        });
+      scanner.start(selectedCam);
       } else {
-        console.error('No cameras found.');
+          console.error('No cameras found.');
       }
     }).catch(function(e) {
       console.error(e);
     });
   }
-
-
 
   // $(document).on("click", "#button-camera", function() {
   //   var isExpanded = $('#button-camera').attr("aria-expanded");

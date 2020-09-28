@@ -31,8 +31,6 @@ class PengelolaAsetController extends AnggotaController
             $pengelola->jabatan = $this->getJabatan($pengelola->anggota_pengelola);
         }
 
-        // return $pengelolaGroup;
-        //retval
         return view('anggota.pengelola_aset', ['pengelolaGroup' => $pengelolaGroup, 'bukanPengelolaGroup' => $bukanPengelolaGroup]);
     }
 

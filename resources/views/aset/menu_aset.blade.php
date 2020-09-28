@@ -10,7 +10,7 @@
 $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
 ?>
 <div id="menu_aset" class="row">
-    <div id="group_menu" style="margin: 1em;">
+    <div id="group_menu" style="margin: 10px auto;">
         <span class="col-xs-2" style="padding: 0px;">
             <a id="menu_index" href="{{ route('asetIndex') }}" class="btn btn-info icon-left" style="height: 55px; width: 18em; font-size: 11px; border-radius: 0; line-height: 1.5; margin-top: 0.3em;">
                 <i class="fa fa-table" style="font-size: 24px;"></i><br>Data Aset

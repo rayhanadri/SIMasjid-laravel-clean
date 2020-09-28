@@ -45,7 +45,7 @@ class AnggotaController extends Controller
         }
     }
 
-    public static function getStatus(Anggota $anggota)
+    public function getStatus(Anggota $anggota)
     {
         switch ($anggota->id_status) {
             case (self::ACTIVE_MEMBER):

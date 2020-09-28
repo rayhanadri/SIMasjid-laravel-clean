@@ -88,7 +88,7 @@ class AsetController extends Controller
         $aset->tipe = $request->tipe;
         $aset->harga_satuan = $request->harga;
         $aset->id_lokasi = $request->id_lokasi;
-        $aset->keterangan = $request->keterangan;
+        $aset->sumber = $request->sumber;
         $aset->save();
         return redirect()->back();
     }

@@ -80,11 +80,7 @@ Route::middleware('auth')->group(function () {
         
         //get route usulan
         Route::get('aset/usulan/', 'Aset\UsulanController@index')->name('asetUsulanIndex');
-        Route::get('aset/usulan/diproses', 'Aset\UsulanController@indexDiproses')->name('asetUsulanIndexDiproses');
-        Route::get('aset/usulan/selesai', 'Aset\UsulanController@indexSelesai')->name('asetUsulanIndexSelesai');
-        Route::get('aset/usulan/ditolak', 'Aset\UsulanController@indexDitolak')->name('asetUsulanIndexDitolak');
-        Route::get('aset/usulan/dibatalkan', 'Aset\UsulanController@indexDibatalkan')->name('asetUsulanIndexDibatalkan');
-        // Route::get('aset/usulan/create', 'Aset\UsulanController@createForm')->name('asetUsulanCreate');
+        Route::get('aset/usulan/status/{status}', 'Aset\UsulanController@indexByStatus')->name('asetUsulanByStatus');
         //post route usulan
         Route::post('aset/usulan/create', 'Aset\UsulanController@create')->name('asetUsulanCreate');
         Route::post('aset/usulan/proses', 'Aset\UsulanController@proses')->name('asetUsulanProses');

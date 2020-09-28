@@ -31,7 +31,7 @@ class PendaftaranController extends Controller
         $lokasiGroup = Lokasi::get();
         $katalogGroup = Katalog::get();
 
-        return view('aset.pendaftaran_form', ['kategoriGroup' => $kategoriGroup, 'lokasiGroup' => $lokasiGroup, 'katalogGroup' => $katalogGroup])->with('katalogJSON', json_decode($katalogGroup, true));
+        return  view('aset.pendaftaran_form',['kategoriGroup' => $kategoriGroup, 'lokasiGroup' => $lokasiGroup, 'katalogGroup' => $katalogGroup])->with('katalogJSON', json_decode($katalogGroup, true));
     }
 
     public function create(Request $request)
@@ -104,24 +104,6 @@ class PendaftaranController extends Controller
             }
         } else {
             return redirect()->back();
-        }
-
-        //notifikasi
-        $managers = Pengelola_Aset::get();
-        foreach ($managers as $manager) {
-            // $arrayNotifikasi = [];
-            $arrayNotifikasi = array(
-                'id_pembuat' => Auth::user()->id,
-                'id_penerima' => $manager->anggota_pengelola->id,
-                'jenis' => "Pendaftaran Aset",
-                'tgl_dibuat' => now(),
-                'msg' => "mendaftarkan aset baru.",
-                'sudah_baca' => 0,
-                'icon' => "fas fa-edit",
-                'bg' => "bg-primary",
-                'link' => route('home') . "/aset/detail/$aset->id"
-            );
-            Notifikasi::create($arrayNotifikasi);
         }
 
         $link_detail = route('home') . "/aset/detail/$aset->id";
