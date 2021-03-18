@@ -25,29 +25,21 @@
             </div>
             @endif
             <div class="row">
-                <button style="margin: 1em auto;" class="btn btn-dark" data-toggle="collapse" data-target="#filter-box">
-                    <i class="fa fa-filter"></i> Show/Close Filter Data
-                </button>
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div id="filter-box" class="collapse">
+                    <div id="filter-box">
                         <div class="card-body">
-                            <h6 style="text-align:center"><i class="fa fa-filter"></i> Filter Data</h6>
                             <div id="filter-nama" style="margin:10px"></div>
                             <div id="filter-kategori" style="margin:10px"></div>
-                            <div id="filter-jumlah" style="margin:10px"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
                     <table id="table_aset" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th id="th_no_aset">No</th>
                                 <th id="th_nama_aset">Nama Barang</th>
                                 <th id="th_kategori_aset">Kategori</th>
-                                <th id="th_nilai_aset">Jumlah</th>
+                                <th id="th_jumlah_aset">Jumlah</th>
+                                <th id="th_nilai_aset">Total Nilai</th>
                                 <th id="th_action_btn">Action</th>
                             </tr>
                         </thead>
@@ -62,6 +54,7 @@
                                 <td>-</td>
                                 @endif
                                 <td>{{ $katalog->jumlah }}</td>
+                                <td class="td_nilai_aset">{{ $katalog->total_nilai }}</td>
                                 <td><a href="{{ route('asetIndex') }}/katalog/{{ $katalog->id }}" class="btn btn-sm btn-primary"><i class="fa fa-boxes"></i> Daftar Barang</a></td>
                             </tr>
                             @endforeach
@@ -147,7 +140,7 @@
                     text: '<i class="fa fa-print"></i> Print',
                     messageTop: 'Data Aset',
                     exportOptions: {
-                        columns:  [0, 1, 2, 3]
+                        columns: [0, 1, 2, 3]
                     },
                     customize: function(win) {
 
@@ -185,15 +178,19 @@
                 //kriteria column 0 nama tipe select
                 this.api().columns([1]).every(function() {
                     var column = this;
-                    var input = $('<input class="form-control" placeholder="Nama Barang" style="margin-bottom:10px;"></input>')
+                    var select = $('<select class="form-control select2" id="select2-nama-barang" style="margin: 5px; width:100%;"><option value="">Nama Barang</option></select>')
                         .appendTo($("#filter-nama"))
-                        .on('keyup change clear', function() {
-                            if (column.search() !== this.value) {
-                                column
-                                    .search(this.value)
-                                    .draw();
-                            }
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
                         });
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
                 });
                 this.api().columns([2]).every(function() {
                     var column = this;
@@ -324,7 +321,8 @@
     $(".td_nilai_aset").autoNumeric('init', {
         aSep: '.',
         aDec: ',',
-        aSign: 'Rp. '
+        aSign: 'Rp. ',
+        mDec: '0'
     });
 </script>
 @include('layouts.footer')

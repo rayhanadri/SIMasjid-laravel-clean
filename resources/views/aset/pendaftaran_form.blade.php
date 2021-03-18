@@ -1,5 +1,12 @@
 @include('layouts.header')
 @include('layouts.navbar')
+<?php
+$permission = app('App\Http\Controllers\Aset\PengelolaAsetController')->checkPermission();
+if (!$permission) {
+  header("Location: " . route('asetIndex'));
+  die();
+}
+?>
 
 <div class="main-content">
   <section class="section">
@@ -32,46 +39,22 @@
           @endif
           <form method="post" action="{{ route('asetCreateHasil') }}" enctype="multipart/form-data">
             @csrf
-            <div class="row">
-              <div class="col-sm-12 col-lg-4 col-md-4">
-                <div class="form-group">
-                  <label class="d-block">Jenis Pendaftaran</label>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenis" id="radio_tunggal" value="Tunggal" checked>
-                    <label class="form-check-label" for="radio_aset_tetap">
-                      Tunggal
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenis" id="radio_jamak" value="Jamak">
-                    <label class="form-check-label" for="radio_jamak">
-                      Jamak
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group" id="div_jumlah">
-                  <label>Jumlah</label>
-                  <input id="input_jumlah" name="jumlah" type="number" class="form-control" placeholder="Jumlah Barang" disabled>
-                </div>
-                <div class="form-group">
-                  <label class="d-block">Apakah nama barang aset pernah didaftarkan?</label>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="masuk_katalog" value="Ya" checked>
-                    <label class="form-check-label" for="dengan_katalog">
-                      Ya
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="masuk_katalog" value="Tidak">
-                    <label class="form-check-label" for="dengan_katalog">
-                      Tidak
-                    </label>
-                  </div>
-                </div>
-              </div>
+            <div class="row justify-content-md-center">
               <div class="col-8">
                 <div class="form-group">
-                  <label>Nama Barang</label>
+                  <label><b>Kolom bertanda * wajib diisi</b></label>
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="check_jamak" name="check_jamak">
+                    <label class="form-check-label" for="exampleCheck1">Input Jamak</label>
+                    <div id="div_jumlah">
+                      <input id="input_jumlah" name="jumlah" type="number" class="form-control" placeholder="Jumlah Barang" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Nama Barang* (cek pada metadata katalog jika barang tidak ada)</label>
                   <select name="id_katalog" id="nama_dengan_katalog" class="form-control select2" style="width:100%;" required>
                     @foreach ($katalogGroup as $katalog)
                     <option value="{{ $katalog->id }}">{{ $katalog->nama_barang }}</option>
@@ -96,7 +79,7 @@
                   <input name="tipe" id="nama_tanpa_katalog" type="text" class="form-control" placeholder="Tipe/Model">
                 </div>
                 <div class="form-group">
-                  <label>Lokasi</label>
+                  <label>Lokasi*</label>
                   <select name="id_lokasi" class="form-control select2" style="width:100%;" required>
                     @foreach ($lokasiGroup as $lokasi)
                     <option value="{{ $lokasi->id }}">{{ $lokasi->nama }}</option>
@@ -104,7 +87,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Sumber</label>
+                  <label>Asal Penerimaan Barang*</label>
                   <select name="sumber" class="form-control" required>
                     <option value="Pengadaan">Pengadaan</option>
                     <option value="Hibah">Hibah</option>
@@ -112,31 +95,31 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Status Kondisi</label>
+                  <label>Status Kondisi Barang*</label>
                   <select name="status" class="form-control" required>
                     <option value="Baik">Baik</option>
                     <option value="Rusak">Rusak</option>
                   </select>
                 </div>
                 <div class="form-group">
+                  <label>Harga Perolehan Barang*</label>
+                  <input id="harga_satuan" name="harga_satuan" type="text" class="form-control currency" required>
+                </div>
+                <div class="form-group">
                   <label>Keterangan</label>
                   <textarea name="keterangan" type="text" class="form-control" style="height: 112px;"></textarea>
                 </div>
                 <div class="form-group">
-                  <label>Harga Perolehan</label>
-                  <input id="harga_satuan" name="harga_satuan" type="text" class="form-control currency" required>
-                </div>
-                <div class="form-group">
+                  <label>Foto Aset*</label>
+                  <input type="file" required name="file" id="fileChooser" accept="image/*" class="form-control" onchange="return ValidateFileUpload()">
                   <span id="img_uploaded" style="text-align: center;" class="img-thumbnail rounded mx-auto d-block">
                     <img src="{{ route('home') }}/public/storage/foto_aset/not-available.jpg" id="blah" alt="foto profil" style="max-width:250px; overflow: hidden;" required><br>
                   </span>
-                  <label>Foto Aset</label>
-                  <input type="file" required name="file" id="fileChooser" accept="image/*" class="form-control" onchange="return ValidateFileUpload()">
                 </div>
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-lg btn-info btn-primary">Submit</button>
+              <button type="submit" id="submit-btn" class="btn btn-lg btn-info btn-primary">Simpan</button>
             </div>
           </form>
           </br>
@@ -153,16 +136,15 @@
   $("#aset-link").addClass("active");
 
   $("#div_jumlah").hide();
-  $("input:radio[name=jenis]").on("change", function() {
-    if ($("input[name='jenis']:checked").val() == "Tunggal") {
-      $("#input_jumlah").prop("disabled", true);
-      $("#input_jumlah").prop("required", false);
-      $("#div_jumlah").hide();
-    }
-    if ($("input[name='jenis']:checked").val() == "Jamak") {
+  $("input[name='check_jamak']").on("change", function() {
+    if ($("input[name='check_jamak']").is(':checked')) {
       $("#input_jumlah").prop("disabled", false);
       $("#input_jumlah").prop("required", true);
       $("#div_jumlah").show();
+    } else {
+      $("#input_jumlah").prop("disabled", true);
+      $("#input_jumlah").prop("required", false);
+      $("#div_jumlah").hide();
     }
   });
 
@@ -206,6 +188,8 @@
     });
 
     $('form').submit(function() {
+      // disable the button prevent double input
+      $('#submit-btn').prop("disabled", true);
       var form = $(this);
       $('input').each(function(i) {
         var self = $(this);
@@ -251,7 +235,7 @@
                 $('#img_uploaded').html(img);
               }, {
                 maxWidth: $('#img_uploaded').width(),
-                orientation: true
+                orientation: 1
               }
             );
 

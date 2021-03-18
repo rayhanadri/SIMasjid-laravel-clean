@@ -7,6 +7,10 @@
 //hide untuk selain sekretaris dan ketua
 // $inside_pengelola = in_array(Auth::user()->id, $list_pengelola);
 ?>
+<?php
+//check permission pengelola
+$permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
+?>
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -33,11 +37,13 @@
             </div>
             @endif
             @include('aset.metadata_tab')
+            @if($permission)
             <div class="row">
                 <div class="col-12">
                     <a href="#" class="btn btn-lg btn-primary open-create" data-toggle="modal" data-target="#tambahKatalogModal" style="margin: 20px;"><i class="fas fas fa-plus"></i> Tambah Katalog</a>
                 </div>
             </div>
+            @endif
             <div class="row">
                 <button style="margin: 1em auto;" class="btn btn-dark" data-toggle="collapse" data-target="#filter-box">
                     <i class="fa fa-filter"></i> Show/Close Filter Data
@@ -61,7 +67,9 @@
                                 <th id="th_no_katalog">No</th>
                                 <th id="th_nama_katalog">Nama Barang</th>
                                 <th id="th_kategori">Kategori</th>
+                                @if($permission)
                                 <th id="th_action_katalog">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -76,11 +84,13 @@
                                     -
                                     @endif
                                     </th>
+                                    @if($permission)
                                 <td id="td_btn">
                                     <div class="btn-group-vertical mb-3" role="group">
                                         <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $katalog->id }}" data-nama="{{ $katalog->nama_barang }}" data-kategori="{{ $katalog->id_kategori }}" data-target="#updateModal"><i class="fas fa-pen-square"></i> Edit</a>
                                         <a href="#" class="open-delete  btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $katalog->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -91,6 +101,7 @@
         </div>
     </section>
 </div>
+@if($permission)
 <!-- Modal Tambah Katalog -->
 <div class="modal fade" tabindex="-1" role="dialog" id="tambahKatalogModal">
     <div class="modal-dialog" role="document">
@@ -101,7 +112,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('metadataKatalogCreate') }}">
+            <form method="POST" action="{{ route('metadataCreate') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
@@ -122,6 +133,7 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="katalog" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
@@ -132,7 +144,7 @@
 <!-- Modal Update -->
 <div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('metadataKatalogUpdate') }}" method="post">
+        <form action="{{ route('metadataUpdate') }}" method="post">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -160,6 +172,7 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="katalog" hidden />
                     <input type="text" id="update_id" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
                     <input type="submit" value="Simpan" class="btn btn-primary" />
@@ -185,8 +198,9 @@
                 <h7 align="center">Menghapus katalog menyebabkan data aset dengan nama barang ini akan terhapus.</h7>
             </div>
             <div class="modal-footer bg-whitesmoke br">
-                <form action="{{ route('metadataKatalogDelete') }}" method="post">
+                <form action="{{ route('metadataDelete') }}" method="post">
                     @csrf
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="katalog" hidden />
                     <input type="text" id="id_delete" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak, Batalkan</button>
                     <input type="submit" value="Ya, Hapus" class="btn btn-danger" />
@@ -195,6 +209,7 @@
         </div>
     </div>
 </div>
+@endif
 <!-- SCRIPT -->
 <script type="text/javascript">
     //document function

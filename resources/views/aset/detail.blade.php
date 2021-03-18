@@ -33,7 +33,7 @@
         @endif
       </div>
       <div class="row">
-        <?php $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();?>
+        <?php $permission = app('App\Http\Controllers\Aset\PengelolaAsetController')->checkPermission(); ?>
         <!-- <a href="#" class="btn btn-icon btn-sm btn-primary open-update" style="width: 7em; margin-left: 20px; margin-bottom: 20px;" data-toggle="modal" data-id="{{ $aset->id }}" data-nama="{{ $aset->nama }}" data-kategori="{{ $aset->id_kategori }}" data-status="{{ $aset->status }}" data-lokasi="{{ $aset->id_lokasi }}" data-jumlah="{{ $aset->jumlah }}" data-harga_satuan="{{ $aset->harga_satuan }}" data-target="#updateModal"><i class="fas fa-sync"></i> Perbarui</a> -->
         <div class="dropdown d-inline">
           @if ($permission == true)
@@ -79,7 +79,7 @@
               <input type="file" required name="file" id="fileChooser" accept="image/*" class="form-control" onchange="return ValidateFileUpload()">
               <input type="text" name="id" value="{{ $aset->id }}" hidden>
               <div class="wrapper" style="text-align: center; margin-top:7px">
-                <button type="submit" class="btn btn-primary">Upload Foto</button>
+                <button type="submit" class="btn btn-primary submit-btn">Upload Foto</button>
               </div>
             </div>
           </form>
@@ -115,18 +115,18 @@
               </tr>
               <tr>
                 <td>Penanggung Jawab:</td>
-                @if ($aset->katalog->kategori != null)
+                @if ($aset->katalog->kategori != null && $aset->katalog->kategori->penanggung_jawab != null )
                 <td>{{ $aset->katalog->kategori->penanggung_jawab->nama }}</td>
                 @else
                 <td>-</td>
                 @endif
               </tr>
               <tr>
-                <td>Pendaftaran Aset:</td>
+                <td>Tanggal Pendaftaran:</td>
                 <td>{{ $aset->tgl_pendaftaran->isoFormat('LLLL') }}</td>
               </tr>
               <tr>
-                <td>Terakhir Diperbarui:</td>
+                <td>Tanggal Terakhir Update:</td>
                 <td>{{ $aset->tgl_diperbarui->isoFormat('LLLL') }}</td>
               </tr>
               <tr>
@@ -165,12 +165,10 @@
                         <td><img id="qr-code-img" src="{{ route('home') }}/{{ $aset->link_qr }}" alt="foto qr" style="max-width: 150px;"></td>
                       </tr>
                     </table>
-                  </div> <br><label>Jumlah Print QR Code</label>
-                  <div class="print-qr input-group">
-                    <br>
-                    <input type="number" style="width: 70px; height: 40px;" id="print-input-qr" class="form-control" placeholder="Jumlah Print" value="1" />
-                    <a href="#" class="btn btn-sm btn-primary input-group-addon" style="width: 70px; height: 40px; display: inline-block;" onclick="printDiv({{ $aset->id }})">
-                      <i class="fa fa-print"></i>Print</a>
+                  </div>
+                  <div class="print-qr">
+                    <a href="#" class="btn btn-sm btn-primary" style="width: 80%; margin-bottom: 0.5em;" onclick="printDiv({{ $aset->id }})">
+                      <i class="fa fa-print"></i>Print QR Code</a>
                   </div>
                 </td>
               </tr>
@@ -230,7 +228,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <div class="form-group row">
+          <div class="form-group row">
             <label for="status-update" class="col-md-4 col-form-label text-md-right">Status</label>
             <div class="col-md-6">
               <select id="status-update" name="status" class="form-control select" style="width:100%;">
@@ -252,7 +250,7 @@
           <div class="modal-footer bg-whitesmoke br">
             <input type="text" id="id-update" name="id" value="{{ $aset->id }}" hidden />
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-            <input type="submit" value="Simpan" class="btn btn-primary" />
+            <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
           </div>
         </div>
       </div>
@@ -283,7 +281,7 @@
             <input type="text" id="id-update" name="id" value="{{ $aset->id }}" hidden />
             <input type="text" name="status" value="Baik" hidden />
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-            <input type="submit" value="Simpan" class="btn btn-primary" />
+            <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
           </div>
         </div>
       </div>
@@ -329,7 +327,7 @@
             <label for="lokasi-update" class="col-md-4 col-form-label text-md-right">Lokasi</label>
             <div class="col-md-6">
               <select id="lokasi-update" name="id_lokasi" class="form-control select" style="width:100%;">
-                <?php $lokasiGroup = App\Models\Aset\Lokasi::get();?>
+                <?php $lokasiGroup = App\Models\Aset\Lokasi::get(); ?>
                 @foreach ($lokasiGroup as $lokasi)
                 @if ( $lokasi->id == $aset->id_lokasi)
                 <option value="{{ $lokasi->id }}" selected>{{ $lokasi->nama }}</option>
@@ -350,7 +348,7 @@
         <div class="modal-footer bg-whitesmoke br">
           <input type="text" id="id-update" name="id" value="{{ $aset->id }}" hidden />
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-          <input type="submit" value="Simpan" class="btn btn-primary" />
+          <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
         </div>
       </div>
     </form>
@@ -380,7 +378,7 @@
             <input type="text" id="id-update" name="id" value="{{ $aset->id }}" hidden />
             <input type="text" name="status" value="Rusak" hidden />
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-            <input type="submit" value="Simpan" class="btn btn-primary" />
+            <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
           </div>
         </div>
       </div>
@@ -483,7 +481,7 @@
 <!-- Modal Delete -->
 <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
   <div class="modal-dialog" role="document">
-    <form action="{{ route('asetDelete') }}" method="post">
+    <form action="{{ route('asetDelete') }}" method="post" id="delete-form">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
@@ -500,7 +498,7 @@
         <div class="modal-footer bg-whitesmoke br">
           <input type="text" id="id-update" name="id" value="{{ $aset->id }}" hidden />
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-          <input type="submit" value="Ya, Hapus" class="btn btn-danger" />
+          <input type="submit" value="Ya, Hapus" class="btn btn-danger submit-btn" />
         </div>
       </div>
     </form>
@@ -539,7 +537,7 @@
                 $('#img_uploaded').html(img);
               }, {
                 maxWidth: $('#img_uploaded').width(),
-                orientation: true
+                orientation: 1
               }
             );
 
@@ -559,18 +557,11 @@
   //print qr
   function printDiv(id) {
     var div_qr_label = "qr-label";
-    var input_print = "print-input-qr";
-    var num = document.getElementById(input_print).value;
-    if (num == null || num == 0 || num < 0) {
-      num = 1;
-    }
     var divToPrintQR = document.getElementById(div_qr_label);
     var newWin = window.open('', 'Print-window');
     newWin.document.open();
     newWin.document.write('<html><body onload="window.print()">');
-    for (i = 0; i < num; i++) {
-      newWin.document.write(divToPrintQR.innerHTML);
-    }
+    newWin.document.write(divToPrintQR.innerHTML);
     newWin.document.write('</body></html>');
 
     newWin.document.close();
@@ -580,9 +571,9 @@
   }
 
   //colorized status
-  function colorized(){
+  function colorized() {
     var status = "{{ $aset->status }}";
-    if (status == "Baik"){
+    if (status == "Baik") {
       $("#colorized_status").css("color", "green");
     } else {
       $("#colorized_status").css("color", "red");
@@ -601,6 +592,8 @@
     colorized();
 
     $('form').submit(function() {
+      // disable the button prevent double input
+      $('.submit-btn').prop( "disabled", true );
       var form = $(this);
       $('input').each(function(i) {
         var self = $(this);
@@ -634,11 +627,14 @@
         "infoEmpty": "Tidak ada data",
         "search": "_INPUT_",
         "searchPlaceholder": "Cari data...",
-        "order": [[ 0, "desc" ]]
+        "order": [
+          [0, "desc"]
+        ]
       }
     });
 
   });
+
 
   /* open action button listener */
   // action listener button

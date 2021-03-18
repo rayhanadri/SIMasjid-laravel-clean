@@ -4,6 +4,9 @@
             <a class="nav-link" id="katalog-tab" href="{{ route('asetIndex') }}"> <i class="fa fa-list-alt"></i> Katalog Aset</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" id="laporan-tab" href="{{ route('asetLaporan') }}"> <i class="fa fa-flag"></i> Laporan Aset</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" id="baik-tab" href="{{  route('asetIndexByStatus', ['status'=>'baik']) }}" role="tab"> <i class="fa fa-check"></i> Baik</a>
         </li>
         <li class="nav-item">

@@ -7,6 +7,10 @@
 //hide untuk selain sekretaris dan ketua
 // $inside_pengelola = in_array(Auth::user()->id, $list_pengelola);
 ?>
+<?php
+//check permission pengelola
+$permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
+?>
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -33,11 +37,13 @@
             </div>
             @endif
             @include('aset.metadata_tab')
+            @if($permission)
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <a href="#" class="btn btn-lg btn-info btn-primary open-tambah" data-toggle="modal" data-target="#tambahKategoriModal" style="margin: 20px;"><i class="fas fas fa-plus"></i> Tambah Kategori</a>
                 </div>
             </div>
+            @endif
             <div class="row">
                 <button style="margin: 1em auto;" class="btn btn-dark" data-toggle="collapse" data-target="#filter-box">
                     <i class="fa fa-filter"></i> Show/Close Filter Data
@@ -59,10 +65,12 @@
                         <thead>
                             <tr>
                                 <th id="th_no_kategori">No</th>
-                                <th id="th_kode_kategori">Kode Kategori</th>
-                                <th id="th_nama_kategori">Nama Kategori</th>
+                                <th id="th_kode_kategori">Kode Aset</th>
+                                <th id="th_nama_kategori">Kategori</th>
                                 <th id="th_pj_kategori">Penanggung Jawab</th>
+                                @if($permission)
                                 <th id="th_btn">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -71,13 +79,19 @@
                                 <td id="td_no_kategori">{{ $loop->iteration }}</th>
                                 <td id="td_kode_kategori">{{ $kategori->kode }}</th>
                                 <td id="td_nama_kategori">{{ $kategori->nama }}</th>
+                                @if ($kategori->penanggung_jawab)
                                 <td id="td_pj_kategori">{{ $kategori->penanggung_jawab->nama }}</th>
+                                @else
+                                <td id="td_pj_kategori">-</th>
+                                @endif
+                                @if($permission)
                                 <td id="td_btn">
                                     <div class="btn-group-vertical mb-3" role="group">
                                         <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $kategori->id }}" data-nama="{{ $kategori->nama }}" data-kode="{{ $kategori->kode }}" data-pj="{{ $kategori->id_pj }}" data-target="#updateModal"><i class="fas fa-pen-square"></i> Edit</a>
                                         <a href="#" class="open-delete  btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $kategori->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
@@ -87,6 +101,7 @@
         </div>
     </section>
 </div>
+@if($permission)
 <!-- Modal Tambah Kategori -->
 <div class="modal fade" tabindex="-1" role="dialog" id="tambahKategoriModal">
     <div class="modal-dialog" role="document">
@@ -97,7 +112,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('metadataKategoriCreate') }}">
+            <form method="POST" action="{{ route('metadataCreate') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
@@ -107,9 +122,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="kode" class="col-md-4 col-form-label text-md-right">Kode Kategori (Harus unik, 4 karakter)</label>
+                        <label for="kode" class="col-md-4 col-form-label text-md-right">Kode Aset (Harus unik, max 3 karakter)</label>
                         <div class="col-md-6">
-                            <input id="kode" type="text" class="form-control" name="kode" placeholder="Kode Kategori" required minlength="4" maxlength="4" size="4">
+                            <input id="kode" type="text" class="form-control" name="kode" placeholder="Kode Kategori" required minlength="1" maxlength="3" size="3">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -124,6 +139,7 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="kategori" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
@@ -134,7 +150,7 @@
 <!-- Modal Update -->
 <div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('metadataKategoriUpdate') }}" method="post">
+        <form action="{{ route('metadataUpdate') }}" method="post">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -151,9 +167,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="update_kode" class="col-md-4 col-form-label text-md-right">Kode Kategori (Harus unik, 4 karakter)</label>
+                        <label for="update_kode" class="col-md-4 col-form-label text-md-right">Kode Aset (Harus unik, max 3 karakter)</label>
                         <div class="col-md-6">
-                            <input id="update_kode" type="text" class="form-control" name="kode" placeholder="Kode Kategori" required="" minlength="4" maxlength="4" size="4">
+                            <input id="update_kode" type="text" class="form-control" name="kode" placeholder="Kode Kategori" required="" minlength="1" maxlength="3" size="3">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -168,7 +184,8 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <input type="text" id="id_update" name="id" value="" hidden/>
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="kategori" hidden />
+                    <input type="text" id="id_update" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
                     <input type="submit" value="Simpan" class="btn btn-primary" />
                 </div>
@@ -192,9 +209,10 @@
                 <h5 align="center">Apakah Anda yakin ingin menghapus kategori ini?</h5>
             </div>
             <div class="modal-footer bg-whitesmoke br">
-                <form action="{{ route('metadataKategoriDelete') }}" method="post">
+                <form action="{{ route('metadataDelete') }}" method="post">
                     @csrf
-                    <input type="text" id="id_delete" name="id" value="" hidden/>
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="kategori" hidden />
+                    <input type="text" id="id_delete" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak, Batalkan</button>
                     <input type="submit" value="Ya, Hapus" class="btn btn-danger" />
                 </form>
@@ -202,6 +220,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <!-- SCRIPT -->
 

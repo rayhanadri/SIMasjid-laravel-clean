@@ -18,8 +18,10 @@
   <!-- bootstrap integrity integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" -->
 
   <!-- JS Bootstrap -->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="{{ asset('public/dist/bootstrap-daterangepicker/daterangepicker.css') }}">
@@ -35,7 +37,7 @@
   <link rel="stylesheet" href="{{ asset('public/dist/assets/css/components.css') }}">
 
   <!-- jQuery -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
   <!-- HTML2CANVAS -->
   <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Anggota;
+namespace App\Http\Controllers\Aset;
 
 use App\Models\Anggota\Pengelola_Aset;
 use Illuminate\Http\Request;
 use App\Models\Anggota\Anggota;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Anggota\AnggotaController;
 
 class PengelolaAsetController extends AnggotaController
 {
@@ -31,7 +32,7 @@ class PengelolaAsetController extends AnggotaController
             $pengelola->jabatan = $this->getJabatan($pengelola->anggota_pengelola);
         }
 
-        return view('anggota.pengelola_aset', ['pengelolaGroup' => $pengelolaGroup, 'bukanPengelolaGroup' => $bukanPengelolaGroup]);
+        return view('aset.pengelola_aset', ['pengelolaGroup' => $pengelolaGroup, 'bukanPengelolaGroup' => $bukanPengelolaGroup]);
     }
 
     //menambah pengelola aset, return list anggota pengelola aset
@@ -40,14 +41,14 @@ class PengelolaAsetController extends AnggotaController
         $Pengelola_Aset = new Pengelola_Aset();
         $Pengelola_Aset->id_anggota = $request->id_anggota;
         $Pengelola_Aset->save();
-        return redirect(route('anggotaPengelolaAset'));
+        return redirect(route('asetPengelolaAset'));
     }
 
     //menghapus hak pengelola aset, return list anggota pengelola aset
     public function delete(Request $request)
     {
         Pengelola_Aset::get()->where('id', '=', $request->id)->first()->delete();
-        return redirect(route('anggotaPengelolaAset'));
+        return redirect(route('asetPengelolaAset'));
     }
 
     public function checkPermission()

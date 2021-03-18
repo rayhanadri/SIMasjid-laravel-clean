@@ -7,6 +7,10 @@
 //hide untuk selain sekretaris dan ketua
 // $inside_pengelola = in_array(Auth::user()->id, $list_pengelola);
 ?>
+<?php
+//check permission pengelola
+$permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
+?>
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -33,11 +37,13 @@
             </div>
             @endif
             @include('aset.metadata_tab')
+            @if($permission)
             <div class="row">
                 <div class="col-12">
                     <a href="#" class="btn btn-lg btn-info btn-primary" data-toggle="modal" data-target="#tambahLokasiModal" style="margin: 20px;"><i class="fas fas fa-plus"></i> Tambah Lokasi</a>
                 </div>
             </div>
+            @endif
             <div class="row">
                 <button style="margin: 1em auto;" class="btn btn-dark" data-toggle="collapse" data-target="#filter-box">
                     <i class="fa fa-filter"></i> Show/Close Filter Data
@@ -59,7 +65,9 @@
                             <tr>
                                 <th id="th_no_lokasi">No</th>
                                 <th id="th_nama_lokasi">Nama Lokasi</th>
+                                @if($permission)
                                 <th id="th_action_lokasi">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -67,12 +75,14 @@
                             <tr>
                                 <td id="td_no_kategori">{{ $loop->iteration }}</th>
                                 <td id="td_nama_kategori">{{ $lokasi->nama }}</th>
+                                @if($permission)
                                 <td id="td_btn">
                                     <div class="btn-group-vertical mb-3" role="group">
-                                    <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $lokasi->id }}" data-nama="{{ $lokasi->nama }}" data-target="#updateModal"><i class="fas fa-pen-square"></i> Edit</a>
+                                        <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $lokasi->id }}" data-nama="{{ $lokasi->nama }}" data-target="#updateModal"><i class="fas fa-pen-square"></i> Edit</a>
                                         <a href="#" class="open-delete  btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $lokasi->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
@@ -82,6 +92,7 @@
         </div>
     </section>
 </div>
+@if($permission)
 <!-- Modal Tambah Lokasi -->
 <div class="modal fade" tabindex="-1" role="dialog" id="tambahLokasiModal">
     <div class="modal-dialog" role="document">
@@ -103,8 +114,9 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="lokasi" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary submit-btn">Simpan</button>
                 </div>
             </form>
         </div>
@@ -131,9 +143,10 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <input type="text" id="update_id" name="id" value="" hidden/>
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="lokasi" hidden />
+                    <input type="text" id="update_id" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                    <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
                 </div>
             </div>
         </form>
@@ -157,17 +170,24 @@
             <div class="modal-footer bg-whitesmoke br">
                 <form action="{{ route('metadataLokasiDelete') }}" method="post">
                     @csrf
-                    <input type="text" id="id_delete" name="id" value="" hidden/>
+                    <input type="text" id="jenis_metadata" name="jenis_metadata" value="lokasi" hidden />
+                    <input type="text" id="id_delete" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak, Batalkan</button>
-                    <input type="submit" value="Ya, Hapus" class="btn btn-danger" />
+                    <input type="submit" value="Ya, Hapus" class="btn btn-danger submit-btn" />
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endif
 <!-- SCRIPT -->
 <script type="text/javascript">
     //document function
+
+    $('form').submit(function() {
+        $('.submit-btn').prop("disabled", true);
+    });
+
     $(document).ready(function() {
         $('#menu_metadata').addClass('active');
         $('#lokasi-tab').addClass('active');

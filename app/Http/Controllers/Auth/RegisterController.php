@@ -89,7 +89,7 @@ class RegisterController extends Controller
         //logout user
         Auth::logout();
         //redirect ke halaman after_register
-        return redirect(route('afterRegister'));
+        return redirect()->route('afterRegister');
         
         // return $this->registered($request, $user)
         //     ?: redirect($this->redirectPath('/'));

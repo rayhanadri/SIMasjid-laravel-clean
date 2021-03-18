@@ -13,6 +13,6 @@ class Usulan extends Model
 
     public function pengusul()
     {
-        return $this->hasOne('App\Models\Anggota\Anggota', 'id', 'id_pengusul');
+        return $this->belongsTo('App\Models\Anggota\Anggota', 'id_pengusul', 'id');
     }
 }

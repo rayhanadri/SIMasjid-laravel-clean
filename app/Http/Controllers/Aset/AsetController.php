@@ -21,7 +21,7 @@ class AsetController extends Controller
     public function index()
     {
         $katalogGroup = Katalog::join('aset', 'aset.id_katalog', '=', 'katalog.id')
-            ->select('katalog.nama_barang', 'katalog.id', 'katalog.id_kategori', DB::raw('count(*) as jumlah'))
+            ->select('katalog.nama_barang', 'katalog.id', 'katalog.id_kategori', DB::raw('count(*) as jumlah'), DB::raw('sum(harga_satuan) as total_nilai'))
             ->where('aset.status', '!=', 'Dilepas')
             ->groupBy('katalog.nama_barang', 'katalog.id', 'katalog.id_kategori')
             ->get();
@@ -73,6 +73,39 @@ class AsetController extends Controller
         $kategoriGroup = Kategori::get();
         $lokasiGroup = Lokasi::get();
         return view('aset.index_by_katalog', ["asetGroup" => $asetGroup, "kategoriGroup" => $kategoriGroup, "lokasiGroup" => $lokasiGroup]);
+    }
+
+    public function laporan()
+    {
+        //
+        $aset_baik = Aset::where('status', '=', 'Baik')
+            ->select(DB::raw('count(*) as jumlah'), DB::raw('sum(harga_satuan) as nilai'))
+            ->get();
+
+        //
+        $aset_rusak = Aset::where('status', '=', 'Rusak')
+            ->select(DB::raw('count(*) as jumlah'), DB::raw('sum(harga_satuan) as nilai'))
+            ->get();
+        //
+        $aset_diperbaiki = Aset::where('status', '=', 'Diperbaiki')
+        ->select(DB::raw('count(*) as jumlah'), DB::raw('sum(harga_satuan) as nilai'))
+            ->get();
+        //
+        $aset_dipinjam = Aset::where('status', '=', 'Dipinjam')
+        ->select(DB::raw('count(*) as jumlah'), DB::raw('sum(harga_satuan) as nilai'))
+            ->get();
+        //
+        $aset_dilepas = Aset::where('status', '=', 'Dilepas')
+        ->select(DB::raw('count(*) as jumlah'), DB::raw('sum(harga_satuan) as nilai'))
+            ->get();
+        //
+        $aset_aktif = Aset::where('status', '!=', 'Dilepas')
+        ->select(DB::raw('count(*) as jumlah'), DB::raw('sum(harga_satuan) as nilai'))
+        ->get();
+    //
+
+        // return $asetGroup;
+        return view('aset.laporan', ["aset_baik" => $aset_baik, "aset_rusak" => $aset_rusak, "aset_diperbaiki" => $aset_diperbaiki, "aset_dipinjam" => $aset_dipinjam, "aset_dilepas" => $aset_dilepas, "aset_aktif" => $aset_aktif]);
     }
 
     public function update(Request $request)

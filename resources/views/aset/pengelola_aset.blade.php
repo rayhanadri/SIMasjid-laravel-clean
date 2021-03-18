@@ -16,11 +16,11 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         <div class="row">
             <ol class="breadcrumb float-sm-left" style="margin-bottom: 10px; margin-left: 15px;">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-mosque"></i> Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('anggotaIndex') }}">Keanggotaan</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('asetIndex') }}">Manajemen Aset</a></li>
                 <li class="breadcrumb-item active">Pengelola Aset</li>
             </ol>
         </div>
-        @include('anggota.menu_anggota')
+        @include('aset.menu_aset')
         <div class="section-header">
             <div class="row" style="margin:auto;">
                 <div class="col-12">
@@ -150,11 +150,11 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                 <h5 align="center">Apakah Anda yakin ingin menghapus akses Pengelola Aset pengguna ini?</h5>
             </div>
             <div class="modal-footer bg-whitesmoke br">
-                <form action="{{ route('anggotaPengelolaAsetDelete') }}" method="post">
+                <form action="{{ route('asetPengelolaAsetDelete') }}" method="post">
                     @csrf
                     <input type="text" id="id_delete" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak, Batalkan</button>
-                    <input type="submit" value="Ya, Hapus" class="btn btn-danger" />
+                    <input type="submit" value="Ya, Hapus" class="btn btn-danger submit-btn" />
                 </form>
             </div>
         </div>
@@ -163,7 +163,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
 <!-- Modal Tambah -->
 <div class="modal fade" tabindex="-1" role="dialog" id="tambahModal">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('anggotaPengelolaAsetCreate') }}" method="post">
+        <form action="{{ route('asetPengelolaAsetCreate') }}" method="post">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -263,6 +263,10 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                 });
             }
         });
+    });
+
+    $('form').submit(function() {
+        $('.submit-btn').prop( "disabled", true );
     });
 
     // onclick btn delete, show modal

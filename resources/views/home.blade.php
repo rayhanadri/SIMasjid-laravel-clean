@@ -18,9 +18,13 @@
     <div class="section-body">
       <div class="row">
         <div class="col-12">
-          <h3 style="text-align:center;">Selamat datang di Sistem Informasi Masjid Ibnu Sina!!</h3>
+          <h3 style="text-align:center;">Selamat datang di Sistem Informasi Masjid Ibnu Sina</h3>
+          @if( Auth::user()->id_status == 2 )
+          <h5 style="text-align:center; color: red;">Akun Anda Non-aktif</h5>
+          @endif
         </div>
       </div>
+      @if( Auth::user()->id_status == 1 )
       <div class="row">
         <div class="col-lg-2 col-md-4 col-6" style="padding: 10px;">
           <a href="{{ route('anggotaIndex') }}" class="btn btn-info" style="width: 100%; height: 150px;">
@@ -68,6 +72,9 @@
           </a>
         </div> -->
       </div>
+      @endif
+      
+
     </div>
   </section>
 </div>

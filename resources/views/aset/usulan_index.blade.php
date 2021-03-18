@@ -68,7 +68,11 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
                                 <td id="td_no_usulan">{{ $usulan->id }}</td>
                                 <td id="td_nama_barang_usulan">{{ $usulan->nama_barang }}</td>
                                 <td id="td_jumlah_barang_usulan">{{ $usulan->jumlah }}</td>
+                                @if($usulan->pengusul)
                                 <td id="td_pengusul">{{ $usulan->pengusul->nama }}</td>
+                                @else
+                                <td id="td_pengusul">-</td>
+                                @endif
                                 <td id="td_keterangan_usulan">{{ $usulan->keterangan_usulan }}</td>
                                 <td id="td_status_usulan">{{ $usulan->status }}</td>
                                 <td id="td_tgl_terjadwal">{{ $usulan->tgl_dibuat->isoFormat('LL') }}</td>

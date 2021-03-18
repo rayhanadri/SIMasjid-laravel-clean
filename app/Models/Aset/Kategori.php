@@ -12,7 +12,7 @@ class Kategori extends Model
 
     public function penanggung_jawab()
     {
-        return $this->hasOne('App\Models\Anggota\Anggota', 'id', 'id_pj');
+        return $this->belongsTo('App\Models\Anggota\Anggota', 'id_pj', 'id');
     }
     
 }

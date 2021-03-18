@@ -128,14 +128,19 @@
           <ul class="sidebar-menu">
             <!-- <li class="menu-header">Dashboard</li> -->
             <li id='home-link'><a class="nav-link" href="{{ route('home') }}"><i class="fas fa-mosque"></i><span>Home</span></a></li>
+            @if( Auth::user()->id_status == 1 )
             <li id='keanggotaan-link'><a class="nav-link" href="{{ route('anggotaIndex') }}"><i class="fas fa-users"></i><span>Keanggotaan</span></a></li>
             <li id='aset-link'><a class="nav-link" href="{{ route('asetIndex') }}"><i class="fas fa-warehouse"></i><span>Aset</span></a></li>
+            @endif
             <!-- <li id='keuangan-link'><a class="nav-link not-ready" href="#"><i class="fas fa-money-bill-wave"></i><span>Keuangan</span></a></li>
             <li id='musyawarah-link'><a class="nav-link not-ready" href="#"><i class="fas fa-comments"></i><span>Musyawarah</span></a></li>
             <li id='kurban-link'><a class="nav-link not-ready" href="#"><i class="icofont-cow" style="font-size: 30px;"></i><span>Kurban</span></a></li> -->
         </aside>
       </div>
       <script>
+        $(window).on('resize', function() {
+          $("body").addClass("sidebar-mini");
+        });
         $(document).ready(function() {
           $("body").addClass("sidebar-mini");
           $('.not-ready').click(function() {

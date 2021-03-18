@@ -22,10 +22,13 @@ class CheckStatus
 
     public function handle($request, Closure $next)
     {
-        //jika user terotentikasi statusnya aktif bisa lanjutkan, jika tidak return ke '/'
+        //jika user belum terverifikasi
         if (Auth::user()->id_status == self::UNVERIFIED_MEMBER) {
             Auth::logout();
             return redirect('/login');
+        } 
+        else if (Auth::user()->id_status == self::NON_ACTIVE_MEMBER){
+            return redirect('/');
         }
         return $next($request);        
     }

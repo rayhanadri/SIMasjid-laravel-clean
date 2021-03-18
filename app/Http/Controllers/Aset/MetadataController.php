@@ -10,181 +10,199 @@ use App\Models\Anggota\Anggota;
 use App\Models\Aset\Katalog;
 use App\Models\Aset\Aset;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
 
 class MetadataController extends Controller
 {
     //
-
-    public function indexKategori()
+    public function index($jenis_metadata)
     {
-        $kategoriGroup = Kategori::get();
-        foreach ($kategoriGroup as $kategori) {
-            $kategori->penanggung_jawab;
+        switch ($jenis_metadata) {
+            case 'kategori':
+                $kategoriGroup = Kategori::orderBy('kode', 'asc')->get();
+                foreach ($kategoriGroup as $kategori) {
+                    $kategori->penanggung_jawab;
+                }
+                $lokasiGroup = Lokasi::get();
+                $anggotaGroup = Anggota::get()->where('id_status', '!=', 3);
+                return view('aset.metadata_kategori', ['kategoriGroup' => $kategoriGroup, 'lokasiGroup' => $lokasiGroup, 'anggotaGroup' => $anggotaGroup]);
+                break;
+            case 'lokasi':
+                $lokasiGroup = Lokasi::orderBy('nama', 'asc')->get();
+                return view('aset.metadata_lokasi', ['lokasiGroup' => $lokasiGroup]);
+                break;
+            case 'katalog':
+                $katalogGroup = Katalog::orderBy('nama_barang', 'asc')->get();
+                foreach ($katalogGroup as $katalog) {
+                    $katalog->kategori = $katalog->kategori;
+                }
+                $kategoriGroup = Kategori::get();
+                return view('aset.metadata_katalog', ['kategoriGroup' => $kategoriGroup, 'katalogGroup' => $katalogGroup]);
+                break;
+            default:
+                abort(404);
+                break;
         }
-        $lokasiGroup = Lokasi::get();
-        $anggotaGroup = Anggota::get()->where('id_status', '!=', 3);
-        //data kategori
-        return view('aset.metadata_kategori', ['kategoriGroup' => $kategoriGroup, 'lokasiGroup' => $lokasiGroup, 'anggotaGroup' => $anggotaGroup]);
     }
 
-    //kategori
-    public function createKategori(Request $request)
+    //create
+    public function create(Request $request)
     {
-        $request->kode = strtoupper($request->kode);
-        //validasi
-        Validator::make($request->all(), [
-            'nama' => 'required',
-            'kode' => 'required|unique:kategori|size:4',
-        ])->validate();
+        switch ($request->jenis_metadata) {
+            case 'kategori':
+                $request->kode = strtoupper($request->kode);
+                //validasi
+                Validator::make($request->all(), [
+                    'nama' => 'required',
+                    'kode' => 'required|unique:kategori|max:4',
+                ])->validate();
 
-        $kategori = new Kategori;
-        $kategori->nama = $request->nama;
-        $kategori->kode = $request->kode;
-        $kategori->id_pj = $request->id_pj;
-        $kategori->save();
+                $kategori = new Kategori;
+                $kategori->nama = $request->nama;
+                $kategori->kode = $request->kode;
+                $kategori->id_pj = $request->id_pj;
+                $kategori->save();
 
-        return Redirect::back();
-    }
+                return redirect()->back();
+                break;
+            case 'lokasi':
+                //validasi
+                Validator::make($request->all(), [
+                    'nama' => 'required',
+                ])->validate();
+                $lokasi = new Lokasi;
+                $lokasi->nama = $request->nama;
+                $lokasi->save();
 
-    //kategori update
-    public function updateKategori(Request $request)
-    {
-        //parse to
-        $request->kode = strtoupper($request->kode);
-        //cari kategori
-        $kategori = Kategori::get()->where('id', '=', $request->id)->first();
-        //validasi
-        if ($request->kode != $kategori->kode) {
-            Validator::make($request->all(), [
-                'nama' => 'required',
-                'kode' => 'required|unique:kategori|size:4',
-            ])->validate();
-        } else {
-            Validator::make($request->all(), [
-                'nama' => 'required',
-            ])->validate();
+                return redirect()->back();
+                break;
+            case 'katalog':
+                //validasi
+                Validator::make($request->all(), [
+                    'nama_barang' => 'required|unique:katalog',
+                    'id_kategori' => 'required',
+                ])->validate();
+                $katalog = new Katalog();
+                $katalog->nama_barang = $request->nama_barang;
+                $katalog->id_kategori = $request->id_kategori;
+                $katalog->save();
+
+                return redirect()->back();
+                break;
+            default:
+                return redirect()->back();
+                break;
         }
-
-        $kategori = Kategori::get()->where('id', '=', $request->id)->first();
-        $kategori->nama = $request->nama;
-        $kategori->kode = $request->kode;
-        $kategori->id_pj = $request->id_pj;
-        $kategori->save();
-
-        return Redirect::back();
     }
 
-    public function deleteKategori(Request $request)
+    //update
+    public function update(Request $request)
     {
-        $kategori = Kategori::get()->where('id', '=', $request->id)->first();
-        $kategori->delete();
+        switch ($request->jenis_metadata) {
+            case 'kategori':
+                //parse to
+                $request->kode = strtoupper($request->kode);
+                //cari kategori
+                $kategori = Kategori::get()->where('id', '=', $request->id)->first();
+                //validasi
+                if ($request->kode != $kategori->kode) {
+                    Validator::make($request->all(), [
+                        'nama' => 'required',
+                        'kode' => 'required|unique:kategori|max:3',
+                    ])->validate();
+                } else {
+                    Validator::make($request->all(), [
+                        'nama' => 'required',
+                    ])->validate();
+                }
 
-        return Redirect::back();
-    }
+                $kategori = Kategori::get()->where('id', '=', $request->id)->first();
+                $kategori->nama = $request->nama;
+                $kategori->id_pj = $request->id_pj;
 
-    public function indexLokasi()
-    {
-        $kategoriGroup = Kategori::get();
-        foreach ($kategoriGroup as $kategori) {
-            $kategori->penanggung_jawab;
+                //jika kode berubah maka update semua kode aset
+                if ($kategori->kode != $request->kode) {
+                    $kategori->kode = $request->kode;
+                    $kategori->save();
+
+                    //update semua kode aset
+                    $katalogGroup = Katalog::get()->where('id_kategori', '=', $kategori->id);
+                    foreach ($katalogGroup as $katalog) {
+                        $asetGroup = Aset::get()->where('id_katalog', '=', $katalog->id);
+                        foreach ($asetGroup as $aset) {
+                            $aset->kode = $katalog->kategori->kode . $aset->id;
+                            app('App\Http\Controllers\Aset\PendaftaranController')->generateQR($aset);
+                            $aset->save();
+                        }
+                    }
+                }
+                $kategori->save();
+
+                return redirect()->back();
+                break;
+            case 'lokasi':
+                Validator::make($request->all(), [
+                    'nama' => 'required',
+                ])->validate();
+                $lokasi = Lokasi::get()->where('id', '=', $request->id)->first();
+                $lokasi->nama = $request->nama;
+                $lokasi->save();
+
+                return redirect()->back();
+                break;
+            case 'katalog':
+                Validator::make($request->all(), [
+                    'nama' => 'required',
+                    'id_kategori' => 'required',
+                ])->validate();
+                $katalog = Katalog::get()->where('id', '=', $request->id)->first();
+                $katalog->nama_barang = $request->nama;
+
+                //katalog berubah kategori, update semua kode barang
+                if ($katalog->id_kategori != $request->id_kategori) {
+                    $katalog->id_kategori = $request->id_kategori;
+                    $katalog->save();
+
+                    $asetGroup = Aset::get()->where('id_katalog', '=', $katalog->id);
+                    foreach ($asetGroup as $aset) {
+                        $aset->kode = $katalog->kategori->kode . $aset->id;
+                        app('App\Http\Controllers\Aset\PendaftaranController')->generateQR($aset);
+                        $aset->save();
+                    }
+                }
+                $katalog->save();
+                return redirect()->back();
+                break;
+            default:
+                return redirect()->back();
+                break;
         }
-        $lokasiGroup = Lokasi::get();
-        $anggotaGroup = Anggota::get()->where('id_status', '!=', 3);
-        //data kategori
-        return view('aset.metadata_lokasi', ['kategoriGroup' => $kategoriGroup, 'lokasiGroup' => $lokasiGroup, 'anggotaGroup' => $anggotaGroup]);
     }
 
-    //lokasi
-    public function createLokasi(Request $request)
+    //update
+    public function delete(Request $request)
     {
-        //validasi
-        Validator::make($request->all(), [
-            'nama' => 'required',
-        ])->validate();
-        $lokasi = new Lokasi;
-        $lokasi->nama = $request->nama;
-        $lokasi->save();
+        switch ($request->jenis_metadata) {
+            case 'kategori':
+                $kategori = Kategori::get()->where('id', '=', $request->id)->first();
+                $kategori->delete();
 
-        return Redirect::back();
-    }
+                return redirect()->back();
+                break;
+            case 'lokasi':
+                $lokasi = Lokasi::get()->where('id', '=', $request->id)->first();
+                $lokasi->delete();
 
-    //lokasi update
-    public function updateLokasi(Request $request)
-    {
-        Validator::make($request->all(), [
-            'nama' => 'required',
-        ])->validate();
-        $lokasi = Lokasi::get()->where('id', '=', $request->id)->first();
-        $lokasi->nama = $request->nama;
-        $lokasi->save();
+                return redirect()->back();
+                break;
+            case 'katalog':
+                $katalog = Katalog::get()->where('id', '=', $request->id)->first();
+                $katalog->delete();
 
-        return redirect()->back();
-    }
-
-    public function deleteLokasi(Request $request)
-    {
-        $lokasi = Lokasi::get()->where('id', '=', $request->id)->first();
-        $lokasi->delete();
-
-        return Redirect::back();
-    }
-
-    public function indexKatalog()
-    {
-        $katalogGroup = Katalog::get();
-        foreach ($katalogGroup as $katalog) {
-            $katalog->kategori = $katalog->kategori;
+                return redirect()->back();
+                break;
+            default:
+                return redirect()->back();
+                break;
         }
-        // return $katalogGroup;
-        $kategoriGroup = Kategori::get();
-        //data kategori
-        return view('aset.metadata_katalog', ['kategoriGroup' => $kategoriGroup, 'katalogGroup' => $katalogGroup]);
-    }
-
-    //lokasi
-    public function createKatalog(Request $request)
-    {
-        // return $request;
-        //validasi
-        Validator::make($request->all(), [
-            'nama_barang' => 'required|unique:katalog',
-            'id_kategori' => 'required',
-        ])->validate();
-        $katalog = new Katalog();
-        $katalog->nama_barang = $request->nama_barang;
-        $katalog->id_kategori = $request->id_kategori;
-        $katalog->save();
-
-        return Redirect::back();
-    }
-
-    public function updateKatalog(Request $request)
-    {
-        Validator::make($request->all(), [
-            'nama' => 'required',
-            'id_kategori' => 'required',
-        ])->validate();
-        $katalog = Katalog::get()->where('id', '=', $request->id)->first();
-        $katalog->nama_barang = $request->nama;
-        $katalog->id_kategori = $request->id_kategori;
-        $katalog->save();
-
-        $asetGroup = Aset::get()->where('id_katalog','=',$katalog->id);
-        foreach ($asetGroup as $aset) {
-            $aset->kode = $katalog->kategori->kode.$aset->id;
-            app('App\Http\Controllers\Aset\PencatatanController')->generateQR($aset);
-            $aset->save();
-        }
-
-        return redirect()->back();
-    }
-
-    public function deleteKatalog(Request $request)
-    {
-        $katalog = Katalog::get()->where('id', '=', $request->id)->first();
-        $katalog->delete();
-
-        return redirect()->back();
     }
 }

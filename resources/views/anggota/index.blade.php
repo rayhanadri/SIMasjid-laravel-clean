@@ -74,7 +74,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                         <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
                                         @if($inside_sekretaris)
                                         <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#updateModal"><i class="fas fa-edit"></i></i> Edit</a>
-                                        <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
+                                        <!-- <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a> -->
                                         @endif
                                     </div>
                                 </td>
@@ -157,7 +157,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                     @csrf
                     <input type="text" id="id_delete" name="id" value="" hidden />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak, Batalkan</button>
-                    <input type="submit" value="Ya, Hapus" class="btn btn-danger" />
+                    <input type="submit" value="Ya, Hapus" class="btn btn-danger submit-btn submit-btn" />
                 </form>
             </div>
         </div>
@@ -209,7 +209,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                             </tr>
                             <tr>
                                 <th scope="row">Alamat</th>
-                                <td><input name="alamat" id="updateAlamat" class="form-control" /></td>
+                                <td><textarea name="alamat" id="updateAlamat" class="form-control" style="height: 82px;"></textarea></td>
                             </tr>
                             <tr>
                                 <th scope="row">Telp/HP</th>
@@ -221,7 +221,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                 <div class="modal-footer bg-whitesmoke br">
                     <input type="text" id="id_update" name="id" value="" hidden required />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                    <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
                 </div>
             </div>
         </form>
@@ -314,6 +314,10 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                 });
             }
         });
+    });
+    //form prevent double input
+    $('form').submit(function() {
+        $('.submit-btn').prop( "disabled", true );
     });
 
     // onclick btn delete, show modal

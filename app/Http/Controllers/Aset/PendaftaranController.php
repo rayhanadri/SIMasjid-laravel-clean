@@ -31,7 +31,7 @@ class PendaftaranController extends Controller
         $lokasiGroup = Lokasi::get();
         $katalogGroup = Katalog::get();
 
-        return  view('aset.pendaftaran_form',['kategoriGroup' => $kategoriGroup, 'lokasiGroup' => $lokasiGroup, 'katalogGroup' => $katalogGroup])->with('katalogJSON', json_decode($katalogGroup, true));
+        return  view('aset.pendaftaran_form', ['kategoriGroup' => $kategoriGroup, 'lokasiGroup' => $lokasiGroup, 'katalogGroup' => $katalogGroup])->with('katalogJSON', json_decode($katalogGroup, true));
     }
 
     public function create(Request $request)
@@ -40,74 +40,34 @@ class PendaftaranController extends Controller
         $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
         if ($permission == false) {
             return redirect(route('home'));
-        }
-
-        if ($request->jenis == "Tunggal") {
-            if ($request->masuk_katalog == "Ya") {
-                //validator
-                Validator::make($request->all(), [
-                    'id_katalog' => 'required',
-                    'file' => 'required|max:5012|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:5012',
-                    'sumber' => 'required',
-                ])->validate();
-
+        } else if (isset($request->jumlah) == true) {
+            //validator
+            Validator::make($request->all(), [
+                'id_katalog' => 'required',
+                'jumlah' => 'required|min:1',
+                'file' => 'required|max:5012|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:5012',
+                'sumber' => 'required',
+            ])->validate();
+            $jumlah = $request->jumlah;
+            for ($i = 0; $i < $jumlah; $i++) {
                 $aset = $this->buatAset($request, $request->id_katalog);
-                $link_detail = route('home') . "/aset/detail/$aset->id";
-                return redirect($link_detail);
-            } else if ($request->masuk_katalog == "Tidak") {
-                //validator
-                Validator::make($request->all(), [
-                    'nama_barang' => 'required|unique:katalog',
-                    'file' => 'required|max:5012|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:5012',
-                    'sumber' => 'required',
-                ])->validate();
+            }
+            $link_detail = route('home') . "/aset/katalog/$request->id_katalog";
+            return redirect($link_detail);
+        } else if (isset($request->jumlah) == false) {
+            //validator
+            Validator::make($request->all(), [
+                'id_katalog' => 'required',
+                'file' => 'required|max:5012|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:5012',
+                'sumber' => 'required',
+            ])->validate();
 
-                $katalog = $this->buatKatalog($request);
-                $aset = $this->buatAset($request, $katalog->id);
-                $link_detail = route('home') . "/aset/detail/$aset->id";
-                return redirect($link_detail);
-            } else {
-                return redirect()->back();
-            }
-        } else if ($request->jenis == "Jamak") {
-            if ($request->masuk_katalog == "Ya") {
-                //validator
-                Validator::make($request->all(), [
-                    'id_katalog' => 'required',
-                    'jumlah' => 'required|min:1',
-                    'file' => 'required|max:5012|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:5012',
-                    'sumber' => 'required',
-                ])->validate();
-                $jumlah = $request->jumlah;
-                for ($i = 0; $i < $jumlah; $i++) {
-                    $aset = $this->buatAset($request, $request->id_katalog);
-                }
-                $link_detail = route('home') . "/aset/katalog/$request->id_katalog";
-                return redirect($link_detail);
-            } else if ($request->masuk_katalog == "Tidak") {
-                //validator
-                Validator::make($request->all(), [
-                    'nama_barang' => 'required|unique:katalog',
-                    'jumlah' => 'required|min:1',
-                    'file' => 'required|max:5012|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:5012',
-                    'sumber' => 'required',
-                ])->validate();
-                $katalog = $this->buatKatalog($request);
-                $jumlah = $request->jumlah;
-                for ($i = 0; $i < $jumlah; $i++) {
-                    $aset = $this->buatAset($request, $katalog->id);
-                }
-                $link_detail = route('home') . "/aset/katalog/$katalog->id";
-                return redirect($link_detail);
-            } else {
-                return redirect()->back();
-            }
+            $aset = $this->buatAset($request, $request->id_katalog);
+            $link_detail = route('home') . "/aset/detail/$aset->id";
+            return redirect($link_detail);
         } else {
             return redirect()->back();
         }
-
-        $link_detail = route('home') . "/aset/detail/$aset->id";
-        return redirect($link_detail);
     }
 
     public function buatKatalog($request)
@@ -125,7 +85,7 @@ class PendaftaranController extends Controller
         $riwayat_aset = new Riwayat_Aset;
         $riwayat_aset->status_awal = '-';
         $riwayat_aset->status_akhir = $status_akhir;
-        $riwayat_aset->status_akhir = $keterangan;
+        $riwayat_aset->keterangan = $keterangan;
         $riwayat_aset->waktu = now();
         $riwayat_aset->id_aset = $aset->id;
         $riwayat_aset->save();

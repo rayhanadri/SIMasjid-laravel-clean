@@ -1,13 +1,5 @@
 @include('layouts.header')
 @include('layouts.navbar')
-<!-- Main Content -->
-<!-- <script type="text/javascript" src="{{asset('public/dist/assets/js/page/bootstrap-modal.js')}}"></script> -->
-<?php
-//check permission pengelola
-$permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
-//hide untuk selain sekretaris dan ketua
-// $inside_pengelola = in_array(Auth::user()->id, $list_pengelola);
-?>
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -19,6 +11,7 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
         @include('aset.menu_aset')
         <div class="section-header">
             <h1 style="margin:auto;"><i class="fa fa-table"></i> Data Aset</h1>
+            <div></div>
         </div>
         <div class="section-body" style="min-height: 800px;">
             @include('aset.data_tab')
@@ -33,55 +26,81 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
             @endif
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div id="filter-box">
-                        <div class="card-body">
-                            <div id="filter-lokasi" style="margin:10px"></div>
-                        </div>
+                    </br>
+                    <div id="tanggal">
+                        Tanggal Laporan: {{ now()->isoFormat('LLLL') }}
                     </div>
+                    </br>
                     <table id="table_aset" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <!-- <th>-</th> -->
-                                <th id="th_no_aset">No</th>
-                                <th id="th_kode_aset">Kode Aset</th>
-                                <th id="th_nama_aset">Nama Barang</th>
-                                <th id="th_kategori_aset">Kategori</th>
-                                <th id="th_pencatatan">Tanggal Pendaftaran</th>
-                                <th id="th_last_update">Tanggal Update Terakhir</th>
-                                <th id="th_merek_aset">Merek</th>
-                                <th id="th_tipe_aset">Tipe</th>
-                                <th id="th_status_aset">Status</th>
-                                <th id="th_lokasi_aset">Lokasi</th>
-                                <th id="th_action_aset" style="width:6em;">Action</th>
+                                <th id="no">No</th>
+                                <th id="th_kondisi_aset">Kondisi Aset</th>
+                                <th id="th_jumlah_aset">Jumlah</th>
+                                <th id="th_nilai_aset">Total Nilai</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($asetGroup as $aset)
-                            <tr data-child-value="{{ $aset->id }}">
-                                <!-- <td class="details-control"></td> -->
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $aset->kode }}</td>
-                                <td>{{ $aset->katalog->nama_barang }}</td>
-                                @if ($aset->katalog->kategori != null)
-                                <td>{{ $aset->katalog->kategori->nama }}</td>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="https://beta2.simasjid.my.id/aset/status/baik">Baik</a></td>
+                                <td>{{ $aset_baik[0]->jumlah }}</td>
+                                @if( $aset_baik[0]->nilai == NULL)
+                                <td class="td_nilai_aset">0</td>
                                 @else
-                                <td>-</td>
+                                <td class="td_nilai_aset">{{ $aset_baik[0]->nilai }}</td>
                                 @endif
-                                <td>{{ $aset->tgl_pendaftaran->isoFormat('LL') }}</td>
-                                <td>{{ $aset->tgl_diperbarui->isoFormat('LL') }}</td>
-                                <td>{{ $aset->merek }}</td>
-                                <td>{{ $aset->tipe }}</td>
-                                <td>{{ $aset->status }}</td>
-                                @if ($aset->lokasi != null)
-                                <td>{{ $aset->lokasi->nama }}</td>
-                                @else
-                                <td>-</td>
-                                @endif
-                                <td>
-                                    <a class="btn btn-icon icon-left btn-info" href="{{ route('home').'/aset/detail/'.$aset->id }}"><i class="fas fa-info-circle"></i> Detail</a>
-                                </td>
                             </tr>
-                            @endforeach
+                            <tr>
+                                <td>2</td>
+                                <td><a href="https://beta2.simasjid.my.id/aset/status/rusak">Rusak</a></td>
+                                <td>{{ $aset_rusak[0]->jumlah }}</td>
+                                @if( $aset_rusak[0]->nilai == NULL)
+                                <td class="td_nilai_aset">0</td>
+                                @else
+                                <td class="td_nilai_aset">{{ $aset_rusak[0]->nilai }}</td>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="https://beta2.simasjid.my.id/aset/status/diperbaiki">Diperbaiki</a></td>
+                                <td>{{ $aset_diperbaiki[0]->jumlah }}</td>
+                                @if( $aset_diperbaiki[0]->nilai == NULL)
+                                <td class="td_nilai_aset">0</td>
+                                @else
+                                <td class="td_nilai_aset">{{ $aset_diperbaiki[0]->nilai }}</td>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><a href="https://beta2.simasjid.my.id/aset/status/dipinjam">Dipinjam</a></td>
+                                <td>{{ $aset_dipinjam[0]->jumlah }}</td>
+                                @if( $aset_dipinjam[0]->nilai == NULL)
+                                <td class="td_nilai_aset">0</td>
+                                @else
+                                <td class="td_nilai_aset">{{ $aset_dipinjam[0]->nilai }}</td>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><a href="https://beta2.simasjid.my.id/aset/status/dilepas">Dilepas</a></td>
+                                <td>{{ $aset_dilepas[0]->jumlah }}</td>
+                                @if( $aset_dilepas[0]->nilai == NULL)
+                                <td class="td_nilai_aset">0</td>
+                                @else
+                                <td class="td_nilai_aset">{{ $aset_dilepas[0]->nilai }}</td>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><b>Total Aset Aktif (tidak termasuk aset yang dilepas)</b></td>
+                                <td>{{ $aset_aktif[0]->jumlah }}</td>
+                                @if( $aset_aktif[0]->nilai == NULL)
+                                <td class="td_nilai_aset">0</td>
+                                @else
+                                <td class="td_nilai_aset">{{ $aset_aktif[0]->nilai }}</td>
+                                @endif
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -96,10 +115,32 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
 </script>
 
 <script type="text/javascript">
+    function printDiv(id) {
+        var div_id = "qr-label-" + id;
+        var input_print = "print-input-qr-" + id;
+        var num = document.getElementById(input_print).value;
+        if (num == null || num == 0 || num < 0) {
+            num = 1;
+        }
+        var divToPrint = document.getElementById(div_id);
+        var newWin = window.open('', 'Print-window');
+        newWin.document.open();
+        newWin.document.write('<html><body onload="window.print()">');
+        for (i = 0; i < num; i++) {
+            newWin.document.write(divToPrint.innerHTML);
+        }
+        newWin.document.write('</body></html>');
+
+        newWin.document.close();
+        setTimeout(function() {
+            newWIn.close();
+        }, 10);
+    }
+
     //document function
     $(document).ready(function() {
         $("#menu_index").addClass("active");
-        $("#katalog-tab").addClass("active");
+        $("#laporan-tab").addClass("active");
         $(".custom-select").css('width', '82px');
 
         $('form').submit(function() {
@@ -132,18 +173,17 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
             buttons: [{
                     extend: 'pdfHtml5',
                     text: '<i class="fa fa-file-pdf"></i> PDF',
-                    messageTop: 'Data Aset',
-                    orientation: 'landscape',
+                    messageTop: 'Laporan Data Aset',
                     exportOptions: {
-                        columns: [1, 2, 3, 4, 5, 6, 7]
+                        columns: [0, 1, 2]
                     }
                 },
                 {
                     extend: 'print',
                     text: '<i class="fa fa-print"></i> Print',
-                    messageTop: 'Data Aset',
+                    messageTop: 'Laporan Data Aset',
                     exportOptions: {
-                        columns: [1, 2, 3, 4, 5, 6, 7]
+                        columns: [0, 1, 2]
                     },
                     customize: function(win) {
 
@@ -151,7 +191,7 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
                         var current = null;
                         var bod = [];
 
-                        var css = '@page { size: landscape; }',
+                        var css = '@page { size: potrait; }',
                             head = win.document.head || win.document.getElementsByTagName('head')[0],
                             style = win.document.createElement('style');
 
@@ -181,29 +221,21 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
                 //kriteria column 0 nama tipe select
                 this.api().columns([1]).every(function() {
                     var column = this;
-                    var input = $('<input class="form-control" placeholder="Kode Aset" style="margin-bottom:10px;"></input>')
-                        .appendTo($("#filter-kode"))
-                        .on('keyup change clear', function() {
-                            if (column.search() !== this.value) {
-                                column
-                                    .search(this.value)
-                                    .draw();
-                            }
+                    var select = $('<select class="form-control select2" id="select2-nama-barang" style="margin: 5px; width:100%;"><option value="">Nama Barang</option></select>')
+                        .appendTo($("#filter-nama"))
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
                         });
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
                 });
                 this.api().columns([2]).every(function() {
-                    var column = this;
-                    var input = $('<input class="form-control" placeholder="Nama Barang" style="margin-bottom:10px;"></input>')
-                        .appendTo($("#filter-nama"))
-                        .on('keyup change clear', function() {
-                            if (column.search() !== this.value) {
-                                column
-                                    .search(this.value)
-                                    .draw();
-                            }
-                        });
-                });
-                this.api().columns([3]).every(function() {
                     var column = this;
                     var select = $('<select class="form-control select2" id="select2-kategori" style="margin: 5px; width:100%;"><option value="">Kategori Aset</option></select>')
                         // .appendTo($(column.header()).empty())
@@ -220,10 +252,10 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
                         select.append('<option value="' + d + '">' + d + '</option>')
                     });
                 });
-                this.api().columns([4]).every(function() {
+                this.api().columns([3]).every(function() {
                     var column = this;
-                    var input = $('<input class="form-control" placeholder="Pencatatan" style="margin-bottom:10px;"></input>')
-                        .appendTo($("#filter-pencatatan"))
+                    var input = $('<input class="form-control" placeholder="Jumlah" style="margin-bottom:10px;"></input>')
+                        .appendTo($("#filter-jumlah"))
                         .on('keyup change clear', function() {
                             if (column.search() !== this.value) {
                                 column
@@ -232,86 +264,6 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
                             }
                         });
                 });
-                this.api().columns([5]).every(function() {
-                    var column = this;
-                    var input = $('<input class="form-control" placeholder="Merek" style="margin-bottom:10px;"></input>')
-                        .appendTo($("#filter-merek"))
-                        .on('keyup change clear', function() {
-                            if (column.search() !== this.value) {
-                                column
-                                    .search(this.value)
-                                    .draw();
-                            }
-                        });
-                });
-                this.api().columns([6]).every(function() {
-                    var column = this;
-                    var input = $('<input class="form-control" placeholder="Tipe/Model" style="margin-bottom:10px;"></input>')
-                        .appendTo($("#filter-tipe"))
-                        .on('keyup change clear', function() {
-                            if (column.search() !== this.value) {
-                                column
-                                    .search(this.value)
-                                    .draw();
-                            }
-                        });
-                });
-                this.api().columns([7]).every(function() {
-                    var column = this;
-                    var select = $('<select class="form-control select2" id="select2-status" style="margin-bottom:10px; width:100%;"><option value = "">Status</option></select>')
-                        // .appendTo($(column.header()).empty())
-                        .appendTo($("#filter-status"))
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
-                    column.data().unique().sort().each(function(d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                    });
-                });
-                this.api().columns([9]).every(function() {
-                    var column = this;
-                    var select = $('<select class="form-control select2" id="select2-lokasi" style="margin-bottom:10px; width:100%;"><option value = "">Lokasi</option></select>')
-                        // .appendTo($(column.header()).empty())
-                        .appendTo($("#filter-lokasi"))
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
-                    column.data().unique().sort().each(function(d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                    });
-                });
-            }
-        });
-
-        $('#table_aset').on('click', 'td.details-control', function() {
-            var tr = $(this).closest('tr');
-            var row = table.row(tr);
-
-            if (row.child.isShown()) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            } else {
-                // Open this row
-                row.child(format(tr.data('child-value'))).show();
-                tr.addClass('shown');
-                $('.nilai_aset').autoNumeric('init', {
-                    aSep: '.',
-                    aDec: ',',
-                    aSign: 'Rp. ',
-                    mDec: '0'
-                });
-
             }
         });
 
@@ -324,7 +276,7 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
         if ($(window).width() <= 595) {
             $('#th_kategori_aset').hide();
             $('#th_status_aset').hide();
-            table.columns([1, 4, 5, 6, 7]).visible(false);
+            // table.columns([1, 4, 5, 6, 7]).visible(false);
             $('.section-body').css({
                 "padding": "0px"
             });
@@ -332,7 +284,7 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
 
         //tab or mobile landscape
         if ($(window).width() < 1280 && $(window).width() > 480) {
-            table.columns([6, 7]).visible(false);
+            // table.columns([6, 7]).visible(false);
         }
     });
     /* open action button listener */
@@ -412,7 +364,8 @@ $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->check
     $(".td_nilai_aset").autoNumeric('init', {
         aSep: '.',
         aDec: ',',
-        aSign: 'Rp. '
+        aSign: 'Rp. ',
+        mDec: '0'
     });
 </script>
 @include('layouts.footer')

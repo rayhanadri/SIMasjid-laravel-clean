@@ -42,19 +42,20 @@
 <!-- Page Specific JS File -->
 <script type="text/javascript">
   //dark-mode
+  $(document).on("click", "#dark-mode-switch", function() {
+    $('body').toggleClass('dark-mode');
+    $('.section-body').toggleClass('dark-mode');
+    $('.section-header').toggleClass('dark-mode');
+    $('.main-footer').toggleClass('white-font');
+    $('tr').toggleClass('dark-mode');
+    $('th').toggleClass('dark-mode');
+    $('th').toggleClass('white-font');
+    $('h1').toggleClass('white-font');
+    $('table').toggleClass('dark-mode');
+    // }
+  });
   $(document).ready(function() {
-    $(document).on("click", "#dark-mode-switch", function() {
-      $('body').toggleClass('dark-mode');
-      $('.section-body').toggleClass('dark-mode');
-      $('.section-header').toggleClass('dark-mode');
-      $('.main-footer').toggleClass('white-font');
-      $('tr').toggleClass('dark-mode');
-      $('th').toggleClass('dark-mode');
-      $('th').toggleClass('white-font');
-      $('h1').toggleClass('white-font');
-      $('table').toggleClass('dark-mode');
-      // }
-    });
+
     // $("#dark-mode-btn").toggle(function() {
     //   alert("First handler for .toggle() called.");
     // }, function() {

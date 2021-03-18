@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function () {
         Route::post('anggota/verifikasi/terima', 'Anggota\VerifikasiController@terima')->name('anggotaTerimaVerif');
 
         //anggota pengelola aset
-        Route::get('anggota/pengelola-aset', 'Anggota\PengelolaAsetController@index')->name('anggotaPengelolaAset');
-        Route::post('anggota/pengelola-aset/delete', 'Anggota\PengelolaAsetController@delete')->name('anggotaPengelolaAsetDelete');
-        Route::post('anggota/pengelola-aset/add', 'Anggota\PengelolaAsetController@create')->name('anggotaPengelolaAsetCreate');
+        Route::get('aset/pengelola-aset', 'Aset\PengelolaAsetController@index')->name('asetPengelolaAset');
+        Route::post('aset/pengelola-aset/delete', 'Aset\PengelolaAsetController@delete')->name('asetPengelolaAsetDelete');
+        Route::post('aset/pengelola-aset/add', 'Aset\PengelolaAsetController@create')->name('asetPengelolaAsetCreate');
 
         //route aset
         Route::get('aset', 'Aset\AsetController@index')->name('asetIndex');
@@ -50,7 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::post('aset/updateStatus', 'Aset\AsetController@updateStatus')->name('asetUpdateStatus');
         Route::post('aset/delete', 'Aset\AsetController@delete')->name('asetDelete');
         Route::post('aset/updateFoto', 'Aset\AsetController@updateFoto')->name('asetUpdateFoto');
-        Route::get('aset/testing', 'Aset\AsetController@testing')->name('asetTesting');
+        Route::get('aset/laporan', 'Aset\AsetController@laporan')->name('asetLaporan');
+        // Route::get('aset/testing', 'Aset\AsetController@testing')->name('asetTesting');
 
         //route aset tracking
         Route::get('aset/tracking', 'Aset\TrackingController@trackingForm')->name('asetTracking');
@@ -65,15 +66,16 @@ Route::middleware('auth')->group(function () {
         Route::post('read_notif_json', 'NotifikasiController@read')->name('notifReadJSON');
 
         //route data metadata
-        Route::get('aset/metadata', 'Aset\MetadataController@indexKategori')->name('metadataIndexKategori');
-        Route::post('aset/metadata/kategori/create', 'Aset\MetadataController@createKategori')->name('metadataKategoriCreate');
-        Route::post('aset/metadata/kategori/update', 'Aset\MetadataController@updateKategori')->name('metadataKategoriUpdate');
-        Route::post('aset/metadata/kategori/delete', 'Aset\MetadataController@deleteKategori')->name('metadataKategoriDelete');
-        Route::get('aset/metadata/lokasi', 'Aset\MetadataController@indexLokasi')->name('metadataIndexLokasi');
+        // Route::get('aset/metadata', 'Aset\MetadataController@indexKategori')->name('metadataIndexKategori');
+        Route::get('aset/metadata/{jenis_metadata}', 'Aset\MetadataController@index')->name('metadataIndex');
+        Route::post('aset/metadata/kategori/create', 'Aset\MetadataController@create')->name('metadataCreate');
+        Route::post('aset/metadata/kategori/update', 'Aset\MetadataController@update')->name('metadataUpdate');
+        Route::post('aset/metadata/kategori/delete', 'Aset\MetadataController@delete')->name('metadataDelete');
+        // Route::get('aset/metadata/lokasi', 'Aset\MetadataController@indexLokasi')->name('metadataIndexLokasi');
         Route::post('aset/metadata/lokasi/create', 'Aset\MetadataController@createLokasi')->name('metadataLokasiCreate');
         Route::post('aset/metadata/lokasi/update', 'Aset\MetadataController@updateLokasi')->name('metadataLokasiUpdate');
         Route::post('aset/metadata/lokasi/delete', 'Aset\MetadataController@deleteLokasi')->name('metadataLokasiDelete');
-        Route::get('aset/metadata/katalog', 'Aset\MetadataController@indexKatalog')->name('metadataIndexKatalog');
+        // Route::get('aset/metadata/katalog', 'Aset\MetadataController@indexKatalog')->name('metadataIndexKatalog');
         Route::post('aset/metadata/katalog/create', 'Aset\MetadataController@createKatalog')->name('metadataKatalogCreate');
         Route::post('aset/metadata/katalog/update', 'Aset\MetadataController@updateKatalog')->name('metadataKatalogUpdate');
         Route::post('aset/metadata/katalog/delete', 'Aset\MetadataController@deleteKatalog')->name('metadataKatalogDelete');

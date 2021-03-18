@@ -92,7 +92,8 @@ class UsulanController extends Controller
         $usulan->status = "Diproses";
         $usulan->tgl_diperbarui = now();
         $usulan->save();
-        return redirect(route('asetUsulanIndexDiproses'));
+        $url = route('home').'/aset/usulan/status/diproses';
+        return redirect($url);
     }
 
     public function selesai(Request $request)
@@ -105,7 +106,8 @@ class UsulanController extends Controller
         $usulan->status = "Selesai";
         $usulan->tgl_diperbarui = now();
         $usulan->save();
-        return redirect(route('asetUsulanIndexSelesai'));
+        $url = route('home').'/aset/usulan/status/selesai';
+        return redirect($url);
     }
 
     public function tolak(Request $request)
@@ -121,7 +123,8 @@ class UsulanController extends Controller
         }
         $usulan->save();
 
-        return redirect(route('asetUsulanIndexDitolak'));
+        $url = route('home').'/aset/usulan/status/ditolak';
+        return redirect($url);
     }
 
     public function batal(Request $request)
@@ -137,6 +140,7 @@ class UsulanController extends Controller
         }
         $usulan->save();
 
-        return redirect(route('asetUsulanIndexDibatalkan'));
+        $url = route('home').'/aset/usulan/status/dibatalkan';
+        return redirect($url);
     }
 }
