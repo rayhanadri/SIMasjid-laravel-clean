@@ -10,8 +10,10 @@
 <blockquote>
 <p><a href="http://clean.simasjid.my.id">http://clean.simasjid.my.id</a></p>
 </blockquote>
-<p>| username: ketua<br>
-| password: password</p>
+<blockquote>
+<p>karena alasan keamanan silakan minta login demo ke pemilik repository</p>
+</blockquote>
+
 <h1 id="modul---fitur-tersedia">Modul &amp;  Fitur Tersedia</h1>
 <ul>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> Full Autentikasi (Login, Logout, Register, dan Reset Password)</li>
@@ -53,15 +55,15 @@ DB_PASSWORD=</p>
 <h2 id="setting-reset-password">Setting Reset Password</h2>
 <ol>
 <li>Buka file .env di direktori project laravel</li>
-<li>Ubah line 26-31 jadi seperti berikut</li>
-</ol>
+<li>Ubah line bagian mail driver sesuai dengan setting email SMTP</li>
+<ol>
 <blockquote>
-<p>MAIL_DRIVER=smtp<br>
-MAIL_HOST=<a href="http://smtp.gmail.com">smtp.gmail.com</a><br>
+MAIL_DRIVER=smtp<br>
+MAIL_HOST=nama.host.com<br>
 MAIL_PORT=465<br>
-<a href="mailto:MAIL_USERNAME=simasjid.ibnusina@gmail.com">MAIL_USERNAME=simasjid.ibnusina@gmail.com</a><br>
-MAIL_PASSWORD=emzbwvjgjstdyuqx<br>
-MAIL_ENCRYPTION=ssl</p>
+MAIL_USERNAME=alama_email@host.com<br>
+MAIL_PASSWORD=password_email<br>
+MAIL_ENCRYPTION=ssl<br>
 </blockquote>
 <h1 id="errors">Errors</h1>
 <h2 id="gambar-tidak-ter-load-error-filemtime-error-navbar-profile-picture">Gambar tidak ter-load, error filemtime, error navbar profile picture</h2>
