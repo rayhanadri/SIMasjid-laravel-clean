@@ -52,36 +52,42 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                         </ul>
                     </div>
                     @endif
-                    <table id="table_id" class="table table-striped table-bordered" style="padding-bottom:20px;">
-                        <thead>
-                            <tr>
-                                <th class="dt-center">No</th>
-                                <th class="dt-center">Nama</th>
-                                <th class="dt-center">Jabatan</th>
-                                <th class="dt-center">Status</th>
-                                <th class="dt-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($anggotaGroup as $anggota)
-                            <tr>
-                                <td class="dt-center">{{ $loop->iteration }}</td>
-                                <td>{{ $anggota->nama }}</td>
-                                <td>{{ $anggota->jabatan }}</td>
-                                <td class="font-status">{!!$anggota->status!!}</td>
-                                <td class="dt-center">
-                                    <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
-                                        <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
-                                        @if($inside_sekretaris)
-                                        <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#updateModal"><i class="fas fa-edit"></i></i> Edit</a>
-                                        <!-- <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a> -->
-                                        @endif
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-action">
+                                <a href="#" data-toggle="modal" data-target="#addModal" class="btn btn-danger">Tambah Pekerjaan <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="table_id" class="table table-striped table-bordered" style="padding-bottom:20px;">
+                            <thead>
+                                <tr>
+                                    <th class="dt-center">No</th>
+                                    <th class="dt-center">Nama</th>
+                                    <th class="dt-center">Deskripsi</th>
+                                    <th class="dt-center">PJ</th>
+                                    <th class="dt-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pekerjaanGroup as $pekerjaan)
+                                <tr>
+                                    <td class="dt-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $pekerjaan->nama }}</td>
+                                    <td>{{ $pekerjaan->deskripsi }}</td>
+                                    <td>{{ $pekerjaan->penanggung_jawab->nama }}</td>
+                                    <td class="dt-center">
+                                        <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
+                                            <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $pekerjaan->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -89,46 +95,64 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
 </div>
 
 <!-- Modal Detail -->
-<div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="detailModal">
+    <div class="modal-dialog custom-modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Detail Akun Anggota</h5>
+                <h5 class="modal-title">Pekerjaan 1</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <img src="" id="detailFoto" class="img-thumbnail rounded mx-auto d-block" alt="foto profil" style="max-width:250px; overflow: hidden;">
-                <table class="table table-borderless" style="width:90%; margin: auto;">
-                    <tbody>
-                        <tr>
-                            <th scope="row">Nama</th>
-                            <td id="detailNama"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Jabatan</th>
-                            <td id="detailJabatan"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Status</th>
-                            <td class="font-status" id="detailStatus"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Email</th>
-                            <td id="detailEmail"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Alamat</th>
-                            <td id="detailAlamat"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Telp/HP</th>
-                            <td id="detailTelp"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- <input type="text" id="id" name="id" value="" hidden/> -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                        <form method="post" class="needs-validation" novalidate="">
+                            <div class="card">
+                            <!-- <div class="card-header">
+                                <h4>Pekerjaan 1</h4>
+                            </div> -->
+                            <div class="card-body pb-0">
+                                <div class="form-group">
+                                    <label>Deskripsi Pekerjaan : </label><br>
+                                    <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                </div>
+                            </div>
+                            <div class="card-footer pt-0">
+                                <button class="btn btn-primary">Save Draft</button>
+                            </div>
+                            </div>
+                        </form>
+                        </div>
+                    <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Aktifitas Terakhir</h4>
+                                <div class="card-header-action">
+                                    <a href="#" data-toggle="modal" data-target="#addProgressModal" class="btn btn-primary">Tambah laporan</a>
+                                </div>
+                            </div>
+                            <div class="card-body">             
+                            <ul class="list-unstyled list-unstyled-border">
+                                <li class="media">
+                                <img class="mr-3 rounded-circle" src="assets/img/avatar/avatar-1.png" alt="avatar" width="50">
+                                <div class="media-body">
+                                    <div class="float-right text-primary">Now</div>
+                                    <div class="media-title">Farhan A Mujib</div>
+                                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                                </div>
+                                </li>
+                                
+                            </ul>
+                            <div class="text-center pt-1 pb-1">
+                                <!-- <a href="#" class="btn btn-primary btn-lg btn-round">
+                                View All
+                                </a> -->
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
             </div>
             <div class="modal-footer bg-whitesmoke br">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -137,6 +161,86 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
     </div>
 </div>
 
+
+<div class="modal fade" tabindex="-1" role="dialog" id="addProgressModal">
+    <div class="modal-dialog" role="document">
+        <!-- Modal Tambah Pekerjaan -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Data Pekerjaan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addFormPekerjaanPekerjaan" action="{{ route('musyawarahAddProgressPekerjaan') }}" method="post">
+                @csrf
+                    <table class="table table-borderless" style="width:100%; margin: auto;">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Progress Pekerjaan</th>
+                                <td><input name="nama_pekerjaan" id="nama_pekerjaan" class="form-control" required /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+    <div class="modal-dialog" role="document">
+        <form id="addPekerjaan" action="{{ route('musyawarahAddPekerjaan') }}" method="post">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Data Pekerjaan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-borderless" style="width:90%; margin: auto;">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Nama Pekerjaan</th>
+                                <td><input name="nama_pekerjaan" id="nama_pekerjaan" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Deskripsi</th>
+                                <td><input name="deskripsi_pekerjaan" id="deskripsi_pekerjaan" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Status</th>
+                                <td><select class="form-control select" required>
+                                        <option value="Menunggu Persetujuan">Menunggu Persetujuan</option>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Penanggung Jawab</th>
+                                <td><select id="penanggung_jawab" name="penanggung_jawab" class="form-control select" required>
+                                        @foreach ($anggotaGroup as $anggota)
+                                        <option value="{{ $anggota->id }}">{{ $anggota->nama }}</option>
+                                        @endforeach
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <!-- Modal Delete -->
 <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
     <div class="modal-dialog" role="document">

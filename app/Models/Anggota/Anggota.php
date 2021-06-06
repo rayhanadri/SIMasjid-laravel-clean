@@ -10,7 +10,7 @@ class Anggota extends Authenticatable
 {
     use Notifiable;
     protected $table = 'anggota';
-
+    protected $connection = 'mysql';
     protected $fillable = [
         'id', 'username', 'password', 'nama', 'alamat', 'telp', 'email', 'link_foto', 'id_status', 'id_jabatan'
     ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Musyawarah;
 
 use App\Models\Anggota\Anggota;
+use App\Models\Musyawarah\Pekerjaan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
@@ -28,11 +29,45 @@ class MusyawarahController extends Controller
     {
         //semua user, composite object
         $anggotaGroup = Anggota::get()->where('id_status', '!=', self::UNVERIFIED_MEMBER);
+        $pekerjaanGroup = Pekerjaan::all();
 
         //retval
-        return view('musyawarah.pekerjaan', ['anggotaGroup' => $anggotaGroup]);
+        return view('musyawarah.pekerjaan', ['anggotaGroup' => $anggotaGroup,'pekerjaanGroup'=>$pekerjaanGroup]);
     }
 
+    public function addPekerjaan(Request $request)
+    {
+        //semua user, composite object
+        $nama_pekerjaan = $request->nama_pekerjaan;
+        $deskripsi_pekerjaan = $request->deskripsi_pekerjaan;
+        $penanggung_jawab = $request->penanggung_jawab;
+
+        Pekerjaan::create([
+            'nama' => $nama_pekerjaan,
+            'deskripsi' => $deskripsi_pekerjaan,
+            'id_anggota' => $penanggung_jawab
+        ]);
+
+        //retval
+        return redirect(route('musyawarahPekerjaan'));
+    }
+
+    public function addProgressPekerjaan(Request $request)
+    {
+        // //semua user, composite object
+        // $nama_pekerjaan = $request->nama_pekerjaan;
+        // $deskripsi_pekerjaan = $request->deskripsi_pekerjaan;
+        // $penanggung_jawab = $request->penanggung_jawab;
+
+        // Pekerjaan::create([
+        //     'nama' => $nama_pekerjaan,
+        //     'deskripsi' => $deskripsi_pekerjaan,
+        //     'id_anggota' => $penanggung_jawab
+        // ]);
+
+        // //retval
+        // return redirect(route('musyawarahPekerjaan'));
+    }
     // //CONSTANT VALUES FOR MEMBER JABATAN
     // public const KETUA = 1;
     // public const SEKRETARIS = 2;

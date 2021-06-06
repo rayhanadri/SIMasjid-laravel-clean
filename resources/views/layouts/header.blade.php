@@ -113,4 +113,8 @@
     background: no-repeat url("https://beta2.simasjid.my.id/public/search.png");
   }
 
+  .custom-modal-lg {
+    min-width:0px;
+    max-width:1200px;
+  }
 </style>
