@@ -99,7 +99,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
     <div class="modal-dialog custom-modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Pekerjaan 1</h5>
+                <h5 id="detail-title-pekerjaan" class="modal-title">Pekerjaan 1 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -114,8 +114,8 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                             </div> -->
                             <div class="card-body pb-0">
                                 <div class="form-group">
-                                    <label>Deskripsi Pekerjaan : </label><br>
-                                    <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                    <label><div id="detail-status" class="badge badge-pill badge-warning mb-1 float-right">Completed</div></label><br>
+                                    <span id="detail-keterangan"></span>
                                 </div>
                             </div>
                             <div class="card-footer pt-0">
@@ -127,20 +127,20 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                     <div class="col-lg-8 col-md-12 col-12 col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Aktifitas Terakhir</h4>
+                                <h4>Aktivitas Terakhir</h4>
                                 <div class="card-header-action">
-                                    <a href="#" data-toggle="modal" data-target="#addProgressModal" class="btn btn-primary">Tambah laporan</a>
+                                    <a href="#" data-toggle="modal" data-target="#addProgressModal" class="btn btn-primary tambah-progress">Tambah progress</a>
                                 </div>
                             </div>
                             <div class="card-body">             
-                            <ul class="list-unstyled list-unstyled-border">
+                            <ul id="detail-list-progress" class="list-unstyled list-unstyled-border">
                                 <li class="media">
-                                <img class="mr-3 rounded-circle" src="assets/img/avatar/avatar-1.png" alt="avatar" width="50">
-                                <div class="media-body">
-                                    <div class="float-right text-primary">Now</div>
-                                    <div class="media-title">Farhan A Mujib</div>
-                                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                                </div>
+                                    <img class="mr-3 rounded-circle" src="assets/img/avatar/avatar-1.png" alt="avatar" width="50">
+                                    <div class="media-body">
+                                        <div class="float-right text-primary">Now</div>
+                                        <div class="media-title">Farhan A Mujib</div>
+                                        <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                                    </div>
                                 </li>
                                 
                             </ul>
@@ -166,29 +166,29 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
     <div class="modal-dialog" role="document">
         <!-- Modal Tambah Pekerjaan -->
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Pekerjaan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="addFormPekerjaanPekerjaan" action="{{ route('musyawarahAddProgressPekerjaan') }}" method="post">
-                @csrf
+            <form id="addFormPekerjaanPekerjaan" action="{{ route('musyawarahAddProgressPekerjaan') }}" method="post">
+            @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">Progress Pekerjaan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
                     <table class="table table-borderless" style="width:100%; margin: auto;">
                         <tbody>
                             <tr>
-                                <th scope="row">Progress Pekerjaan</th>
-                                <td><input name="nama_pekerjaan" id="nama_pekerjaan" class="form-control" required /></td>
+                                <td><input name="progress" id="progress" class="form-control" required /></td>
                             </tr>
                         </tbody>
                     </table>
-                </form>
-            </div>
-            <div class="modal-footer bg-whitesmoke br">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
-            </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <input type="text" id="id_progress_pekerjaan" name="id_progress_pekerjaan" value="" hidden />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <input type="submit" value="Simpan" class="btn btn-primary submit-btn" />
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -453,28 +453,57 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         });
     });
     // onclick btn detail, show modal
+    let data_index = "";
+    $(document).on("click", ".tambah-progress", function() {
+        console.log("data_index 1", data_index);
+        $("#id_progress_pekerjaan").val(data_index);
+    });
     $(document).on("click", ".open-detail", function() {
         /* passing data dari view button detail ke modal */
         var thisDataAnggota = $(this).data('id');
         // $(".modal-body #id").val(thisDataAnggota);
-        var linkDetail = "{{ route('home') }}/anggota/detail/" + thisDataAnggota;
+        var linkDetail = "{{ route('home') }}/musyawarah/pekerjaan/detail/" + thisDataAnggota;
         $.get(linkDetail, function(data) {
             //deklarasi var obj JSON data detail anggota
             var obj = data;
+            console.log("obj", obj)
+            $("#detail-status").html(obj.status)
+            $("#detail-title-pekerjaan").html(obj.nama+" ")
+            $("#detail-keterangan").html(obj.deskripsi+" ")
+            
+            data_index = obj.id;
+            console.log("data_index", data_index)
+            let progress = obj.progress;
+            let html_progress = ""
+            
+            for (let index = 0; index < progress.length; index++) {
+                const element = progress[index];
+                let link_foto = "{{ route('home') }}/" + element.pembuat_progress.link_foto;
+                let text_html = '<li class="media">'+
+                '<img class="mr-3 rounded-circle" src="'+link_foto+'" alt="avatar" width="50">'+
+                '<div class="media-body">'+
+                '<div class="float-right text-primary">'+element.created_at+'</div>'+
+                '<div class="media-title">'+element.pembuat_progress.nama+'</div>'+
+                '<span class="text-small text-muted">'+element.keterangan+'</span>'+
+                '</div>'+
+                '</li>'
+                html_progress += text_html;
+            }
+            $("#detail-list-progress").html(html_progress)
             // ganti elemen pada dokumen html dengan hasil data json dari jquery
-            $("#detailNama").html(obj.nama);
-            $("#detailJabatan").html(obj.jabatan);
-            $("#detailStatus").html(obj.status);
-            $("#detailEmail").html(obj.email);
-            $("#detailAlamat").html(obj.alamat);
-            $("#detailTelp").html(obj.telp);
+            // $("#detailNama").html(obj.nama);
+            // $("#detailJabatan").html(obj.jabatan);
+            // $("#detailStatus").html(obj.status);
+            // $("#detailEmail").html(obj.email);
+            // $("#detailAlamat").html(obj.alamat);
+            // $("#detailTelp").html(obj.telp);
 
-            //base root project url + url dari db
-            var link_foto = "{{ route('home') }}/" + obj.link_foto;
-            $("#detailFoto").attr('src', link_foto);
-            // console.log(link_foto);
+            // //base root project url + url dari db
+            // var link_foto = "{{ route('home') }}/" + obj.link_foto;
+            // $("#detailFoto").attr('src', link_foto);
+            // // console.log(link_foto);
 
-            status_colorized()
+            // status_colorized()
         });
     });
     $(document).ready(function() {

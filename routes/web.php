@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::get('musyawarah', 'Musyawarah\MusyawarahController@index')->name('musyawarahIndex');
         Route::get('musyawarah/pekerjaan', 'Musyawarah\MusyawarahController@pekerjaan')->name('musyawarahPekerjaan');
         Route::post('musyawarah/pekerjaan/add', 'Musyawarah\MusyawarahController@addPekerjaan')->name('musyawarahAddPekerjaan');
+        Route::get('musyawarah/pekerjaan/detail/{id}', 'Musyawarah\MusyawarahController@getDetailPekerjaan')->name('musyawarahgetDetailPekerjaan');
         Route::post('musyawarah/pekerjaan/add/progress', 'Musyawarah\MusyawarahController@addProgressPekerjaan')->name('musyawarahAddProgressPekerjaan');
 
         //route keanggotaan

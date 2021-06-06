@@ -19,6 +19,7 @@ class CreateProgressPekerjaanTable extends Migration
             // $table->foreign('id_notulensi')->references('id')->on('notulensi')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('id_pekerjaan')->nullable();
             // $table->foreign('id_pekerjaan')->references('id')->on('pekerjaan')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_anggota')->nullable();
             $table->longText('keterangan')->nullable();
             $table->longText('masukkan')->nullable();
             $table->longText('keputusan')->nullable();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Musyawarah;
 
 use App\Models\Anggota\Anggota;
 use App\Models\Musyawarah\Pekerjaan;
+use App\Models\Musyawarah\ProgressPekerjaan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
@@ -54,19 +55,33 @@ class MusyawarahController extends Controller
 
     public function addProgressPekerjaan(Request $request)
     {
+        // dd($request);
         // //semua user, composite object
-        // $nama_pekerjaan = $request->nama_pekerjaan;
-        // $deskripsi_pekerjaan = $request->deskripsi_pekerjaan;
+        $progress = $request->progress;
+        $id_progress_pekerjaan = $request->id_progress_pekerjaan;
+        $penanggung_jawab = Auth::user()->id;
         // $penanggung_jawab = $request->penanggung_jawab;
 
-        // Pekerjaan::create([
-        //     'nama' => $nama_pekerjaan,
-        //     'deskripsi' => $deskripsi_pekerjaan,
-        //     'id_anggota' => $penanggung_jawab
-        // ]);
+        ProgressPekerjaan::create([
+            'keterangan' => $progress,
+            'id_pekerjaan' => $id_progress_pekerjaan,
+            'id_anggota' => $penanggung_jawab
+        ]);
 
         // //retval
-        // return redirect(route('musyawarahPekerjaan'));
+        return redirect(route('musyawarahPekerjaan'));
+    }
+
+    public function getDetailPekerjaan($id)
+    {
+        $pekerjaan = Pekerjaan::get()->where('id', $id)->first();
+        $pp = ProgressPekerjaan::where('id_pekerjaan', $id)->get();
+        for ($i=0; $i < count($pp); $i++) { 
+            $p = $pp[$i];
+            $p['creator'] = $p->pembuat_progress->nama;
+        }
+        $pekerjaan->progress = $pp;
+        return $pekerjaan;
     }
     // //CONSTANT VALUES FOR MEMBER JABATAN
     // public const KETUA = 1;
