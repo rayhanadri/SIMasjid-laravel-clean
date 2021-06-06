@@ -23,6 +23,11 @@ Route::middleware('auth')->group(function () {
     // group untuk anggota aktif
     Route::middleware('CheckStatus')->group(function () {
         Route::get('anggota', 'Anggota\AnggotaController@index')->name('anggotaIndex');
+        
+
+        //route musyawarah
+        Route::get('musyawarah', 'Musyawarah\MusyawarahController@index')->name('musyawarahIndex');
+        Route::get('musyawarah/pekerjaan', 'Musyawarah\MusyawarahController@pekerjaan')->name('musyawarahPekerjaan');
 
         //route keanggotaan
         Route::get('anggota', 'Anggota\AnggotaController@index')->name('anggotaIndex');
