@@ -18,26 +18,26 @@
 <!-- key bootstrap js integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="{{ asset('public/dist/assets/js/stisla.js') }}"></script>
+<script src="{{ asset('dist/assets/js/stisla.js') }}"></script>
 
 <!-- JS Libraries -->
 <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-<!-- <script src="{{ asset('public/dist/cleave.js/dist/cleave.min.js') }}"></script> -->
-<!-- <script src="{{ asset('public/dist/cleave.js/dist/addons/cleave-phone.us.js') }}"></script> -->
-<script src="{{ asset('public/dist/jquery-pwstrength/jquery.pwstrength.min.js') }}"></script>
-<script src="{{ asset('public/dist/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-<!-- <script src="{{ asset('public/dist/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script> -->
-<script src="{{ asset('public/dist/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
-<script src="{{ asset('public/dist/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
-<script src="{{ asset('public/dist/select2/dist/js/select2.full.min.js') }}"></script>
-<script src="{{ asset('public/dist/selectric/public/jquery.selectric.min.js') }}"></script>
-<script src="{{ asset('public/dist/summernote/dist/summernote-bs4.js') }}"></script>
+<!-- <script src="{{ asset('dist/cleave.js/dist/cleave.min.js') }}"></script> -->
+<!-- <script src="{{ asset('dist/cleave.js/dist/addons/cleave-phone.us.js') }}"></script> -->
+<script src="{{ asset('dist/jquery-pwstrength/jquery.pwstrength.min.js') }}"></script>
+<script src="{{ asset('dist/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+<!-- <script src="{{ asset('dist/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script> -->
+<script src="{{ asset('dist/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
+<script src="{{ asset('dist/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+<script src="{{ asset('dist/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('dist/selectric/public/jquery.selectric.min.js') }}"></script>
+<script src="{{ asset('dist/summernote/dist/summernote-bs4.js') }}"></script>
 
 <!-- Template JS File -->
-<script src="{{ asset('public/dist/assets/js/scripts.js') }}"></script>
-<!-- <script src="{{ asset('public/dist/assets/js/custom.js') }}"></script> -->
+<script src="{{ asset('dist/assets/js/scripts.js') }}"></script>
+<!-- <script src="{{ asset('dist/assets/js/custom.js') }}"></script> -->
 
 <!-- Page Specific JS File -->
 <script type="text/javascript">
