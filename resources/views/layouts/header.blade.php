@@ -24,17 +24,17 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href="{{ asset('public/dist/bootstrap-daterangepicker/daterangepicker.css') }}">
-  <link rel="stylesheet" href="{{ asset('public/dist/select2/dist/css/select2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('public/dist/selectric/public/selectric.css') }}">
-  <link rel="stylesheet" href="{{ asset('public/dist/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('public/dist/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/bootstrap-daterangepicker/daterangepicker.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/select2/dist/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/selectric/public/selectric.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
-  <link rel="stylesheet" href="{{ asset('public/dist/summernote/dist/summernote-bs4.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/summernote/dist/summernote-bs4.css') }}">
 
   <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('public/dist/assets/css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('public/dist/assets/css/components.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/assets/css/components.css') }}">
 
   <!-- jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
@@ -43,14 +43,14 @@
   <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 
   <!-- Icofont -->
-  <link rel="stylesheet" href="{{ asset('public/plugins/icofont/icofont.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/icofont/icofont.min.css') }}">
 
   <!-- Autonumeric JQuery -->
-  <script src="{{ asset('public/js/autoNumeric.js') }}" type="text/javascript"> </script>
+  <script src="{{ asset('js/autoNumeric.js') }}" type="text/javascript"> </script>
 
 
   <!-- JS image loader -->
-  <script src="{{ asset('public/js/load-image.all.min.js') }}" type="text/javascript"> </script>
+  <script src="{{ asset('js/load-image.all.min.js') }}" type="text/javascript"> </script>
 
   <!-- DataTables -->
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>

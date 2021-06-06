@@ -13,6 +13,13 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
+  'imanghafoori/laravel-masterpass' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Imanghafoori\\MasterPass\\MasterPassServiceProvider',
+    ),
+  ),
   'intervention/image' => 
   array (
     'providers' => 
