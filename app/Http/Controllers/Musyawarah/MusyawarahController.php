@@ -36,6 +36,16 @@ class MusyawarahController extends Controller
         return view('musyawarah.pekerjaan', ['anggotaGroup' => $anggotaGroup,'pekerjaanGroup'=>$pekerjaanGroup]);
     }
 
+    public function addNotulensi()
+    {
+        //semua user, composite object
+        $anggotaGroup = Anggota::get()->where('id_status', '!=', self::UNVERIFIED_MEMBER);
+        $pekerjaanGroup = Pekerjaan::all();
+
+        //retval
+        return view('musyawarah.add_notulensi', ['anggotaGroup' => $anggotaGroup,'pekerjaanGroup'=>$pekerjaanGroup]);
+    }
+
     public function addPekerjaan(Request $request)
     {
         //semua user, composite object

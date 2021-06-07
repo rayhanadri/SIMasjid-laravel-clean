@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
         //route musyawarah
         Route::get('musyawarah', 'Musyawarah\MusyawarahController@index')->name('musyawarahIndex');
+        Route::get('musyawarah/add', 'Musyawarah\MusyawarahController@addNotulensi')->name('musyawarahAdd');
         Route::get('musyawarah/pekerjaan', 'Musyawarah\MusyawarahController@pekerjaan')->name('musyawarahPekerjaan');
         Route::post('musyawarah/pekerjaan/add', 'Musyawarah\MusyawarahController@addPekerjaan')->name('musyawarahAddPekerjaan');
         Route::get('musyawarah/pekerjaan/detail/{id}', 'Musyawarah\MusyawarahController@getDetailPekerjaan')->name('musyawarahgetDetailPekerjaan');

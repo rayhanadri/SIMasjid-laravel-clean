@@ -52,36 +52,45 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                         </ul>
                     </div>
                     @endif
-                    <table id="table_id" class="table table-striped table-bordered" style="padding-bottom:20px;">
-                        <thead>
-                            <tr>
-                                <th class="dt-center">No</th>
-                                <th class="dt-center">Nama</th>
-                                <th class="dt-center">Jabatan</th>
-                                <th class="dt-center">Status</th>
-                                <th class="dt-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($anggotaGroup as $anggota)
-                            <tr>
-                                <td class="dt-center">{{ $loop->iteration }}</td>
-                                <td>{{ $anggota->nama }}</td>
-                                <td>{{ $anggota->jabatan }}</td>
-                                <td class="font-status">{!!$anggota->status!!}</td>
-                                <td class="dt-center">
-                                    <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
-                                        <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
-                                        @if($inside_sekretaris)
-                                        <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#updateModal"><i class="fas fa-edit"></i></i> Edit</a>
-                                        <!-- <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a> -->
-                                        @endif
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-action">
+                                <a href="{{ route('musyawarahAdd') }}" class="btn btn-danger">Tambah Notulensi <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="table_id" class="table table-striped table-bordered" style="padding-bottom:20px;">
+                                <thead>
+                                    <tr>
+                                        <th class="dt-center">No</th>
+                                        <th class="dt-center">Nama</th>
+                                        <th class="dt-center">Jabatan</th>
+                                        <th class="dt-center">Status</th>
+                                        <th class="dt-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($anggotaGroup as $anggota)
+                                    <tr>
+                                        <td class="dt-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $anggota->nama }}</td>
+                                        <td>{{ $anggota->jabatan }}</td>
+                                        <td class="font-status">{!!$anggota->status!!}</td>
+                                        <td class="dt-center">
+                                            <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
+                                                <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
+                                                @if($inside_sekretaris)
+                                                <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#updateModal"><i class="fas fa-edit"></i></i> Edit</a>
+                                                <!-- <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a> -->
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
