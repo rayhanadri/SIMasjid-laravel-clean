@@ -97,11 +97,25 @@
         add_to_list();
     });
 
+    $( "#submit-notulensi" ).click(function() {
+        console.log("click")
+        submit_notulensi();
+    });
+
+    
+
     $(document).on('click', '.delete-progress', function () {
       console.log("click")
       let id_delete = $(this).data("id-delete")
       deleting_list(id_delete)
     });
+
+    function submit_notulensi() {
+      let kehadiran_musyawarah = $("#kehadiran_musyawarah").select2("val")
+      kehadiran_musyawarah = kehadiran_musyawarah.join(",")
+      $("#all_kehadiran_id").val(kehadiran_musyawarah)
+      $("#form_notulensi").submit()
+    }
 
     let already_inserted_id = []
 
@@ -127,7 +141,7 @@
       console.log("option_pekerjaan_text", option_pekerjaan_text)
       console.log("option_pekerjaan_value", option_pekerjaan_value)
 
-      let progress_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+' <button data-id-delete="'+option_pekerjaan_value+'" style="float:right" class="btn btn-icon btn-sm btn-warning delete-progress"><i class="fas fa-times"></i></button> </div></div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="progress[]" class="form-control custom-textarea"></textarea></div>'
+      let progress_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+' <button data-id-delete="'+option_pekerjaan_value+'" style="float:right" class="btn btn-icon btn-sm btn-warning delete-progress"><i class="fas fa-times"></i></button> </div></div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="progress[]" class="form-control custom-textarea"></textarea> <input name="pekerjaan_id[]" type="text" value="'+option_pekerjaan_value+'" hidden></div>'
       $( "#body_progress" ).append(progress_html);
       let masukkan_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+'</div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="masukkan[]" class="form-control custom-textarea"></textarea></div>'
       $( "#body_masukkan" ).append(masukkan_html);

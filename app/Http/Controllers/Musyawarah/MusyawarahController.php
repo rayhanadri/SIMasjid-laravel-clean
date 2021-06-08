@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Musyawarah;
 
 use App\Models\Anggota\Anggota;
+use App\Models\Musyawarah\Notulensi;
+use App\Models\Musyawarah\Kehadiran;
 use App\Models\Musyawarah\Pekerjaan;
 use App\Models\Musyawarah\ProgressPekerjaan;
 use App\Http\Controllers\Controller;
@@ -21,9 +23,11 @@ class MusyawarahController extends Controller
     {
         //semua user, composite object
         $anggotaGroup = Anggota::get()->where('id_status', '!=', self::UNVERIFIED_MEMBER);
+        
+        $notulensiGroup = Notulensi::all();
 
         //retval
-        return view('musyawarah.index', ['anggotaGroup' => $anggotaGroup]);
+        return view('musyawarah.index', ['anggotaGroup' => $anggotaGroup,'notulensiGroup' => $notulensiGroup]);
     }
 
     public function pekerjaan()
@@ -44,6 +48,65 @@ class MusyawarahController extends Controller
 
         //retval
         return view('musyawarah.add_notulensi', ['anggotaGroup' => $anggotaGroup,'pekerjaanGroup'=>$pekerjaanGroup]);
+    }
+
+    public function storeNotulensi(Request $request)
+    {
+        // dd($request);
+        //semua user, composite object
+        $notulen = Auth::user()->id;
+        $judul_musyawarah = $request->judul_musyawarah;
+        $amir_musyawarah = $request->amir_musyawarah;
+        $all_kehadiran_id = $request->all_kehadiran_id;
+        $all_kehadiran_id = explode(",",$all_kehadiran_id);
+        
+        $all_pekerjaan_id = $request->pekerjaan_id;
+        $all_progress = $request->progress;
+        $all_masukkan = $request->masukkan;
+        $all_keputusan = $request->keputusan;
+
+        $notulensi = Notulensi::create([
+            'judul_musyawarah' => $judul_musyawarah,
+            'id_notulen' => $notulen
+        ]);
+        
+        $kehadiran = Kehadiran::create([
+            'id_notulensi' => $notulensi->id,
+            'id_anggota' => $amir_musyawarah,
+            'role' => 'Amir'
+        ]);
+
+        $kehadiran = Kehadiran::create([
+            'id_notulensi' => $notulensi->id,
+            'id_anggota' => $notulen,
+            'role' => 'Notulen'
+        ]);
+        // dd($all_kehadiran_id);
+        for ($i=0; $i < count($all_kehadiran_id); $i++) { 
+            $id_kehadiran = $all_kehadiran_id[$i];
+            $kehadiran = Kehadiran::create([
+                'id_notulensi' => $notulensi->id,
+                'id_anggota' => $id_kehadiran
+            ]);
+        }
+        
+        for ($i=0; $i < count($all_pekerjaan_id) ; $i++) { 
+            $id_pekerjaan = $all_pekerjaan_id[$i];
+            $pekerjaan = Pekerjaan::find($id_pekerjaan);
+            $data_progress = $all_progress[$i];
+            $data_masukkan = $all_masukkan[$i];
+            $data_keputusan = $all_keputusan[$i];
+            ProgressPekerjaan::create([
+                'keterangan' => $data_progress,
+                'masukkan' => $data_masukkan,
+                'keputusan' => $data_keputusan,
+                'id_anggota' => $pekerjaan->id_anggota
+            ]);
+            
+        }
+        
+        //retval
+        return redirect(route('musyawarahIndex'));
     }
 
     public function addPekerjaan(Request $request)

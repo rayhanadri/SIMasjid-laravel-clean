@@ -10,6 +10,8 @@ $sekretaris = array(1, 2);
 $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
 ?>
 
+<form id="form_notulensi" action="{{ route('musyawarahStoreNotulensi') }}" method="post" class="needs-validation" novalidate="">
+@csrf
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -29,39 +31,40 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
             </div>
         </div>
         
-        <form method="post" class="needs-validation" novalidate="">
             <div class="row">
                 <div class="col-lg-5 col-md-12 col-12 col-sm-12">
                     <div class="card">
                         <div class="card-body pb-0">
                             <div class="form-group">
                                 <label>Judul</label>
-                                <input type="text" name="title" class="form-control" required="">
+                                <input type="text" name="judul_musyawarah" class="form-control" required="">
                             </div>
                             <div class="form-group">
                                 <label>Amir Musyawarah</label>
-                                <select class="form-control select2">
+                                <select name="amir_musyawarah" class="form-control select2">
                                     @foreach ($anggotaGroup as $anggota)
                                         <option value="{{ $anggota->id }}">{{ $anggota->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Daftar Kehadiran</label>
-                                <select class="form-control select2" multiple="">
+                                <label onclick='alert("Selected value is: "+$("#kehadiran_musyawarah").select2("val"));
+'>Daftar Kehadiran</label>
+                                <select id="kehadiran_musyawarah" name="kehadiran_musyawarah" class="form-control select2" multiple="">
                                     @foreach ($anggotaGroup as $anggota)
-                                        <option value="{{ $anggota->id }}" class="option_hide">{{ $anggota->nama }}</option>
+                                        <option value="{{ $anggota->id }}">{{ $anggota->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Musyawarah</label>
-                                <input type="text" class="form-control datepicker">
+                                <input name="tanggal_musyawarah" type="text" class="form-control datepicker">
                             </div>
                         </div>
                         
                         <div class="card-footer pt-0">
-                            <button class="btn btn-primary">Simpan</button>
+                            <button id="submit-notulensi" class="btn btn-primary">Simpan</button>
+                            <input id="all_kehadiran_id" name="all_kehadiran_id" type="text" hidden>
                         </div>
                     </div>
                     
@@ -104,11 +107,9 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                     </div>
                 </div>
             </div>
-        </form>
-
-
     </section>
 </div>
+</form>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="selectPekerjaan">
     <div class="modal-dialog custom-modal-lg" role="document">

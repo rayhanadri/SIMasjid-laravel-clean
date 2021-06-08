@@ -63,26 +63,20 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                 <thead>
                                     <tr>
                                         <th class="dt-center">No</th>
-                                        <th class="dt-center">Nama</th>
-                                        <th class="dt-center">Jabatan</th>
+                                        <th class="dt-center">Judul Musyawarah</th>
                                         <th class="dt-center">Status</th>
                                         <th class="dt-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($anggotaGroup as $anggota)
+                                    @foreach ($notulensiGroup as $notulensi)
                                     <tr>
                                         <td class="dt-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $anggota->nama }}</td>
-                                        <td>{{ $anggota->jabatan }}</td>
-                                        <td class="font-status">{!!$anggota->status!!}</td>
+                                        <td>{{ $notulensi->judul_musyawarah }}</td>
+                                        <td>{{ $notulensi->status }}</td>
                                         <td class="dt-center">
                                             <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
-                                                <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
-                                                @if($inside_sekretaris)
-                                                <a href="#" class="open-update btn btn-icon btn-sm btn-primary" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#updateModal"><i class="fas fa-edit"></i></i> Edit</a>
-                                                <!-- <a href="#" class="open-delete btn btn-icon btn-sm btn-danger" data-toggle="modal" data-id="{{ $anggota->id }}" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a> -->
-                                                @endif
+                                                <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-id="{{ $notulensi->id }}"><i class="fas fa-id-badge"></i> Detail</a>
                                             </div>
                                         </td>
                                     </tr>
