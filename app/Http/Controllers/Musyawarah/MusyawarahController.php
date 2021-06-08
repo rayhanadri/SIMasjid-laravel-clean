@@ -63,6 +63,23 @@ class MusyawarahController extends Controller
         return redirect(route('musyawarahPekerjaan'));
     }
 
+    public function storePekerjaan(Request $request)
+    {
+        //semua user, composite object
+        $nama_pekerjaan = $request->nama_pekerjaan;
+        $deskripsi_pekerjaan = $request->deskripsi_pekerjaan;
+        $penanggung_jawab = Auth::user()->id;
+
+        $p = Pekerjaan::create([
+            'nama' => $nama_pekerjaan,
+            'deskripsi' => $deskripsi_pekerjaan,
+            'id_anggota' => $penanggung_jawab
+        ]);
+
+        //retval
+        return $p;
+    }
+
     public function addProgressPekerjaan(Request $request)
     {
         // dd($request);

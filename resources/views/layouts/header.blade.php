@@ -11,6 +11,9 @@
   <!-- favicon -->
   <link rel="shortcut icon" href="{{ route('home') }}/public/dist/assets/img/ibnusina.jpg">
 
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
@@ -18,10 +21,7 @@
   <!-- bootstrap integrity integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" -->
 
   <!-- JS Bootstrap -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-  <!-- jQuery -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="{{ asset('dist/bootstrap-daterangepicker/daterangepicker.css') }}">
@@ -116,5 +116,9 @@
   .custom-modal-lg {
     min-width:0px;
     max-width:1200px;
+  }
+
+  .custom-textarea {
+    min-height:80px;
   }
 </style>

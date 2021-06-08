@@ -86,6 +86,72 @@
     //
   });
 </script>
+<script>
+    $( "#createPekerjaanBtn" ).click(function() {
+        console.log("click")
+        createPekerjaan();
+    });
+
+    $( "#select_pekerjaan" ).click(function() {
+        console.log("click")
+        add_to_list();
+    });
+
+    $(document).on('click', '.delete-progress', function () {
+      console.log("click")
+      let id_delete = $(this).data("id-delete")
+      deleting_list(id_delete)
+    });
+
+    let already_inserted_id = []
+
+    function deleting_list(id_delete) {
+      for (var i = already_inserted_id.length - 1; i >= 0; i--) {
+        if (already_inserted_id[i] == id_delete) {
+          already_inserted_id.splice(i, 1);
+        }
+      }
+      $( '.flag-id-'+id_delete ).remove();
+    }
+
+    function add_to_list() {
+      let option_pekerjaan_value = $( "#option_pekerjaan option:selected" ).val();
+
+      var exist = already_inserted_id.includes(option_pekerjaan_value);
+      if(exist){
+        alert("Sudah dipilih sebelumnya");
+        return
+      } 
+      already_inserted_id.push(option_pekerjaan_value);
+      let option_pekerjaan_text = $( "#option_pekerjaan option:selected" ).text();
+      console.log("option_pekerjaan_text", option_pekerjaan_text)
+      console.log("option_pekerjaan_value", option_pekerjaan_value)
+
+      let progress_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+' <button data-id-delete="'+option_pekerjaan_value+'" style="float:right" class="btn btn-icon btn-sm btn-warning delete-progress"><i class="fas fa-times"></i></button> </div></div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="progress[]" class="form-control custom-textarea"></textarea></div>'
+      $( "#body_progress" ).append(progress_html);
+      let masukkan_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+'</div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="masukkan[]" class="form-control custom-textarea"></textarea></div>'
+      $( "#body_masukkan" ).append(masukkan_html);
+      let keputusan_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+'</div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="keputusan[]" class="form-control custom-textarea"></textarea></div>'
+      $( "#body_keputusan" ).append(keputusan_html);
+
+      $('#selectPekerjaan').modal('toggle');
+      $( '.modal-backdrop' ).remove();
+    }
+    
+    function createPekerjaan() {
+        let nama_pekerjaan = $("#nama_pekerjaan").val()
+        let deskripsi_pekerjaan = $("#deskripsi_pekerjaan").val()
+        console.log("deskripsi_pekerjaan", deskripsi_pekerjaan)
+        $.post("pekerjaan/store",
+        {
+            nama_pekerjaan: nama_pekerjaan,
+            deskripsi_pekerjaan: deskripsi_pekerjaan
+        },
+        function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });    
+    }
+</script>
 </body>
 
 </html>
