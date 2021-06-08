@@ -97,6 +97,7 @@ class MusyawarahController extends Controller
             $data_masukkan = $all_masukkan[$i];
             $data_keputusan = $all_keputusan[$i];
             ProgressPekerjaan::create([
+                'id_pekerjaan' => $id_pekerjaan,
                 'keterangan' => $data_progress,
                 'masukkan' => $data_masukkan,
                 'keputusan' => $data_keputusan,
