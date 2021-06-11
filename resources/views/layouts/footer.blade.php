@@ -155,15 +155,25 @@
     function createPekerjaan() {
         let nama_pekerjaan = $("#nama_pekerjaan").val()
         let deskripsi_pekerjaan = $("#deskripsi_pekerjaan").val()
-        console.log("deskripsi_pekerjaan", deskripsi_pekerjaan)
-        $.post("pekerjaan/store",
-        {
-            nama_pekerjaan: nama_pekerjaan,
-            deskripsi_pekerjaan: deskripsi_pekerjaan
-        },
-        function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
-        });    
+        $.ajax({
+            url: "pekerjaan/store",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+              nama_pekerjaan: nama_pekerjaan,
+              deskripsi_pekerjaan: deskripsi_pekerjaan
+            },
+            success: function (data) {   
+                console.log("data", data)
+                let option_html = '<option value="'+data.id+'">'+data.nama+'</option>'
+                $("#option_pekerjaan").append(option_html)
+                
+                $("#nama_pekerjaan").val("")
+                $("#deskripsi_pekerjaan").val("")
+            }
+        });   
     }
 </script>
 </body>

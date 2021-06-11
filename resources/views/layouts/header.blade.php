@@ -78,6 +78,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <style>
   td.details-control {
