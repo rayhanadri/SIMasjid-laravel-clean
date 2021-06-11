@@ -6,6 +6,7 @@ use App\Models\Anggota\Anggota;
 use App\Models\Musyawarah\Notulensi;
 use App\Models\Musyawarah\Kehadiran;
 use App\Models\Musyawarah\Pekerjaan;
+use App\Models\Musyawarah\Komentar;
 use App\Models\Musyawarah\ProgressPekerjaan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -63,7 +64,34 @@ class MusyawarahController extends Controller
     public function getNotulensi($id)
     {
         $result = ProgressPekerjaan::where('id_notulensi', $id)->get();
+        foreach ($result as $key => $value) {
+            $value['pekerjaan'] = $value->pekerjaan;
+        }
         return $result;
+    }
+
+    public function getKomentarNotulensi($id)
+    {
+        $result = Komentar::where('id_notulensi', $id)->orderBy('id', 'desc')->get();
+        foreach ($result as $key => $value) {
+            $value['notulensi'] = $value->notulensi;
+            $value['anggota'] = $value->anggota;
+        }
+        return $result;
+    }
+
+    public function storeKomentarNotulensi(Request $request)
+    {
+        $id_notulensi = $request->id_notulensi;
+        $isi_komentar = $request->isi_komentar;
+        $user_id = Auth::user()->id;
+
+        $p = Komentar::create([
+            'keterangan' => $isi_komentar,
+            'id_notulensi' => $id_notulensi,
+            'id_anggota' => $user_id
+        ]);
+        return $p;
     }
 
     public function storeNotulensi(Request $request)

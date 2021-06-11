@@ -117,18 +117,8 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                         <th>Keputusan</th>
                                         </tr>
                                     </thead>
-                                    <tbody>                         
-                                        <tr>
-                                            <td>
-                                                <a href="#" class="font-weight-600"><img src="assets/img/avatar/avatar-1.png" alt="avatar" class="rounded-circle mr-1" width="30">Kucing Masjid</a>
-                                            </td>
-                                            <td>
-                                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</span>
-                                            </td>
-                                            <td>
-                                                <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</span>
-                                            </td>
-                                        </tr>
+                                    <tbody id="list_progress_notulensi">                         
+                                        
                                     </tbody>
                                     </table>
                                 </div>
@@ -149,21 +139,14 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                 <li class="media">
                                     <div class="media-body">
                                         <div class="media-title">Beri Komentar</div>
-                                        <input type="text" class="form-control">
+                                        <input id="isi_komentar" type="text" class="form-control">
+                                        <input id="selected_detail" type="text" hidden>
                                         <div style="padding-top:10px;padding-bottom:10px;">
-                                            <button class="btn btn-primary btn-block">Submit</button>
+                                            <button id="send_komentar" onclick="send_komentar()" class="btn btn-primary btn-block">Submit</button>
                                         </div>
                                     </div>
                                 </li>
                                 <div id="komentar_user">
-                                    <li class="media">
-                                        <img class="mr-3 rounded-circle" src="assets/img/avatar/avatar-1.png" alt="avatar" width="50">
-                                        <div class="media-body">
-                                            <div class="float-right text-primary">Now</div>
-                                            <div class="media-title">Farhan A Mujib</div>
-                                            <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                                        </div>
-                                    </li>
                                 </div>
                                 
                             </ul>
@@ -398,28 +381,78 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
     // onclick btn detail, show modal
     $(document).on("click", ".open-detail", function() {
         /* passing data dari view button detail ke modal */
-        var thisDataAnggota = $(this).data('id');
-        // $(".modal-body #id").val(thisDataAnggota);
-        var linkDetail = "{{ route('home') }}/anggota/detail/" + thisDataAnggota;
-        $.get(linkDetail, function(data) {
-            //deklarasi var obj JSON data detail anggota
-            var obj = data;
-            // ganti elemen pada dokumen html dengan hasil data json dari jquery
-            $("#detailNama").html(obj.nama);
-            $("#detailJabatan").html(obj.jabatan);
-            $("#detailStatus").html(obj.status);
-            $("#detailEmail").html(obj.email);
-            $("#detailAlamat").html(obj.alamat);
-            $("#detailTelp").html(obj.telp);
+        var thisDataNotulensi = $(this).data('id');
+        
+        $("#selected_detail").val(thisDataNotulensi)
+        let url = "{{route('musyawarahGetNotulensi', 'id_notulensi')}}"
+        url = url.replace("id_notulensi", thisDataNotulensi);
+        // komentar_user list_progress_notulensi
+        $.ajax({
+            url: url,
+            type: "GET",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {   
+                console.log("data", data)
+                data.forEach(element => {
+                    console.log("element", element)
+                    let html_progress = '<tr><td><a href="#" class="font-weight-600">'+element.pekerjaan.nama+'</a></td><td><span>'+element.keterangan+'</span></td><td><span>'+element.keputusan+'</span></td></tr>'
+                    $("#list_progress_notulensi").append(html_progress);
 
-            //base root project url + url dari db
-            var link_foto = "{{ route('home') }}/" + obj.link_foto;
-            $("#detailFoto").attr('src', link_foto);
-            // console.log(link_foto);
-
-            status_colorized()
-        });
+                    
+                });
+                
+            }
+        });  
+        get_komentar(thisDataNotulensi)
     });
+
+    function get_komentar(thisDataNotulensi) {
+        $("#komentar_user").empty();
+        url = "{{route('musyawarahGetKomentarNotulensi', 'id_notulensi')}}"
+        url = url.replace("id_notulensi", thisDataNotulensi);
+        // komentar_user list_progress_notulensi
+        $.ajax({
+            url: url,
+            type: "GET",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {   
+                console.log("data", data)
+                data.forEach(element => {
+                    console.log("element", element)
+                    let html_progress = '<li class="media"><img class="mr-3 rounded-circle" src="'+element.anggota.link_foto+'" alt="avatar" width="50"><div class="media-body"><div class="float-right text-primary">'+element.updated_at+'</div><div class="media-title">'+element.anggota.nama+'</div><span class="text-small text-muted">'+element.keterangan+'</span></div></li>'
+                    $("#komentar_user").append(html_progress);  
+                });
+                
+            }
+        });  
+    }
+
+    function send_komentar() {
+        let selected_detail = $("#selected_detail").val()
+        let isi_komentar = $("#isi_komentar").val()
+        console.log("selected_detail", selected_detail)
+        let url = "{{route('musyawarahStoreKomentarNotulensi')}}"
+        $.ajax({
+            url: url,
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+            id_notulensi: selected_detail,
+            isi_komentar: isi_komentar
+            },
+            success: function (data) {   
+                console.log("data", data)
+                get_komentar(selected_detail)
+            }
+        });   
+    }
+
     $(document).ready(function() {
         //ganti ukuran show entries
         $('#menu_index').addClass('active');

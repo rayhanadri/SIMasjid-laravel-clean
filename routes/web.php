@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
         Route::get('musyawarah/add', 'Musyawarah\MusyawarahController@addNotulensi')->name('musyawarahAdd');
         Route::get('musyawarah/edit/{id}', 'Musyawarah\MusyawarahController@editNotulensi')->name('musyawarahEdit');
         Route::get('musyawarah/get/{id}', 'Musyawarah\MusyawarahController@getNotulensi')->name('musyawarahGetNotulensi');
+        Route::get('musyawarah/getkomentar/{id}', 'Musyawarah\MusyawarahController@getKomentarNotulensi')->name('musyawarahGetKomentarNotulensi');
+        Route::post('musyawarah/komentarstore', 'Musyawarah\MusyawarahController@storeKomentarNotulensi')->name('musyawarahStoreKomentarNotulensi');
         
         Route::post('musyawarah/store', 'Musyawarah\MusyawarahController@storeNotulensi')->name('musyawarahStoreNotulensi');
         Route::get('musyawarah/pekerjaan', 'Musyawarah\MusyawarahController@pekerjaan')->name('musyawarahPekerjaan');
