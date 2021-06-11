@@ -37,17 +37,18 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                         <div class="card-body pb-0">
                             <div class="form-group">
                                 <label>Judul</label>
-                                <input type="text" name="judul_musyawarah" class="form-control" required="">
+                                <input type="text" name="judul_musyawarah" class="form-control" required="" value="{{ $notulensi->judul_musyawarah ?? '' }}">
+                                <input type="text" id="id_notulensi" name="id_notulensi" class="form-control" required="" value="{{ $notulensi->id ?? '' }}" hidden>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group hide-at-edit">
                                 <label>Amir Musyawarah</label>
-                                <select name="amir_musyawarah" class="form-control select2">
+                                <select id="select_amir" name="amir_musyawarah" class="form-control select2">
                                     @foreach ($anggotaGroup as $anggota)
                                         <option value="{{ $anggota->id }}">{{ $anggota->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group hide-at-edit">
                                 <label onclick='alert("Selected value is: "+$("#kehadiran_musyawarah").select2("val"));
 '>Daftar Kehadiran</label>
                                 <select id="kehadiran_musyawarah" name="kehadiran_musyawarah" class="form-control select2" multiple="">
@@ -56,9 +57,9 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group hide-at-edit">
                                 <label>Tanggal Musyawarah</label>
-                                <input name="tanggal_musyawarah" type="text" class="form-control datepicker">
+                                <input id="tanggal_musyawarah" name="tanggal_musyawarah" type="text" class="form-control datepicker" value="">
                             </div>
                         </div>
                         
@@ -75,7 +76,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                     <div class="card">
                         <div class="card-header">
                             <h4>Progress</h4>
-                            <div class="card-header-action">
+                            <div class="card-header-action hide-at-edit">
                                 <button type="button" data-toggle="modal" data-target="#selectPekerjaan" class="btn btn-danger"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
@@ -176,5 +177,14 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         </div>
     </div>
 </div>
-
+<script>
+    $(function() {
+        let id_notulensi = $("#id_notulensi").val()
+        if (id_notulensi != ""){
+            $(".hide-at-edit").hide();
+            
+            getProgressNotulensi(id_notulensi)
+        }
+    });
+</script>
 @include('layouts.footer')

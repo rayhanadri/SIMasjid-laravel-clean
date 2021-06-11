@@ -140,16 +140,48 @@
       let option_pekerjaan_text = $( "#option_pekerjaan option:selected" ).text();
       console.log("option_pekerjaan_text", option_pekerjaan_text)
       console.log("option_pekerjaan_value", option_pekerjaan_value)
-
-      let progress_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+' <button data-id-delete="'+option_pekerjaan_value+'" style="float:right" class="btn btn-icon btn-sm btn-warning delete-progress"><i class="fas fa-times"></i></button> </div></div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="progress[]" class="form-control custom-textarea"></textarea> <input name="pekerjaan_id[]" type="text" value="'+option_pekerjaan_value+'" hidden></div>'
-      $( "#body_progress" ).append(progress_html);
-      let masukkan_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+'</div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="masukkan[]" class="form-control custom-textarea"></textarea></div>'
-      $( "#body_masukkan" ).append(masukkan_html);
-      let keputusan_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+'</div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="keputusan[]" class="form-control custom-textarea"></textarea></div>'
-      $( "#body_keputusan" ).append(keputusan_html);
+      add_card(option_pekerjaan_text,option_pekerjaan_value,"","","","")
 
       $('#selectPekerjaan').modal('toggle');
       $( '.modal-backdrop' ).remove();
+    }
+
+    function add_card(option_pekerjaan_text,option_pekerjaan_value,value_input_progress,value_input_masukkan,value_input_keputusan,id_progress) {
+      let progress_html;
+      if (id_progress != ""){
+        progress_html = '<input type="text" name="id_progress[]" class="form-control" required="" value="'+id_progress+'" hidden>'
+        $( "#body_progress" ).append(progress_html);
+        progress_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+' </div></div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="progress[]" class="form-control custom-textarea">'+value_input_progress+'</textarea> <input name="pekerjaan_id[]" type="text" value="'+option_pekerjaan_value+'" hidden></div>'
+      } else {
+        progress_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+' <button data-id-delete="'+option_pekerjaan_value+'" style="float:right" class="btn btn-icon btn-sm btn-warning delete-progress"><i class="fas fa-times"></i></button> </div></div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="progress[]" class="form-control custom-textarea">'+value_input_progress+'</textarea> <input name="pekerjaan_id[]" type="text" value="'+option_pekerjaan_value+'" hidden></div>'
+      }
+      $( "#body_progress" ).append(progress_html);
+      
+      let masukkan_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+'</div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="masukkan[]" class="form-control custom-textarea">'+value_input_masukkan+'</textarea></div>'
+      $( "#body_masukkan" ).append(masukkan_html);
+      let keputusan_html = '<div class="section-title mt-0 flag-id-'+option_pekerjaan_value+'">'+option_pekerjaan_text+'</div><div class="form-group flag-id-'+option_pekerjaan_value+'"><textarea name="keputusan[]" class="form-control custom-textarea">'+value_input_keputusan+'</textarea></div>'
+      $( "#body_keputusan" ).append(keputusan_html);
+    }
+
+    function getProgressNotulensi(id) {
+      let url = "{{route('musyawarahGetNotulensi', 'id_notulensi')}}"
+      url = url.replace("id_notulensi", id);
+        $.ajax({
+            url: url,
+            type: "GET",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {   
+                console.log("data", data)
+                data.forEach(element => {
+                  already_inserted_id.push(element.id_pekerjaan);
+                  console.log("element.keterangan", element.keterangan)
+                  add_card(element.id_notulensi,element.id_pekerjaan,element.keterangan,element.masukkan,element.keputusan,element.id)
+                });
+                
+            }
+        });   
     }
     
     function createPekerjaan() {

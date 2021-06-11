@@ -76,7 +76,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                         <td>{{ $notulensi->status }}</td>
                                         <td class="dt-center">
                                             <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
-                                                <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-id="{{ $notulensi->id }}"><i class="fas fa-id-badge"></i> Detail</a>
+                                                <a class="open-detail btn btn-icon btn-sm btn-info" href="{{ route('musyawarahEdit',$notulensi->id) }}"><i class="fas fa-edit"></i> revisi</a>
                                             </div>
                                         </td>
                                     </tr>
