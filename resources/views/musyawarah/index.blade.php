@@ -76,7 +76,8 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
                                         <td>{{ $notulensi->status }}</td>
                                         <td class="dt-center">
                                             <div class="btn-group mb-3" role="group" aria-label="Basic example" style="padding-left: 20px;">
-                                                <a class="open-detail btn btn-icon btn-sm btn-info" href="{{ route('musyawarahEdit',$notulensi->id) }}"><i class="fas fa-edit"></i> revisi</a>
+                                                <a class="open-detail btn btn-icon btn-sm btn-warning" href="{{ route('musyawarahEdit',$notulensi->id) }}"><i class="fas fa-edit"></i> revisi</a>
+                                                <a href="#" class="open-detail btn btn-icon btn-sm btn-info" data-toggle="modal" data-id="{{ $notulensi->id }}" data-target="#detailModal"><i class="fas fa-id-badge"></i> Detail</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -92,46 +93,89 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
 </div>
 
 <!-- Modal Detail -->
-<div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="detailModal">
+    <div class="modal-dialog custom-modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Detail Akun Anggota</h5>
+                <h5 class="modal-title">Detail Notulensi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <img src="" id="detailFoto" class="img-thumbnail rounded mx-auto d-block" alt="foto profil" style="max-width:250px; overflow: hidden;">
-                <table class="table table-borderless" style="width:90%; margin: auto;">
-                    <tbody>
-                        <tr>
-                            <th scope="row">Nama</th>
-                            <td id="detailNama"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Jabatan</th>
-                            <td id="detailJabatan"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Status</th>
-                            <td class="font-status" id="detailStatus"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Email</th>
-                            <td id="detailEmail"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Alamat</th>
-                            <td id="detailAlamat"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Telp/HP</th>
-                            <td id="detailTelp"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- <input type="text" id="id" name="id" value="" hidden/> -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-body pb-0 pl-0 pt-0 pr-0">
+                                <!-- Notulen list A -->
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                        <th>Pekerjaan</th>
+                                        <th>Progress</th>
+                                        <th>Keputusan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                         
+                                        <tr>
+                                            <td>
+                                                <a href="#" class="font-weight-600"><img src="assets/img/avatar/avatar-1.png" alt="avatar" class="rounded-circle mr-1" width="30">Kucing Masjid</a>
+                                            </td>
+                                            <td>
+                                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</span>
+                                            </td>
+                                            <td>
+                                                <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Komentar</h4>
+                                <!-- <div class="card-header-action">
+                                    <a href="#" data-toggle="modal" data-target="#addProgressModal" class="btn btn-primary tambah-progress">Tambah progress</a>
+                                </div> -->
+                            </div>
+                            <div class="card-body">             
+                            <ul id="detail-list-progress" class="list-unstyled list-unstyled-border">
+                                <li class="media">
+                                    <div class="media-body">
+                                        <div class="media-title">Beri Komentar</div>
+                                        <input type="text" class="form-control">
+                                        <div style="padding-top:10px;padding-bottom:10px;">
+                                            <button class="btn btn-primary btn-block">Submit</button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div id="komentar_user">
+                                    <li class="media">
+                                        <img class="mr-3 rounded-circle" src="assets/img/avatar/avatar-1.png" alt="avatar" width="50">
+                                        <div class="media-body">
+                                            <div class="float-right text-primary">Now</div>
+                                            <div class="media-title">Farhan A Mujib</div>
+                                            <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                                        </div>
+                                    </li>
+                                </div>
+                                
+                            </ul>
+                            <div class="text-center pt-1 pb-1">
+                                <!-- <a href="#" class="btn btn-primary btn-lg btn-round">
+                                View All
+                                </a> -->
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer bg-whitesmoke br">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
