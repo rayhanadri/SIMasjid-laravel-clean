@@ -22,7 +22,7 @@ class PendaftaranController extends Controller
     public function createForm()
     {
         //check permission
-        $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
+        $permission = app('App\Http\Controllers\Aset\PengelolaAsetController')->checkPermission();
         if ($permission == false) {
             return redirect(route('home'));
         }
@@ -37,7 +37,7 @@ class PendaftaranController extends Controller
     public function create(Request $request)
     {
         //check permission
-        $permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
+        $permission = app('App\Http\Controllers\Aset\PengelolaAsetController')->checkPermission();
         if ($permission == false) {
             return redirect(route('home'));
         } else if (isset($request->jumlah) == true) {

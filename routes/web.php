@@ -88,13 +88,13 @@ Route::middleware('auth')->group(function () {
         Route::post('aset/metadata/kategori/update', 'Aset\MetadataController@update')->name('metadataUpdate');
         Route::post('aset/metadata/kategori/delete', 'Aset\MetadataController@delete')->name('metadataDelete');
         // Route::get('aset/metadata/lokasi', 'Aset\MetadataController@indexLokasi')->name('metadataIndexLokasi');
-        Route::post('aset/metadata/lokasi/create', 'Aset\MetadataController@createLokasi')->name('metadataLokasiCreate');
-        Route::post('aset/metadata/lokasi/update', 'Aset\MetadataController@updateLokasi')->name('metadataLokasiUpdate');
-        Route::post('aset/metadata/lokasi/delete', 'Aset\MetadataController@deleteLokasi')->name('metadataLokasiDelete');
+        Route::post('aset/metadata/lokasi/create', 'Aset\MetadataController@create')->name('metadataLokasiCreate');
+        Route::post('aset/metadata/lokasi/update', 'Aset\MetadataController@update')->name('metadataLokasiUpdate');
+        Route::post('aset/metadata/lokasi/delete', 'Aset\MetadataController@delete')->name('metadataLokasiDelete');
         // Route::get('aset/metadata/katalog', 'Aset\MetadataController@indexKatalog')->name('metadataIndexKatalog');
-        Route::post('aset/metadata/katalog/create', 'Aset\MetadataController@createKatalog')->name('metadataKatalogCreate');
-        Route::post('aset/metadata/katalog/update', 'Aset\MetadataController@updateKatalog')->name('metadataKatalogUpdate');
-        Route::post('aset/metadata/katalog/delete', 'Aset\MetadataController@deleteKatalog')->name('metadataKatalogDelete');
+        Route::post('aset/metadata/katalog/create', 'Aset\MetadataController@create')->name('metadataKatalogCreate');
+        Route::post('aset/metadata/katalog/update', 'Aset\MetadataController@update')->name('metadataKatalogUpdate');
+        Route::post('aset/metadata/katalog/delete', 'Aset\MetadataController@delete')->name('metadataKatalogDelete');
         
         //get route usulan
         Route::get('aset/usulan/', 'Aset\UsulanController@index')->name('asetUsulanIndex');

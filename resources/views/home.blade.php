@@ -47,7 +47,7 @@
         <div class="col-lg-2 col-md-4 col-6" style="padding: 10px;">
           <a href="{{ route('musyawarahIndex') }}" class="btn btn-info" style="width: 100%; height: 150px;">
             <div style="font-size: 14px; padding: 30px 0px;">
-              <i class="fa fa-users" style="font-size: 32px;"></i>
+              <i class="fa fa-comment-dots" style="font-size: 32px;"></i>
               <br>
               Musyawarah
             </div>

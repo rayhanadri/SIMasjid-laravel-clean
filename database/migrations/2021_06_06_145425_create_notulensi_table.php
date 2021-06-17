@@ -13,7 +13,7 @@ class CreateNotulensiTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_musyawarah')->create('notulensi', function (Blueprint $table) {
+        Schema::create('notulensi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_notulen')->nullable();
             // $table->foreign('id_notulen')->references('id')->on('SIMASINA.anggota')->onDelete('cascade')->onUpdate('cascade');

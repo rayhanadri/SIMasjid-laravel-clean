@@ -22,7 +22,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         <div class="section-header">
             <div class="row" style="margin:auto;">
                 <div class="col-12">
-                    <h1><i class="fa fa-address-book"></i> Data Pekerjaan</h1>
+                    <h1><i class="fa fa-tasks"></i> Data Pekerjaan</h1>
                     <div></div>
                 </div>
             </div>

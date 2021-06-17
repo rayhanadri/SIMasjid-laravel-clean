@@ -27,9 +27,11 @@ class PengelolaAsetController extends AnggotaController
         //id ke string
         foreach ($pengelolaGroup as $pengelola) {
             $pengelola->anggota_pengelola;
-            $pengelola->nama = $pengelola->anggota_pengelola->nama;
-            $pengelola->status = $this->getStatus($pengelola->anggota_pengelola);
-            $pengelola->jabatan = $this->getJabatan($pengelola->anggota_pengelola);
+            if ($pengelola->anggota_pengelola != NULL) {
+                $pengelola->nama = $pengelola->anggota_pengelola->nama;
+                $pengelola->status = $this->getStatus($pengelola->anggota_pengelola);
+                $pengelola->jabatan = $this->getJabatan($pengelola->anggota_pengelola);
+            }
         }
 
         return view('aset.pengelola_aset', ['pengelolaGroup' => $pengelolaGroup, 'bukanPengelolaGroup' => $bukanPengelolaGroup]);

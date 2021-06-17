@@ -32,7 +32,7 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
         </div>
         
             <div class="row">
-                <div class="col-lg-5 col-md-12 col-12 col-sm-12">
+                <div class="col-lg-12 col-md-12 col-12 col-sm-12">
                     <div class="card">
                         <div class="card-body pb-0">
                             <div class="form-group">

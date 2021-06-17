@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProgressPekerjaan extends Model
 {
     //
-    protected $connection = 'mysql_musyawarah';
+    // protected $connection = 'mysql_musyawarah';
     protected $table = 'progress_pekerjaan';
     protected $fillable = ['keterangan', 'masukkan', 'keputusan', 'id_anggota','id_pekerjaan','id_notulensi'];
 

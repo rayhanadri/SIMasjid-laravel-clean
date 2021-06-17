@@ -9,7 +9,7 @@
 ?>
 <?php
 //check permission pengelola
-$permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
+$permission = app('App\Http\Controllers\Aset\PengelolaAsetController')->checkPermission();
 ?>
 <div class="main-content">
     <section class="section">

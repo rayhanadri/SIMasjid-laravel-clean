@@ -20,19 +20,19 @@ class ProfileController extends AnggotaController
         $file = $request->file('file');
 
         //validasi file dengan mime
-        Validator::make($request->all(), [
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2048',
-        ])->validate();
+        // Validator::make($request->all(), [
+        //     'file' => 'required|image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2048',
+        // ])->validate();
 
         // validasi jenis file in case mime not allowed
-        // $allowed_extension = ['jpg', 'jpeg', 'gif', 'png', 'bmp'];
-        // $extension = $file->getClientOriginalExtension();
-        // $inside_allowed = in_array($extension, $allowed_extension);
-        // if( !$inside_allowed ){
-        //     throw ValidationException::withMessages([
-        //         'file' => 'Format file gambar yang diperbolehkan adalah jpg, jpeg, gif, png, dan bmp.',
-        //     ]);
-        // }
+        $allowed_extension = ['jpg', 'jpeg', 'gif', 'png', 'bmp'];
+        $extension = $file->getClientOriginalExtension();
+        $inside_allowed = in_array($extension, $allowed_extension);
+        if( !$inside_allowed ){
+            throw ValidationException::withMessages([
+                'file' => 'Format file gambar yang diperbolehkan adalah jpg, jpeg, gif, png, dan bmp.',
+            ]);
+        }
 
         //file confirmed image, make image then orientate
         ini_set('memory_limit', '2048M');

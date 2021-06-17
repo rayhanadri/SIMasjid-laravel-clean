@@ -13,7 +13,7 @@ class CreatePekerjaanTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_musyawarah')->create('pekerjaan', function (Blueprint $table) {
+        Schema::create('pekerjaan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_anggota')->nullable();
             // $table->foreign('id_anggota')->references('id')->on('SIMASINA.anggota')->onDelete('cascade')->onUpdate('cascade');

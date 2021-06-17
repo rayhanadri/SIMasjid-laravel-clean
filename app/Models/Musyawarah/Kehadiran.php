@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kehadiran extends Model
 {
     //
-    protected $connection = 'mysql_musyawarah';
+    // protected $connection = 'mysql_musyawarah';
     protected $table = 'kehadiran';
     protected $fillable = ['id_notulensi','id_anggota','role'];
 

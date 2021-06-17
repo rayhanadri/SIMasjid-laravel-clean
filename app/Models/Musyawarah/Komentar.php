@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Komentar extends Model
 {
     //
-    protected $connection = 'mysql_musyawarah';
+    // protected $connection = 'mysql_musyawarah';
     protected $table = 'komentar';
     protected $fillable = ['id_notulensi','id_anggota','keterangan'];
 

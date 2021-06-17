@@ -4,7 +4,7 @@
 <!-- <script type="text/javascript" src="{{asset('public/dist/assets/js/page/bootstrap-modal.js')}}"></script> -->
 <?php
 //check permission pengelola
-$permission = app('App\Http\Controllers\Anggota\PengelolaAsetController')->checkPermission();
+$permission = app('App\Http\Controllers\Aset\PengelolaAsetController')->checkPermission();
 //hide untuk selain sekretaris dan ketua
 // $inside_pengelola = in_array(Auth::user()->id, $list_pengelola);
 ?>

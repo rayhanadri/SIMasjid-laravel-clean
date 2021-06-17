@@ -13,7 +13,7 @@ class CreateKehadiranTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_musyawarah')->create('kehadiran', function (Blueprint $table) {
+        Schema::create('kehadiran', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_notulensi')->nullable();
             // $table->foreign('id_notulensi')->references('id')->on('notulensi')->onDelete('cascade')->onUpdate('cascade');

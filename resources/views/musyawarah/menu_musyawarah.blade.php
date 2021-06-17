@@ -17,20 +17,20 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
     <div id="group_menu" style="margin: 10px auto;">
         <span class="col-xs-2" style="padding: 0px;">
             <a id="menu_index" href="{{ route('musyawarahIndex') }}" class="btn btn-info icon-left" style="height: 55px; width: 18em; font-size: 11px; border-radius: 0; line-height: 1.5;">
-                <i class="fa fa-address-book" style="font-size: 24px;"></i><br>Musyawarah
+                <i class="fa fa-comment-dots" style="font-size: 24px;"></i><br>Musyawarah
             </a>
         </span>
         
         <span class="col-xs-2" style="padding: 0px;">
             <a id="menu_pekerjaan" href="{{ route('musyawarahPekerjaan') }}" class="btn btn-info icon-left" style="height: 55px; width: 18em; font-size: 11px; border-radius: 0; line-height: 1.5;">
-                <i class="fa fa-user-check" style="font-size: 24px;"></i><br>Pekerjaan
+                <i class="fa fa-tasks" style="font-size: 24px;"></i><br>Pekerjaan
             </a>
         </span>
         @if($inside_sekretaris)
         @endif
     </div>
 </div>
-<div id="menu_keanggotaan_mini" class="row" style="margin: 1em auto; display:none;">
+<div id="menu_musyawarah_mini" class="row" style="margin: 1em auto; display:none;">
     <div class="dropdown d-inline mr-2">
         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-bars"></i> Menu
@@ -45,10 +45,10 @@ $inside_sekretaris = in_array($authUser->id_jabatan, $sekretaris);
 </div>
 <script>
     $(document).ready(function() {
-        $("#keanggotaan-link").addClass("active");
+        $("#musyawarah-link").addClass("active");
         if ($(window).width() <= 576) {
-            $("#menu_keanggotaan").remove();
-            $("#menu_keanggotaan_mini").show();
+            $("#menu_musyawarah").remove();
+            $("#menu_musyawarah_mini").show();
         }
     });
 </script>

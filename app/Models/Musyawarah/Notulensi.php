@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notulensi extends Model
 {
     //
-    protected $connection = 'mysql_musyawarah';
+    // protected $connection = 'mysql_musyawarah';
     protected $table = 'notulensi';
     protected $fillable = ['judul_musyawarah', 'catatan', 'status', 'id_notulen'];
 
